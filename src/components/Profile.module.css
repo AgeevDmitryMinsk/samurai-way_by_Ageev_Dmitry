@@ -1,0 +1,11 @@
+.content {
+    grid-area: c;
+    background-color: darkseagreen;
+    padding: 10px;
+    border-radius: 5px;
+}
+.content img {
+    width: 1200px;
+    max-width: 100%;
+    border-radius: 5px;
+}
