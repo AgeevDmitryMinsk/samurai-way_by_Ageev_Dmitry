@@ -15,7 +15,6 @@ export const Profile = () => {
 				ava + descr
 			</div>
 			<MyPosts/>
-
 		</div>
 	);
 };
