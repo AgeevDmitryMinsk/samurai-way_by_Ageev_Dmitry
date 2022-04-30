@@ -7,11 +7,13 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {StateType} from "./redux/state";
+import { StateType} from "./redux/state";
 
 
 type AppPropsType = {
 	state: StateType
+	addPost: (newPostMessage:string)=> void
+
 }
 
 function App(props: AppPropsType) {
@@ -33,7 +35,9 @@ function App(props: AppPropsType) {
 					{/*<Route path={'/profile'} component={Profile}/>*/}
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
-					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage.posts}/>}/>
+					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage.posts}
+																	addPost={props.addPost}
+					/>}/>
 
 					<Route path={'/news'} component={News}/>
 				</div>

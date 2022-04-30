@@ -6,17 +6,19 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {PostDataType} from "../../redux/state";
 
 type ProfilePropsType = {
-    PostData: PostDataType[]
+	PostData: PostDataType[]
+	addPost: (newPostMessage:string)=> void
 }
 export const Profile = (props: ProfilePropsType) => {
 
-    //console.log(props.PostData)
-    return (
-        <div>
-            Main content
+	//console.log(props.PostData)
+	return (
+		<div>
+			Main content
 
-            <ProfileInfo />
-            <MyPosts PostData={props.PostData} />
-        </div>
-    )
+			<ProfileInfo/>
+			<MyPosts PostData={props.PostData}
+					 addPost={props.addPost}/>
+		</div>
+	)
 }
