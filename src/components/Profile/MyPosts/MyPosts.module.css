@@ -1,4 +1,9 @@
 .myPosts {
     color: blue;
     font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.posts {
+    margin: 5px;
 }

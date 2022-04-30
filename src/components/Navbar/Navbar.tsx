@@ -1,23 +1,64 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import s from './Navbar.module.css'
 
 export const Navbar = () => {
     return (
         <nav className={s.nav}>
             <div>
-                <a className={s.item}>Profile</a>
+                <>
+                    {/*<a href={'/profile'} className={s.item}>*/}
+                    {/*    Profile*/}
+                    {/*</a>*/}
+                </>
+                <NavLink
+                    to={'/profile'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    Profile
+                </NavLink>
             </div>
             <div>
-                <a className={`${s.item} ${s.active}`}>Messages</a>
+                <>
+                    {/*<a href={'/dialogs'} className={`${s.item} ${s.active}`}>*/}
+                    {/*    Messages*/}
+                    {/*</a>*/}
+                </>
+                <NavLink
+                    to={'/dialogs'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    Messages
+                </NavLink>
             </div>
             <div>
-                <a className={s.item}>News</a>
+                <NavLink
+                    to={'/news'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    News
+                </NavLink>
             </div>
             <div>
-                <a className={s.item}>Music</a>
+                <NavLink
+                    to={'/music'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    Music
+                </NavLink>
             </div>
             <div>
-                <a className={s.item}>Settings</a>
+                <NavLink
+                    to={'/settings'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    Settings
+                </NavLink>
             </div>
         </nav>
     )
