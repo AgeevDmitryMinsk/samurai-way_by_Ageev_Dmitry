@@ -5,47 +5,39 @@ import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {DialogItemType, MessageType, PostDataType} from "./index";
+import {StateType} from "./redux/state";
 
 
 type AppPropsType = {
-	PostData: PostDataType[]
-	DialogsData: DialogItemType[]
-	MessagesData: MessageType[]
+	state: StateType
 }
 
 function App(props: AppPropsType) {
-	console.log(props.PostData)
+	//console.log(props.state.DialogsPage.dialogs)
 	return (
 		<>
-			<BrowserRouter>
-				{/*http://localhost:3000/*/}
-				{/*http://localhost:3000/profile*/}
-				{/*http://localhost:3000/dialogs*/}
-			{/*<HashRouter>*/}
-				{/*http://localhost:3000/profile#/profile*/}
-				{/*http://localhost:3000/profile#/dialogs*/}
-				<div className="App">Hello, samurai! Let's go!</div>
-				<div className={'app-wrapper'}>
-					<Header/>
-					<Navbar/>
-					<div className={'app-wrapper__content'}>
+			<div className="App">Hello, samurai! Let's go!</div>
+			<div className={'app-wrapper'}>
+				<Header/>
+				<Navbar/>
+				<div className={'app-wrapper__content'}>
 
-						{/*<Route path={'/'} component={Profile}/>*/}
-						{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
-						<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>
+					{/*<Route path={'/'} component={Profile}/>*/}
+					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
+					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
+					<Route path={'/dialogs'} render={() => <Dialogs DialogsData={props.state.DialogsPage.dialogs}
+																	MessagesData={props.state.DialogsPage.messages}/>}/>
 
-						{/*<Route path={'/profile'} component={Profile}/>*/}
-						{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
-						<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>
+					{/*<Route path={'/profile'} component={Profile}/>*/}
+					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
+					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
+					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage.posts}/>}/>
 
-						<Route path={'/news'} component={News}/>
-					</div>
+					<Route path={'/news'} component={News}/>
 				</div>
-			{/*</HashRouter>*/}
-			</BrowserRouter>
+			</div>
 		</>
 	)
 }

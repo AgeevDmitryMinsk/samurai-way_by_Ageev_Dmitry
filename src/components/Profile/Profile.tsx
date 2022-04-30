@@ -2,14 +2,15 @@ import React from 'react'
 //import s from './Profile.module.css'
 
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostDataType} from "../../index";
 import {MyPosts} from "./MyPosts/MyPosts";
+import {PostDataType} from "../../redux/state";
 
 type ProfilePropsType = {
     PostData: PostDataType[]
 }
 export const Profile = (props: ProfilePropsType) => {
-    console.log(props.PostData)
+
+    //console.log(props.PostData)
     return (
         <div>
             Main content
