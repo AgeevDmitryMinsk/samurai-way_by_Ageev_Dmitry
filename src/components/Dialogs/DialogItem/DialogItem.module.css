@@ -1,0 +1,20 @@
+.dialogItems{
+padding: 10px;
+}
+
+.dialog {
+    color: azure;
+    text-decoration: none;
+}
+
+.dialog.active {
+    color: darkorchid;
+}
+
+/*.messages {*/
+/*padding: 10px;*/
+/*}*/
+
+/*.message{*/
+
+/*}*/

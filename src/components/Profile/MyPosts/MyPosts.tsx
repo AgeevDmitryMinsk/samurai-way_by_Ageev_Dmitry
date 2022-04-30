@@ -1,21 +1,21 @@
 import React from 'react'
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
+import {PostDataType} from "../../../index";
 
-export type PostDataType = {
-	id:number
-	message: string
-	likesCount:number
+
+type MyPostPropsType = {
+	PostData: PostDataType[]
 }
-export const MyPosts = () => {
+export const MyPosts = (props: MyPostPropsType) => {
 
-
-	let PostData:PostDataType[] = [
-		{id:1, 	message: "It's my 2nd post", likesCount:5},
-		{id:2, 	message: "Hi, how are you now?", likesCount:7},
-		{id:3, 	message: "Where are you from?", likesCount:9},
-
-	]
+//вынесем данные из компоненты в BLL в index.tsx
+	// let PostData:PostDataType[] = [
+	// 	{id:1, 	message: "It's my 2nd post", likesCount:5},
+	// 	{id:2, 	message: "Hi, how are you now?", likesCount:7},
+	// 	{id:3, 	message: "Where are you from?", likesCount:9},
+	//
+	// ]
 	return (
 		<>
 		<div className={s.myPosts}>
@@ -32,7 +32,7 @@ export const MyPosts = () => {
 			{[<Post message={"It's my first post"} likesCount={10} id={1} key={1}/>,
 				<Post message={'Hi, how are you?'} likesCount={11} id={2} key={2}/>]}
 
-			{PostData.map(el=> <Post message={el.message}
+			{props.PostData.map(el=> <Post message={el.message}
 									likesCount={el.likesCount}
 									id={el.id}
 									key={el.id}

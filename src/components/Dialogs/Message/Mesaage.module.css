@@ -1,7 +1,7 @@
-.dialogs {
-display: grid;
-    grid-template-columns: 1.5fr 2fr 10fr;
-}
+/*.dialogs {*/
+/*display: grid;*/
+/*    grid-template-columns: 1.5fr 2fr 10fr;*/
+/*}*/
 
 /*.dialogItems{*/
 /*padding: 10px;*/
@@ -16,10 +16,11 @@ display: grid;
 /*    color: darkorchid;*/
 /*}*/
 
-/*.messages {*/
-/*padding: 10px;*/
-/*}*/
+.messages {
+padding: 10px;
+}
 
-/*.message{*/
+.message{
+    color: palegreen;
 
-/*}*/
+}
