@@ -3,7 +3,8 @@ import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 import {v1} from "uuid";
-import {rerenderEntireTree} from "../index";
+//import {rerenderEntireTree} from "../rerenderEntireTree";
+
 
 export type MessageType = {
 	message: string
@@ -37,7 +38,7 @@ export type PostDataType = {
 // 	{id: '3', message: "Where are you from?", likesCount: 9},
 // ]
 
-export type StateType = {
+export type RootStateType = {
 	ProfilePage: ProfilePageType
 	DialogsPage: DialogsPageType
 }
@@ -55,7 +56,7 @@ type DialogsPageType = {
 	dialogs: DialogItemType[]
 }
 
-export let state: StateType = {
+export let state: RootStateType = {
 	ProfilePage: {
 		posts: [
 			{id: '1', message: "It's my 3nd post", likesCount: 5},
@@ -78,11 +79,45 @@ export let state: StateType = {
 	}
 }
 
-type StoreType = {
-	_state: StateType
+export const addPost = (newPostMessage: string) => {
+	let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+	state.ProfilePage.posts.push(newPost)
+	// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 }
 
-let store: StoreType = {
+export const changeTextareaTitle = (newText: string) => {
+	state.ProfilePage.newPostText = newText
+	//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	//console.log(`changeTextareaTitle from state`)
+	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+}
+
+let rerenderEntireTree2 = () => {
+	console.log(`rerenderEntireTree`)
+}
+
+// export const subscribe = (callback: ()=> void) => {
+// 	rerenderEntireTree = callback
+// 	console.log(`subscribe`)
+// }
+
+export const subscribe = (callback: () => void) => {
+	rerenderEntireTree2 = callback
+	console.log(`subscribe`)
+}
+
+
+export type StoreType = {
+	_state: RootStateType
+	_rerenderEntireTree2: () => void
+	addPost: (newPostMessage: string) => void
+	changeTextareaTitle: (newText: string) => void
+	subscribe: (callback: () => void) => void
+	getState: () => RootStateType
+}
+
+export let store: StoreType = {
 	_state: {
 		ProfilePage: {
 			posts: [
@@ -104,22 +139,33 @@ let store: StoreType = {
 				{id: '4', name: 'Vera3', photo: Vera_photo},
 			]
 		}
+	},
+	_rerenderEntireTree2() {
+		console.log(`_rerenderEntireTree2, state changed`)
+	},
+	addPost(newPostMessage: string) {
+		let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+		this._state.ProfilePage.posts.push(newPost)
+		// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		this._rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	},
+	changeTextareaTitle(newText: string) {
+		this._state.ProfilePage.newPostText = newText
+		//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		//console.log(`changeTextareaTitle from state`)
+		this._rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	},
+	subscribe(callback: () => void) {
+		this._rerenderEntireTree2 = callback
+		console.log(`subscribe`)
+	},
+	getState() {
+		return this._state
 	}
+
 }
 
 // @ts-ignore
 window.state = state
-
-export const addPost = (newPostMessage: string) => {
-	let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
-	state.ProfilePage.posts.push(newPost)
-	rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-}
-
-export const changeTextareaTitle = (newText: string) => {
-	state.ProfilePage.newPostText = newText
-	rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-	//console.log(`changeTextareaTitle from state`)
-}
-
-
+// @ts-ignore
+window.store = store

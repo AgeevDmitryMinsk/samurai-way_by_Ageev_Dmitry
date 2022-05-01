@@ -29,6 +29,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 		props.addPost(props.newText)
 		console.log(`props.PostData.newPostText из state = `, props.PostData.newPostText)
 		console.log(`обновился список постов`, props.PostData.posts)
+		props.newText = ``
+		// props.addPost(``)
 		// console.log(`createRef`, newTitleRef.current?.value)
 		// if (newTitleRef.current) {
 		// 	props.addPost(newTitleRef.current.value)

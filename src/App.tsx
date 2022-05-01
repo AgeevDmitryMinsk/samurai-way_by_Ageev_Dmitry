@@ -7,17 +7,18 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {changeTextareaTitle, StateType} from "./redux/state";
+import {changeTextareaTitle, RootStateType} from "./redux/state";
 
 
 type AppPropsType = {
-	state: StateType
+	state: RootStateType
 	addPost: (newPostMessage:string)=> void
 	changeTextareaTitle: (newText: string) =>void
 
 }
 
 const App: React.FC<AppPropsType> = (props) => {
+	console.log(3, `App.tsx`)
 	//console.log(props.state.DialogsPage.dialogs)
 	return (
 		<>
