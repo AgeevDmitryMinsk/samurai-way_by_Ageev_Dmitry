@@ -3,11 +3,12 @@ import React from 'react'
 
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
-import {PostDataType} from "../../redux/state";
+import {PostDataType, ProfilePageType} from "../../redux/state";
 
 type ProfilePropsType = {
-	PostData: PostDataType[]
-	addPost: (newPostMessage:string)=> void
+	PostData: ProfilePageType
+	addPost: (newPostMessage: string) => void
+	changeTextareaTitle: (newText: string) => void
 }
 export const Profile = (props: ProfilePropsType) => {
 
@@ -18,7 +19,11 @@ export const Profile = (props: ProfilePropsType) => {
 
 			<ProfileInfo/>
 			<MyPosts PostData={props.PostData}
-					 addPost={props.addPost}/>
+					 addPost={props.addPost}
+					 changeTextareaTitle={props.changeTextareaTitle}
+					 newText={props.PostData.newPostText}
+			/>
+
 		</div>
 	)
 }

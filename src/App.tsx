@@ -7,16 +7,17 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import { StateType} from "./redux/state";
+import {changeTextareaTitle, StateType} from "./redux/state";
 
 
 type AppPropsType = {
 	state: StateType
 	addPost: (newPostMessage:string)=> void
+	changeTextareaTitle: (newText: string) =>void
 
 }
 
-function App(props: AppPropsType) {
+const App: React.FC<AppPropsType> = (props) => {
 	//console.log(props.state.DialogsPage.dialogs)
 	return (
 		<>
@@ -35,8 +36,9 @@ function App(props: AppPropsType) {
 					{/*<Route path={'/profile'} component={Profile}/>*/}
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
-					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage.posts}
+					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage}
 																	addPost={props.addPost}
+																	changeTextareaTitle={props.changeTextareaTitle}
 					/>}/>
 
 					<Route path={'/news'} component={News}/>

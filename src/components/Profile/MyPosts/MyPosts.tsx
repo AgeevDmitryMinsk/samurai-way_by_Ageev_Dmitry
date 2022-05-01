@@ -1,16 +1,18 @@
 import React, {ChangeEvent, useState} from 'react'
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
-import {PostDataType} from "../../../redux/state";
+import {PostDataType, ProfilePageType} from "../../../redux/state";
 
 
 
 type MyPostPropsType = {
-	PostData: PostDataType[]
+	PostData: ProfilePageType
+	newText: string
 	addPost: (newPostMessage:string)=> void
+	changeTextareaTitle: (newText: string) => void
 }
 export const MyPosts = (props: MyPostPropsType) => {
-	debugger
+
 
 //вынесем данные из компоненты в BLL в index.tsx
 	// let PostData:PostDataType[] = [
@@ -20,20 +22,28 @@ export const MyPosts = (props: MyPostPropsType) => {
 	//
 
 
-	//let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
-	const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
+	let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
+	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
 	function addHandlePost() {
-	//	console.log(`createRef`, newTitleRef.current?.value)
-		console.log(`useState`, title)
-		props.addPost(title)
-		console.log(props.PostData)
-		setTitle(``)
+		props.addPost(props.newText)
+		console.log(`props.PostData.newPostText из state = `, props.PostData.newPostText)
+		console.log(`обновился список постов`, props.PostData.posts)
+		// console.log(`createRef`, newTitleRef.current?.value)
+		// if (newTitleRef.current) {
+		// 	props.addPost(newTitleRef.current.value)
+		// }
+
+		//console.log(`useState`, title)
+		//props.addPost(title)
+		//setTitle(``)
 	}
 
-	function onchangeHandle(e:ChangeEvent<HTMLTextAreaElement>) {
+	function newTextOnChangeHandler(e:ChangeEvent<HTMLTextAreaElement>) {
 		console.log(e.currentTarget.value)
-		setTitle(e.currentTarget.value)
+		//setTitle(e.currentTarget.value)
+		props.changeTextareaTitle(e.currentTarget.value)
+		console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	}
 
 	// ]
@@ -43,11 +53,9 @@ export const MyPosts = (props: MyPostPropsType) => {
 			My posts:
 		</div>
 		<div>
-			{/*<textarea ref={newTitleRef} onChange={onchangeHandle} style={{width: 250}}/>*/}
-			<textarea onChange={onchangeHandle}
-					  //placeholder={'Please, enter the post text'}
-					  value={title}
-					  style={{width: 250}}/>
+			{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
+			<textarea onChange={newTextOnChangeHandler} value={props.newText} style={{width: 250}}/>
+			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
 			<div>
 				<button onClick={addHandlePost}>Add post</button>
@@ -58,7 +66,7 @@ export const MyPosts = (props: MyPostPropsType) => {
 			{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
 			{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
 
-			{props.PostData.map(el=> <Post message={el.message}
+			{props.PostData.posts.map(el=> <Post message={el.message}
 									likesCount={el.likesCount}
 									id={el.id}
 									key={el.id}
