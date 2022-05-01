@@ -77,9 +77,13 @@ export let state: StateType = {
 	}
 }
 
-export const addPost = (newPostMessage:string) => {
-	let newPost:PostDataType = {id: v1(), message: newPostMessage, likesCount:0}
-	return state.ProfilePage.posts.push(newPost)
 
+// @ts-ignore
+window.state = state
+
+export const addPost = (newPostMessage:string) => {
+	debugger
+	let newPost:PostDataType = {id: v1(), message: newPostMessage, likesCount:0}
+	state.ProfilePage.posts.push(newPost)
 }
 

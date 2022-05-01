@@ -4,11 +4,13 @@ import {Post} from './Post/Post'
 import {PostDataType} from "../../../redux/state";
 
 
+
 type MyPostPropsType = {
 	PostData: PostDataType[]
 	addPost: (newPostMessage:string)=> void
 }
 export const MyPosts = (props: MyPostPropsType) => {
+	debugger
 
 //вынесем данные из компоненты в BLL в index.tsx
 	// let PostData:PostDataType[] = [
@@ -26,6 +28,7 @@ export const MyPosts = (props: MyPostPropsType) => {
 		console.log(`useState`, title)
 		props.addPost(title)
 		console.log(props.PostData)
+		setTitle(``)
 	}
 
 	function onchangeHandle(e:ChangeEvent<HTMLTextAreaElement>) {
@@ -42,7 +45,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 		<div>
 			{/*<textarea ref={newTitleRef} onChange={onchangeHandle} style={{width: 250}}/>*/}
 			<textarea onChange={onchangeHandle}
-					  placeholder={'Please, enter the post text'}
+					  //placeholder={'Please, enter the post text'}
+					  value={title}
 					  style={{width: 250}}/>
 
 			<div>
@@ -51,8 +55,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 
 		</div>
 		<div className={s.posts}>
-			{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,
-				<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}
+			{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
+			{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
 
 			{props.PostData.map(el=> <Post message={el.message}
 									likesCount={el.likesCount}
