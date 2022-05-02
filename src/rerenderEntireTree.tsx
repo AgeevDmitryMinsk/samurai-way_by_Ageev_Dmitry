@@ -13,7 +13,7 @@ export const rerenderEntireTree = () => {
 		</BrowserRouter>
 		, document.getElementById('root'))
 }
-console.log(2, `rerenderEntireTree`)
+
 
 
 

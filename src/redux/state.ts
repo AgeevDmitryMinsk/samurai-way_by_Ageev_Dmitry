@@ -148,7 +148,7 @@ export const store: StoreType = {
 		}
 	},
 	_onChange() {
-		console.log(`_onChange,_onChange,_onChange,_rerenderEntireTree2, state changed`)
+		console.log(`_rerenderEntireTree2, state changed`)
 	},
 	addPost(newPostMessage: string) {
 		const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
@@ -163,9 +163,8 @@ export const store: StoreType = {
 		this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 	},
 	subscribe(callback: () => void) {
-		console.log(`subscribe before`)
+		console.log(`subscribe`)
 		this._onChange = callback
-		console.log(`subscribe after`)
 	},
 	getState() {
 		return this._state
@@ -177,6 +176,7 @@ export const store: StoreType = {
 			this._state.ProfilePage.posts.push(newPost)
 			this._state.ProfilePage.newPostText = ``
 			this._onChange()
+			console.log(this)
 
 		} else if (action.type === "CHANGE-NEW-TEXT") {
 			this._state.ProfilePage.newPostText = action.newText
