@@ -4,10 +4,14 @@ import {store} from "./redux/state";
 
 // ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
 
+
+rerenderEntireTree() // для стартовой отрисовки приложения
+//для отслеживания в процессе и перерисовки в случае выполнения функций,
+// в которых используется функция subscribe:
+console.log(`index.tsx`)
 store.subscribe(rerenderEntireTree)
 
-//subscribe(rerenderEntireTree)
-//console.log(1, `index.tsx`)
+
 
 // <BrowserRouter>
 // {/*http://localhost:3000/*/}

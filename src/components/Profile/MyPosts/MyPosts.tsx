@@ -4,16 +4,19 @@ import React, {ChangeEvent,
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 import {
+	ActionsTypes, addPostAC,
 	//PostDataType,
-	ProfilePageType} from "../../../redux/state";
+	ProfilePageType
+} from "../../../redux/state";
 
 
 
 type MyPostPropsType = {
 	PostData: ProfilePageType
 	newText: string
-	addPost: (newPostMessage:string)=> void
+	// addPost: (newPostMessage:string)=> void
 	changeTextareaTitle: (newText: string) => void
+	dispatch: (action: ActionsTypes) => void
 }
 export const MyPosts = (props: MyPostPropsType) => {
 
@@ -30,7 +33,10 @@ export const MyPosts = (props: MyPostPropsType) => {
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
 	function addHandlePost() {
-		props.addPost(props.newText)
+		//props.addPost(props.newText)
+		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
+		props.dispatch(addPostAC(props.newText))
+
 		console.log(`props.PostData.newPostText из state = `, props.PostData.newPostText)
 		console.log(`обновился список постов`, props.PostData.posts)
 		console.log(props.newText)

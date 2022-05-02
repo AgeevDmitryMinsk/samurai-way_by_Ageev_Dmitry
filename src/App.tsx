@@ -39,9 +39,12 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/profile'} component={Profile}/>*/}
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
+
 					<Route path={'/profile'} render={() => <Profile PostData={state.ProfilePage}
-																	addPost={props.store.addPost.bind(props.store)}
+																	// addPost={props.store.addPost.bind(props.store)}
+																	//addPost={props.store.addPost.bind(props.store)}
 																	changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
+																	dispatch = {props.store.dispatch.bind(props.store)}
 					/>}/>
 
 					<Route path={'/news'} component={News}/>

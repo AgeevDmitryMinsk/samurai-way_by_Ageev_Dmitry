@@ -15,6 +15,6 @@ export const rerenderEntireTree = () => {
 }
 console.log(2, `rerenderEntireTree`)
 
-rerenderEntireTree()
+
 
 

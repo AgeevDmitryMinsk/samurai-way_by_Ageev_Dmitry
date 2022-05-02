@@ -110,12 +110,19 @@ type DialogsPageType = {
 
 export type StoreType = {
 	_state: RootStateType
-	_rerenderEntireTree2: () => void
+	_onChange: () => void
 	addPost: (newPostMessage: string) => void
 	changeTextareaTitle: (newText: string) => void
 	subscribe: (callback: () => void) => void
 	getState: () => RootStateType
+	dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
 }
+
+// type AddPostActionType = {
+// 	type: "ADD-POST"
+// 	newPostMessage: string
+// }
+
 
 export const store: StoreType = {
 	_state: {
@@ -140,30 +147,67 @@ export const store: StoreType = {
 			]
 		}
 	},
-	_rerenderEntireTree2() {
-		console.log(`_rerenderEntireTree2, state changed`)
+	_onChange() {
+		console.log(`_onChange,_onChange,_onChange,_rerenderEntireTree2, state changed`)
 	},
 	addPost(newPostMessage: string) {
-		let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+		const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
 		this._state.ProfilePage.posts.push(newPost)
 		this._state.ProfilePage.newPostText = ``
-		// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-		this._rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		this._onChange()
 	},
 	changeTextareaTitle(newText: string) {
 		this._state.ProfilePage.newPostText = newText
 		//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 		//console.log(`changeTextareaTitle from state`)
-		this._rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 	},
 	subscribe(callback: () => void) {
-		this._rerenderEntireTree2 = callback
-		console.log(`subscribe`)
+		console.log(`subscribe before`)
+		this._onChange = callback
+		console.log(`subscribe after`)
 	},
 	getState() {
 		return this._state
-	}
+	},
+	dispatch(action) {
+		if (action.type === "ADD-POST") {
+			console.log(`addPost,addPost,addPost`)
+			const newPost: PostDataType = {id: v1(), message: action.newPostMessage, likesCount: 0}
+			this._state.ProfilePage.posts.push(newPost)
+			this._state.ProfilePage.newPostText = ``
+			this._onChange()
 
+		} else if (action.type === "CHANGE-NEW-TEXT") {
+			this._state.ProfilePage.newPostText = action.newText
+			this._onChange()
+		}
+	}
+}
+type AddPostActionType = ReturnType<typeof addPostAC>
+
+// type ChangeNewTextActionType = {
+// 	type: "CHANGE-NEW-TEXT"
+// 	newText: string
+// }
+type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
+
+//export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
+export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
+
+
+export const addPostAC = (newPostMessage: string) => {
+	return {
+		type: "ADD-POST",
+		newPostMessage: newPostMessage
+	} as const
+}
+
+export const changeNewTextAC = (newText: string) => {
+	return {
+		type: "CHANGE-NEW-TEXT",
+		newText: newText
+	} as const
 }
 
 // @ts-ignore
