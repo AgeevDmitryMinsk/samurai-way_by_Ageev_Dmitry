@@ -1,13 +1,13 @@
-import React from "react";
 import {rerenderEntireTree} from "./rerenderEntireTree";
-import {addPost, subscribe} from "./redux/state";
+import {store} from "./redux/state";
 
 
 // ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
 
-rerenderEntireTree()
-subscribe(rerenderEntireTree)
-console.log(1, `index.tsx`)
+store.subscribe(rerenderEntireTree)
+
+//subscribe(rerenderEntireTree)
+//console.log(1, `index.tsx`)
 
 // <BrowserRouter>
 // {/*http://localhost:3000/*/}

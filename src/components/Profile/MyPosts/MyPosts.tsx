@@ -1,7 +1,11 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent,
+//	useState
+} from 'react'
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
-import {PostDataType, ProfilePageType} from "../../../redux/state";
+import {
+	//PostDataType,
+	ProfilePageType} from "../../../redux/state";
 
 
 
@@ -22,20 +26,20 @@ export const MyPosts = (props: MyPostPropsType) => {
 	//
 
 
-	let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
+	//let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
 	function addHandlePost() {
 		props.addPost(props.newText)
 		console.log(`props.PostData.newPostText из state = `, props.PostData.newPostText)
 		console.log(`обновился список постов`, props.PostData.posts)
-		props.newText = ``
+		console.log(props.newText)
+		//props.newText = ``
 		// props.addPost(``)
 		// console.log(`createRef`, newTitleRef.current?.value)
 		// if (newTitleRef.current) {
 		// 	props.addPost(newTitleRef.current.value)
 		// }
-
 		//console.log(`useState`, title)
 		//props.addPost(title)
 		//setTitle(``)

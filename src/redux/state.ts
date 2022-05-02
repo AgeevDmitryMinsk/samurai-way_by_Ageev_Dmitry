@@ -56,56 +56,56 @@ type DialogsPageType = {
 	dialogs: DialogItemType[]
 }
 
-export let state: RootStateType = {
-	ProfilePage: {
-		posts: [
-			{id: '1', message: "It's my 3nd post", likesCount: 5},
-			{id: '2', message: "Hi, how are you now?", likesCount: 7},
-			{id: '3', message: "Where are you from?", likesCount: 9}],
-		newPostText: ""
-	},
-	DialogsPage: {
-		messages: [
-			{id: '1', message: 'HI !!!3'},
-			{id: '2', message: 'Hello 3'},
-			{id: '3', message: 'Good Afternoon 3'},
-		],
-		dialogs: [
-			{id: '1', name: 'Dima3', photo: Dima_photo},
-			{id: '2', name: 'Natasha3', photo: Natasha_photo},
-			{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
-			{id: '4', name: 'Vera3', photo: Vera_photo},
-		]
-	}
-}
+// export let state: RootStateType = {
+// 	ProfilePage: {
+// 		posts: [
+// 			{id: '1', message: "It's my 3nd post", likesCount: 5},
+// 			{id: '2', message: "Hi, how are you now?", likesCount: 7},
+// 			{id: '3', message: "Where are you from?", likesCount: 9}],
+// 		newPostText: ""
+// 	},
+// 	DialogsPage: {
+// 		messages: [
+// 			{id: '1', message: 'HI !!!3'},
+// 			{id: '2', message: 'Hello 3'},
+// 			{id: '3', message: 'Good Afternoon 3'},
+// 		],
+// 		dialogs: [
+// 			{id: '1', name: 'Dima3', photo: Dima_photo},
+// 			{id: '2', name: 'Natasha3', photo: Natasha_photo},
+// 			{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
+// 			{id: '4', name: 'Vera3', photo: Vera_photo},
+// 		]
+// 	}
+// }
 
-export const addPost = (newPostMessage: string) => {
-	let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
-	state.ProfilePage.posts.push(newPost)
-	// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-}
+// export const addPost = (newPostMessage: string) => {
+// 	let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+// 	state.ProfilePage.posts.push(newPost)
+// 	// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+// 	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+// }
 
-export const changeTextareaTitle = (newText: string) => {
-	state.ProfilePage.newPostText = newText
-	//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-	//console.log(`changeTextareaTitle from state`)
-	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-}
-
-let rerenderEntireTree2 = () => {
-	console.log(`rerenderEntireTree`)
-}
+// export const changeTextareaTitle = (newText: string) => {
+// 	state.ProfilePage.newPostText = newText
+// 	//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+// 	//console.log(`changeTextareaTitle from state`)
+// 	rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+// }
+//
+// let rerenderEntireTree2 = () => {
+// 	console.log(`rerenderEntireTree`)
+// }
 
 // export const subscribe = (callback: ()=> void) => {
 // 	rerenderEntireTree = callback
 // 	console.log(`subscribe`)
 // }
 
-export const subscribe = (callback: () => void) => {
-	rerenderEntireTree2 = callback
-	console.log(`subscribe`)
-}
+// export const subscribe = (callback: () => void) => {
+// 	rerenderEntireTree2 = callback
+// 	console.log(`subscribe`)
+// }
 
 
 export type StoreType = {
@@ -117,7 +117,7 @@ export type StoreType = {
 	getState: () => RootStateType
 }
 
-export let store: StoreType = {
+export const store: StoreType = {
 	_state: {
 		ProfilePage: {
 			posts: [
@@ -146,6 +146,7 @@ export let store: StoreType = {
 	addPost(newPostMessage: string) {
 		let newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
 		this._state.ProfilePage.posts.push(newPost)
+		this._state.ProfilePage.newPostText = ``
 		// rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 		this._rerenderEntireTree2() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 	},
@@ -166,6 +167,6 @@ export let store: StoreType = {
 }
 
 // @ts-ignore
-window.state = state
+//window.state = state
 // @ts-ignore
 window.store = store

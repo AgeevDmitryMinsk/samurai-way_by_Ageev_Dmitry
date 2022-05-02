@@ -7,19 +7,21 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {changeTextareaTitle, RootStateType} from "./redux/state";
+import {
+	//RootStateType,
+	StoreType} from "./redux/state";
 
 
 type AppPropsType = {
-	state: RootStateType
-	addPost: (newPostMessage:string)=> void
-	changeTextareaTitle: (newText: string) =>void
-
+	// state: RootStateType
+	// addPost: (newPostMessage:string)=> void
+	// changeTextareaTitle: (newText: string) =>void
+	store: StoreType
 }
 
 const App: React.FC<AppPropsType> = (props) => {
-	console.log(3, `App.tsx`)
-	//console.log(props.state.DialogsPage.dialogs)
+
+	const state = props.store.getState()
 	return (
 		<>
 			<div className="App">Hello, samurai! Let's go!</div>
@@ -31,15 +33,15 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/'} component={Profile}/>*/}
 					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
 					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
-					<Route path={'/dialogs'} render={() => <Dialogs DialogsData={props.state.DialogsPage.dialogs}
-																	MessagesData={props.state.DialogsPage.messages}/>}/>
+					<Route path={'/dialogs'} render={() => <Dialogs DialogsData={state.DialogsPage.dialogs}
+																	MessagesData={state.DialogsPage.messages}/>}/>
 
 					{/*<Route path={'/profile'} component={Profile}/>*/}
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
-					<Route path={'/profile'} render={() => <Profile PostData={props.state.ProfilePage}
-																	addPost={props.addPost}
-																	changeTextareaTitle={props.changeTextareaTitle}
+					<Route path={'/profile'} render={() => <Profile PostData={state.ProfilePage}
+																	addPost={props.store.addPost.bind(props.store)}
+																	changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
 					/>}/>
 
 					<Route path={'/news'} component={News}/>
