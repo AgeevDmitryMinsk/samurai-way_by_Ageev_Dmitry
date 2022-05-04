@@ -151,16 +151,16 @@ export const store: StoreType = {
 		console.log(`_rerenderEntireTree2, state changed`)
 	},
 	addPost(newPostMessage: string) {
-		const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
-		this._state.ProfilePage.posts.push(newPost)
-		this._state.ProfilePage.newPostText = ``
-		this._onChange()
+		// const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+		// this._state.ProfilePage.posts.push(newPost)
+		// this._state.ProfilePage.newPostText = ``
+		// this._onChange()
 	},
 	changeTextareaTitle(newText: string) {
-		this._state.ProfilePage.newPostText = newText
-		//rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-		//console.log(`changeTextareaTitle from state`)
-		this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		// this._state.ProfilePage.newPostText = newText
+		// //rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+		// //console.log(`changeTextareaTitle from state`)
+		// this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
 	},
 	subscribe(callback: () => void) {
 		console.log(`subscribe`)

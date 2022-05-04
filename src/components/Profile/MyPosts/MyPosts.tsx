@@ -4,7 +4,7 @@ import React, {ChangeEvent,
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 import {
-	ActionsTypes, addPostAC,
+	ActionsTypes, addPostAC, changeNewTextAC,
 	//PostDataType,
 	ProfilePageType
 } from "../../../redux/state";
@@ -54,7 +54,10 @@ export const MyPosts = (props: MyPostPropsType) => {
 	function newTextOnChangeHandler(e:ChangeEvent<HTMLTextAreaElement>) {
 		console.log(e.currentTarget.value)
 		//setTitle(e.currentTarget.value)
-		props.changeTextareaTitle(e.currentTarget.value)
+		//props.changeTextareaTitle(e.currentTarget.value)
+		// props.dispatch(changeNewTextAC(props.newText))
+		let newText = e.currentTarget.value
+		props.dispatch(changeNewTextAC(newText))
 		console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	}
 

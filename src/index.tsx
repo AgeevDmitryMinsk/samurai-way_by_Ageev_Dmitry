@@ -10,8 +10,11 @@ rerenderEntireTree() // для стартовой отрисовки прило�
 // в которых используется функция subscribe:
 console.log(`index.tsx`)
 
+
 store.subscribe(rerenderEntireTree) //  store.subscribe(rerenderEntireTree) равносильно store.subscribe(_onChange)
 //т.к. this._onChange = callback, в  subscribe(callback) в state.ts
+
+
 
 
 
