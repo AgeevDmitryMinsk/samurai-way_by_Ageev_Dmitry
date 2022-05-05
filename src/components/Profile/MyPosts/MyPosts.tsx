@@ -15,7 +15,7 @@ type MyPostPropsType = {
 	PostData: ProfilePageType
 	newText: string
 	// addPost: (newPostMessage:string)=> void
-	changeTextareaTitle: (newText: string) => void
+	//changeTextareaTitle: (newText: string) => void
 	dispatch: (action: ActionsTypes) => void
 }
 export const MyPosts = (props: MyPostPropsType) => {
@@ -32,7 +32,7 @@ export const MyPosts = (props: MyPostPropsType) => {
 	//let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
-	function addHandlePost() {
+	function addPostHandler() {
 		//props.addPost(props.newText)
 		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
 		props.dispatch(addPostAC(props.newText))
@@ -56,8 +56,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 		//setTitle(e.currentTarget.value)
 		//props.changeTextareaTitle(e.currentTarget.value)
 		// props.dispatch(changeNewTextAC(props.newText))
-		let newText = e.currentTarget.value
-		props.dispatch(changeNewTextAC(newText))
+		let newText2 = e.currentTarget.value
+		props.dispatch(changeNewTextAC(newText2))
 		console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	}
 
@@ -73,7 +73,7 @@ export const MyPosts = (props: MyPostPropsType) => {
 			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
 			<div>
-				<button onClick={addHandlePost}>Add post</button>
+				<button onClick={addPostHandler}>Add post</button>
 			</div>
 
 		</div>

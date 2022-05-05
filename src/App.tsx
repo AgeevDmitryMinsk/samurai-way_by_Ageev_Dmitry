@@ -9,7 +9,8 @@ import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {
 	//RootStateType,
-	StoreType} from "./redux/state";
+	StoreType
+} from "./redux/state";
 
 
 type AppPropsType = {
@@ -40,12 +41,16 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 
-					<Route path={'/profile'} render={() => <Profile PostData={state.ProfilePage}
-																	// addPost={props.store.addPost.bind(props.store)}
-																	//addPost={props.store.addPost.bind(props.store)}
-																	changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
-																	dispatch = {props.store.dispatch.bind(props.store)}
-					/>}/>
+					<Route path={'/profile'} render={() =>
+						<Profile PostData={state.ProfilePage}
+							// addPost={props.store.addPost.bind(props.store)}
+							//changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
+								 dispatch={props.store.dispatch.bind(props.store)
+									 //bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store
+									 // тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}
+								 }
+
+						/>}/>
 
 					<Route path={'/news'} component={News}/>
 				</div>

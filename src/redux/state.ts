@@ -111,8 +111,8 @@ type DialogsPageType = {
 export type StoreType = {
 	_state: RootStateType
 	_onChange: () => void
-	addPost: (newPostMessage: string) => void
-	changeTextareaTitle: (newText: string) => void
+	// addPost: (newPostMessage: string) => void
+	// changeTextareaTitle: (newText: string) => void
 	subscribe: (callback: () => void) => void
 	getState: () => RootStateType
 	dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
@@ -150,18 +150,7 @@ export const store: StoreType = {
 	_onChange() {
 		console.log(`_rerenderEntireTree2, state changed`)
 	},
-	addPost(newPostMessage: string) {
-		// const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
-		// this._state.ProfilePage.posts.push(newPost)
-		// this._state.ProfilePage.newPostText = ``
-		// this._onChange()
-	},
-	changeTextareaTitle(newText: string) {
-		// this._state.ProfilePage.newPostText = newText
-		// //rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-		// //console.log(`changeTextareaTitle from state`)
-		// this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
-	},
+
 	subscribe(callback: () => void) {
 		console.log(`subscribe`)
 		this._onChange = callback
@@ -169,16 +158,34 @@ export const store: StoreType = {
 	getState() {
 		return this._state
 	},
+
+	//перенесем внутренности методов addPost и changeTextareaTitle в метод dispatch:
+	// addPost(newPostMessage: string) {
+	// 	// const newPost: PostDataType = {id: v1(), message: newPostMessage, likesCount: 0}
+	// 	// this._state.ProfilePage.posts.push(newPost)
+	// 	// this._state.ProfilePage.newPostText = ``
+	// 	// this._onChange()
+	// },
+	// changeTextareaTitle(newText: string) {
+	// 	// this._state.ProfilePage.newPostText = newText
+	// 	// //rerenderEntireTree(state) //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	// 	// //console.log(`changeTextareaTitle from state`)
+	// 	// this._onChange() //  необходим в случае использования textarea ref={newTitleRef} в MyPost.tsx
+	// },
+
 	dispatch(action) {
 		if (action.type === "ADD-POST") {
 			console.log(`addPost,addPost,addPost`)
-			const newPost: PostDataType = {id: v1(), message: action.newPostMessage, likesCount: 0}
+			const newPost: PostDataType = {
+				id: v1(), message: action.newPostMessage, likesCount: 0
+			}
 			this._state.ProfilePage.posts.push(newPost)
 			this._state.ProfilePage.newPostText = ``
 			this._onChange()
-			console.log(this)
+			console.log(this)//{_state: {…}, _onChange: ƒ, subscribe: ƒ, getState: ƒ, addPost: ƒ, …}
 
-		} else if (action.type === "CHANGE-NEW-TEXT") {
+		} else if (action.type === "UPDATE-NEW-POST-TEXT") {
+			console.log(this)
 			this._state.ProfilePage.newPostText = action.newText
 			this._onChange()
 		}
@@ -199,14 +206,16 @@ export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
 export const addPostAC = (newPostMessage: string) => {
 	return {
 		type: "ADD-POST",
-		newPostMessage: newPostMessage
+		// newPostMessage: newPostMessage
+		newPostMessage
 	} as const
 }
 
 export const changeNewTextAC = (newText: string) => {
 	return {
-		type: "CHANGE-NEW-TEXT",
-		newText: newText
+		type: "UPDATE-NEW-POST-TEXT",
+		// newText: newText
+		newText
 	} as const
 }
 
