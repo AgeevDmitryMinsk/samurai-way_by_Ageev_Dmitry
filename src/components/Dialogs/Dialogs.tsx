@@ -1,12 +1,21 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
-import {Message } from "./Message/Message";
-import {DialogItemType, MessageType} from "../../redux/state";
+import {Message} from "./Message/Message";
+import {
+	ActionsTypes,
+	addMessageAC,
+	changeNewMessageTextAC,
+	//DialogItemType,
+	DialogsPageType,
+	//MessageType
+} from "../../redux/state";
 
 type DialogsPropsType = {
-	DialogsData: DialogItemType[]
-	MessagesData: MessageType[]
+	//DialogsData: DialogItemType[]
+	// MessagesData: MessageType[]
+	MessagesData: DialogsPageType
+	dispatch: (action: ActionsTypes) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -29,6 +38,18 @@ export const Dialogs = (props: DialogsPropsType) => {
 	// 	{id:3, message: 'Good Afternoon 3'},
 	//
 	// ]
+	function newMessageOnChangeHandler(e: ChangeEvent<HTMLInputElement>) {
+		console.log(e.currentTarget.value)
+		let newMessage = e.currentTarget.value
+		props.dispatch(changeNewMessageTextAC(newMessage))
+		console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+	}
+
+	function addMessageHandler() {
+		props.dispatch(addMessageAC(props.MessagesData.newMessageText))
+		console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
+	}
+
 	//console.log(props.DialogsData)
 	return (
 
@@ -36,23 +57,33 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Dialogs:
 			<div>
 
-				{props.DialogsData.map(el=><DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
-				{/*<DialogItem name={'Dima'} id={1}/>*/}
-				{/*<DialogItem name={DialogsData[0].name} id={DialogsData[0].id}/>*/}
-				{/*<DialogItem name={'Natasha'} id={2}/>*/}
-				{/*<DialogItem name={DialogsData[1].name} id={DialogsData[1].id}/>*/}
-				{/*<DialogItem name={'Ksenia'} id={3}/>*/}
-				{/*<DialogItem name={'Vera'} id={4}/>*/}
+				{props.MessagesData.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
+				<>
+					{/*<DialogItem name={'Dima'} id={1}/>*/}
+					{/*<DialogItem name={DialogsData[0].name} id={DialogsData[0].id}/>*/}
+					{/*<DialogItem name={'Natasha'} id={2}/>*/}
+					{/*<DialogItem name={DialogsData[1].name} id={DialogsData[1].id}/>*/}
+					{/*<DialogItem name={'Ksenia'} id={3}/>*/}
+					{/*<DialogItem name={'Vera'} id={4}/>*/}
+				</>
 			</div>
 			<div>
-				{props.MessagesData.map(el=><Message message={el.message} id={el.id} key={el.id}/>)}
-				{/*<Message message={'HI !!!'} id={1}/>*/}
-				{/*<Message message={'Hello'} id={2}/>*/}
-				{/*<Message message={'Good Afternoon'} id={3}/>*/}
-				{/*<Message message={MessagesData[0].message} id={MessagesData[0].id}/>*/}
-				{/*<Message message={MessagesData[1].message} id={MessagesData[1].id}/>*/}
-				{/*<Message message={MessagesData[2].message} id={MessagesData[2].id}/>*/}
+				{props.MessagesData.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
+				<>
+					{/*<Message message={'HI !!!'} id={1}/>*/}
+					{/*<Message message={'Hello'} id={2}/>*/}
+					{/*<Message message={'Good Afternoon'} id={3}/>*/}
+					{/*<Message message={MessagesData[0].message} id={MessagesData[0].id}/>*/}
+					{/*<Message message={MessagesData[1].message} id={MessagesData[1].id}/>*/}
+					{/*<Message message={MessagesData[2].message} id={MessagesData[2].id}/>*/}
+				</>
 			</div>
+			Please, enter new message:
+			<div>
+				<input onChange={newMessageOnChangeHandler} value={props.MessagesData.newMessageText}/>
+				<button onClick={addMessageHandler}>send message</button>
+			</div>
+
 		</div>
 	)
 }

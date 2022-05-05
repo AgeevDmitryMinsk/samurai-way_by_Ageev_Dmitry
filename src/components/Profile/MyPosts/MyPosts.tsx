@@ -37,7 +37,7 @@ export const MyPosts = (props: MyPostPropsType) => {
 		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
 		props.dispatch(addPostAC(props.newText))
 
-		console.log(`props.PostData.newPostText из state = `, props.PostData.newPostText)
+		console.log(`props.newText из state = `, props.newText)
 		console.log(`обновился список постов`, props.PostData.posts)
 		console.log(props.newText)
 		//props.newText = ``

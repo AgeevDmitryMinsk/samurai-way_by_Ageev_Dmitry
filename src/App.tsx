@@ -34,8 +34,10 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/'} component={Profile}/>*/}
 					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
 					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
-					<Route path={'/dialogs'} render={() => <Dialogs DialogsData={state.DialogsPage.dialogs}
-																	MessagesData={state.DialogsPage.messages}/>}/>
+					<Route path={'/dialogs'} render={() => <Dialogs //DialogsData={state.DialogsPage.dialogs}
+																	MessagesData={state.DialogsPage}
+																	dispatch={props.store.dispatch.bind(props.store)}
+					/>}/>
 
 					{/*<Route path={'/profile'} component={Profile}/>*/}
 					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
