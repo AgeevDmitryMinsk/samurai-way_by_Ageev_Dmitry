@@ -5,6 +5,8 @@ import {store} from "./redux/redux-store";
 
 // ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
 
+export type StateType = ReturnType<typeof store.getState>
+//let state: StateType = store.getState()
 
 rerenderEntireTree() // для стартовой отрисовки приложения
 //для отслеживания в процессе и перерисовки в случае выполнения функций,
@@ -12,9 +14,15 @@ rerenderEntireTree() // для стартовой отрисовки прило�
 console.log(`index.tsx`)
 
 
-store.subscribe(rerenderEntireTree) //  store.subscribe(rerenderEntireTree) равносильно store.subscribe(_onChange)
+//store.subscribe(rerenderEntireTree) //  store.subscribe(rerenderEntireTree) равносильно store.subscribe(_onChange)
 //т.к. this._onChange = callback, в  subscribe(callback) в store.ts
 
+
+
+store.subscribe(()=> {
+
+//	let state = store.getState()
+	rerenderEntireTree()})
 
 
 

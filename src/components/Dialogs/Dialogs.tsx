@@ -11,12 +11,17 @@ import {
 	//MessageType
 } from "../../redux/store";
 import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
+import {ReduxStoreType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
 	//DialogsData: DialogItemType[]
 	// MessagesData: MessageType[]
 	MessagesData: DialogsPageType
-	dispatch: (action: ActionsTypes) => void
+	//dispatch: (action: ActionsTypes) => void
+	//store: ReduxStoreType
+	newMessageOnChange: (newMessage: string) => void
+	addMessage: ()=>void
+	//store: ReduxStoreType
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -40,14 +45,16 @@ export const Dialogs = (props: DialogsPropsType) => {
 	//
 	// ]
 	function newMessageOnChangeHandler(e: ChangeEvent<HTMLInputElement>) {
-		console.log(e.currentTarget.value)
+		//console.log(e.currentTarget.value)
 		let newMessage = e.currentTarget.value
-		props.dispatch(changeNewMessageTextAC(newMessage))
-		console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+		//props.store.dispatch(changeNewMessageTextAC(newMessage))
+		props.newMessageOnChange(newMessage)
+		//console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
 	}
 
 	function addMessageHandler() {
-		props.dispatch(addMessageAC(props.MessagesData.newMessageText))
+		props.addMessage()
+		//props.store.dispatch(addMessageAC(props.MessagesData.newMessageText))
 		console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
 	}
 

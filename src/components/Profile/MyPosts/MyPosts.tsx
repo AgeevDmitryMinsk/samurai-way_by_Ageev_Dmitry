@@ -16,9 +16,9 @@ import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
 type MyPostPropsType = {
 	PostData: ProfilePageType
 	newText: string
-	// addPost: (newPostMessage:string)=> void
-	//changeTextareaTitle: (newText: string) => void
-	dispatch: (action: ActionsTypes) => void
+	addPost: (newPostMessage:string)=> void
+	changeTextareaTitle: (newText: string) => void
+	//dispatch: (action: ActionsTypes) => void
 }
 export const MyPosts = (props: MyPostPropsType) => {
 
@@ -35,9 +35,9 @@ export const MyPosts = (props: MyPostPropsType) => {
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
 	function addPostHandler() {
-		//props.addPost(props.newText)
+		props.addPost(props.newText)
 		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-		props.dispatch(addPostAC(props.newText))
+		//props.dispatch(addPostAC(props.newText))
 
 		console.log(`props.newText из state = `, props.newText)
 		console.log(`обновился список постов`, props.PostData.posts)
@@ -56,10 +56,10 @@ export const MyPosts = (props: MyPostPropsType) => {
 	function newTextOnChangeHandler(e:ChangeEvent<HTMLTextAreaElement>) {
 		console.log(e.currentTarget.value)
 		//setTitle(e.currentTarget.value)
-		//props.changeTextareaTitle(e.currentTarget.value)
+		props.changeTextareaTitle(e.currentTarget.value)
 		// props.dispatch(changeNewTextAC(props.newText))
 		let newText2 = e.currentTarget.value
-		props.dispatch(changeNewTextAC(newText2))
+		//props.dispatch(changeNewTextAC(newText2))
 		console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	}
 

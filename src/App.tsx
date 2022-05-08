@@ -8,9 +8,10 @@ import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {ReduxStoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 //import {
-	//RootStateType,
-	//StoreType} from "./redux/state";
+//RootStateType,
+//StoreType} from "./redux/state";
 
 
 type AppPropsType = {
@@ -24,6 +25,7 @@ type AppPropsType = {
 const App: React.FC<AppPropsType> = (props) => {
 
 	const state = props.store.getState()
+
 	return (
 		<>
 			<div className="App">Hello, samurai! Let's go!</div>
@@ -35,9 +37,11 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/'} component={Profile}/>*/}
 					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
 					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
-					<Route path={'/dialogs'} render={() => <Dialogs //DialogsData={state.DialogsPage.dialogs}
-																	MessagesData={state.DialogsPage}
-																	dispatch={props.store.dispatch.bind(props.store)}
+					<Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
+						//DialogsData={state.DialogsPage.dialogs}
+						//MessagesData={state.DialogsPage}
+						//dispatch={props.store.dispatch
+						//	.bind(props.store)
 					/>}/>
 
 					{/*<Route path={'/profile'} component={Profile}/>*/}
@@ -45,13 +49,13 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 
 					<Route path={'/profile'} render={() =>
-						<Profile PostData={state.ProfilePage}
+						<Profile store={props.store}
+							//PostData={state.ProfilePage}
 							// addPost={props.store.addPost.bind(props.store)}
 							//changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
-								 dispatch={props.store.dispatch.bind(props.store)
-									 //bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store
-									 // тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}
-								 }
+							//dispatch={props.store.dispatch//.bind(props.store)
+							//bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store
+							// тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}
 
 						/>}/>
 
