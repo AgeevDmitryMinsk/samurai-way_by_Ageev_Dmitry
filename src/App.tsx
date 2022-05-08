@@ -7,6 +7,7 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
+import {ReduxStoreType} from "./redux/redux-store";
 //import {
 	//RootStateType,
 	//StoreType} from "./redux/state";
@@ -17,7 +18,7 @@ type AppPropsType = {
 	// addPost: (newPostMessage:string)=> void
 	// changeTextareaTitle: (newText: string) =>void
 	//store: StoreType
-	store: any
+	store: ReduxStoreType
 }
 
 const App: React.FC<AppPropsType> = (props) => {
