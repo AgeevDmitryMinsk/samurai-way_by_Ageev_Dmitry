@@ -5,7 +5,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ActionsTypes,
 	//PostDataType,
-	ProfilePageType} from "../../redux/state";
+	ProfilePageType} from "../../redux/store";
 
 type ProfilePropsType = {
 	PostData: ProfilePageType

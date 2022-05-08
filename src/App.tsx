@@ -7,17 +7,17 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {
+//import {
 	//RootStateType,
-	StoreType
-} from "./redux/state";
+	//StoreType} from "./redux/state";
 
 
 type AppPropsType = {
 	// state: RootStateType
 	// addPost: (newPostMessage:string)=> void
 	// changeTextareaTitle: (newText: string) =>void
-	store: StoreType
+	//store: StoreType
+	store: any
 }
 
 const App: React.FC<AppPropsType> = (props) => {

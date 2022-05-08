@@ -1,5 +1,6 @@
 import {rerenderEntireTree} from "./rerenderEntireTree";
-import {store} from "./redux/state";
+import {store} from "./redux/redux-store";
+//import {store} from "./redux/state";
 
 
 // ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
@@ -12,7 +13,7 @@ console.log(`index.tsx`)
 
 
 store.subscribe(rerenderEntireTree) //  store.subscribe(rerenderEntireTree) равносильно store.subscribe(_onChange)
-//т.к. this._onChange = callback, в  subscribe(callback) в state.ts
+//т.к. this._onChange = callback, в  subscribe(callback) в store.ts
 
 
 

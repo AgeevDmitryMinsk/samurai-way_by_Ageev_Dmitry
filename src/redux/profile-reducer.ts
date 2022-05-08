@@ -1,9 +1,17 @@
-import {ActionsTypes, PostDataType, ProfilePageType} from "./state";
+import {ActionsTypes, PostDataType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
 
+const initialState: ProfilePageType = {
+	posts: [
+		{id: '1', message: "It's my 4nd post from profileReducer initialState (connected with Redux by Dimich legacy code)", likesCount: 5},
+		{id: '2', message: "Hi, how are you now?", likesCount: 7},
+		{id: '3', message: "Where are you from?", likesCount: 9}
+	],
+	newPostText: ""
+}
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+export const profileReducer = (state=initialState, action: ActionsTypes) => {
 	switch (action.type){
 		case "ADD-POST": {
 			const newPost: PostDataType = {

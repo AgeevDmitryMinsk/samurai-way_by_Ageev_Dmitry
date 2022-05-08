@@ -8,7 +8,7 @@ import {
 	//addPostAC, changeNewTextAC,
 	//PostDataType,
 	ProfilePageType
-} from "../../../redux/state";
+} from "../../../redux/store";
 import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
 
 
