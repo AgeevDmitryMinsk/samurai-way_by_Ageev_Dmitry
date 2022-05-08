@@ -5,15 +5,18 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ActionsTypes,
 	//PostDataType,
-	ProfilePageType} from "../../redux/state";
+	ProfilePageType} from "../../redux/store";
 
 type ProfilePropsType = {
-	PostData: ProfilePageType
+	//	PostData: ProfilePageType
+
 	// addPost: (newPostMessage: string) => void
 	//changeTextareaTitle: (newText: string) => void
-	dispatch: (action: ActionsTypes) => void
+
+	//dispatch: (action: ActionsTypes) => void
 }
 export const Profile = (props: ProfilePropsType) => {
+
 
 	//console.log(props.PostData)
 	return (
@@ -21,11 +24,11 @@ export const Profile = (props: ProfilePropsType) => {
 			Main content
 
 			<ProfileInfo/>
-			<MyPosts PostData={props.PostData}
-					 newText={props.PostData.newPostText}
+			<MyPosts //PostData={props.PostData}
+					 //newText={props.PostData.newPostText}
 					 //addPost={props.addPost}
 					 //changeTextareaTitle={props.changeTextareaTitle}
-					 dispatch = {props.dispatch}
+					 //dispatch = {props.dispatch}
 			/>
 
 		</div>

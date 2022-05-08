@@ -1,7 +1,27 @@
-import {ActionsTypes, DialogsPageType, MessageType} from "./state";
+import {ActionsTypes, DialogsPageType, MessageType} from "./store";
 import {v1} from "uuid";
+import Dima_photo from "../photos/Dima.png";
+import Natasha_photo from "../photos/Natasha.png";
+import Ksenia_photo from "../photos/Ksenia.png";
+import Vera_photo from "../photos/Vera.png";
 
-export const messagesReducer = (state: DialogsPageType, action:ActionsTypes) => {
+
+const initialState: DialogsPageType = {
+	messages: [
+		{id: '1', message: 'HI from messages-reducer (connected redux)!!!'},
+		{id: '2', message: 'Hello 3'},
+		{id: '3', message: 'Good Afternoon 3'},
+	],
+	dialogs: [
+		{id: '1', name: 'Dima3', photo: Dima_photo},
+		{id: '2', name: 'Natasha3', photo: Natasha_photo},
+		{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
+		{id: '4', name: 'Vera3', photo: Vera_photo},
+	],
+	newMessageText: ""
+}
+
+export const messagesReducer = (state = initialState, action:ActionsTypes) => {
 	switch (action.type){
 		case "UPDATE-NEW-MESSAGE-TEXT": {
 			state.newMessageText = action.newMessage

@@ -182,7 +182,7 @@ export const store: StoreType = {
 	dispatch(action) {
 		this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
 		this._state.DialogsPage = messagesReducer(this._state.DialogsPage, action)
-		this._onChange()
+		this._onChange() // уведомляем всех подписчиков об изменении локальных частей стейта
 		// if (action.type === "ADD-POST") {
 		// 	//console.log(`addPost,addPost,addPost`)
 		// 	const newPost: PostDataType = {

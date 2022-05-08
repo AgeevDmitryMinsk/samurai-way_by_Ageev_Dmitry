@@ -7,19 +7,27 @@ import {
 	//addMessageAC,
 	//changeNewMessageTextAC,
 	//DialogItemType,
-	DialogsPageType,
+	DialogsPageType, ProfilePageType,
 	//MessageType
-} from "../../redux/state";
+} from "../../redux/store";
 import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
 	//DialogsData: DialogItemType[]
 	// MessagesData: MessageType[]
-	MessagesData: DialogsPageType
-	dispatch: (action: ActionsTypes) => void
+
+	//MessagesData: DialogsPageType
+	//dispatch: (action: ActionsTypes) => void
 }
 
+
 export const Dialogs = (props: DialogsPropsType) => {
+
+	//let ProfilePage = useSelector<AppRootStateType, ProfilePageType>(state => state.ProfilePage)
+	let DialogsPage = useSelector<AppRootStateType, DialogsPageType>(state => state.DialogsPage)
+	const dispatch = useDispatch()
 
 	//вынесем данные из компоненты в BLL в index.tsx
 	// type DialogItemType = {
@@ -42,13 +50,19 @@ export const Dialogs = (props: DialogsPropsType) => {
 	function newMessageOnChangeHandler(e: ChangeEvent<HTMLInputElement>) {
 		console.log(e.currentTarget.value)
 		let newMessage = e.currentTarget.value
-		props.dispatch(changeNewMessageTextAC(newMessage))
-		console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+		let action = changeNewMessageTextAC(newMessage)
+		dispatch(action)
+		// console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+		console.log('props.MessagesData.newMessageText заносим в state = ', DialogsPage.newMessageText)
 	}
 
 	function addMessageHandler() {
-		props.dispatch(addMessageAC(props.MessagesData.newMessageText))
-		console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
+		// let action = addMessageAC(props.MessagesData.newMessageText)
+		let action = addMessageAC(DialogsPage.newMessageText)
+		// props.dispatch(action)
+		dispatch(action)
+		// console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
+		console.log(`props.MessagesData.newMessageText из state до обнуления = `, DialogsPage.messages.at(-1)?.message)
 	}
 
 	//console.log(props.DialogsData)
@@ -58,7 +72,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Dialogs:
 			<div>
 
-				{props.MessagesData.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
+				{/*{props.MessagesData.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}*/}
+				{DialogsPage.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
 				<>
 					{/*<DialogItem name={'Dima'} id={1}/>*/}
 					{/*<DialogItem name={DialogsData[0].name} id={DialogsData[0].id}/>*/}
@@ -69,7 +84,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</>
 			</div>
 			<div>
-				{props.MessagesData.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
+				{/*{props.MessagesData.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}*/}
+				{DialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
 				<>
 					{/*<Message message={'HI !!!'} id={1}/>*/}
 					{/*<Message message={'Hello'} id={2}/>*/}
@@ -81,7 +97,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<input onChange={newMessageOnChangeHandler} value={props.MessagesData.newMessageText}/>
+				{/*<input onChange={newMessageOnChangeHandler} value={props.MessagesData.newMessageText}/>*/}
+				<input onChange={newMessageOnChangeHandler} value={DialogsPage.newMessageText}/>
 				<button onClick={addMessageHandler}>send message</button>
 			</div>
 

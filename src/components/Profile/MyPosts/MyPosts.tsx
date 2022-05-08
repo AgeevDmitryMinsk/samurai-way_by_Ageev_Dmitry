@@ -4,24 +4,31 @@ import React, {ChangeEvent,
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 import {
-	ActionsTypes,
+	ActionsTypes, DialogsPageType,
 	//addPostAC, changeNewTextAC,
 	//PostDataType,
 	ProfilePageType
-} from "../../../redux/state";
+} from "../../../redux/store";
 import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../../redux/redux-store";
 
 
 
 type MyPostPropsType = {
-	PostData: ProfilePageType
-	newText: string
+	//PostData: ProfilePageType
+	//newText: string
+
 	// addPost: (newPostMessage:string)=> void
 	//changeTextareaTitle: (newText: string) => void
-	dispatch: (action: ActionsTypes) => void
+
+	//dispatch: (action: ActionsTypes) => void
 }
 export const MyPosts = (props: MyPostPropsType) => {
 
+	let ProfilePage = useSelector<AppRootStateType, ProfilePageType>(state => state.ProfilePage)
+	let DialogsPage = useSelector<AppRootStateType, DialogsPageType>(state => state.DialogsPage)
+	const dispatch = useDispatch()
 
 //вынесем данные из компоненты в BLL в index.tsx
 	// let PostData:PostDataType[] = [
@@ -37,11 +44,17 @@ export const MyPosts = (props: MyPostPropsType) => {
 	function addPostHandler() {
 		//props.addPost(props.newText)
 		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-		props.dispatch(addPostAC(props.newText))
+		//let action = addPostAC(props.newText)
+		let action = addPostAC(ProfilePage.newPostText)
+		// props.dispatch(action)
+		dispatch(action)
 
-		console.log(`props.newText из state = `, props.newText)
-		console.log(`обновился список постов`, props.PostData.posts)
-		console.log(props.newText)
+		//console.log(`props.newText из state = `, props.newText)
+		console.log(`ProfilePage.newPostText из state = `, ProfilePage.newPostText)
+		// console.log(`обновился список постов`, props.PostData.posts)
+		console.log(`обновился список постов`, ProfilePage.posts)
+		// console.log(props.newText)
+		console.log(ProfilePage.newPostText)
 		//props.newText = ``
 		// props.addPost(``)
 		// console.log(`createRef`, newTitleRef.current?.value)
@@ -59,8 +72,11 @@ export const MyPosts = (props: MyPostPropsType) => {
 		//props.changeTextareaTitle(e.currentTarget.value)
 		// props.dispatch(changeNewTextAC(props.newText))
 		let newText2 = e.currentTarget.value
-		props.dispatch(changeNewTextAC(newText2))
-		console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
+		let action = changeNewTextAC(newText2)
+		// props.dispatch(action)
+		dispatch(action)
+		// console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
+		console.log('props.PostData.newPostText заносим в state = ', ProfilePage.newPostText)
 	}
 
 	// ]
@@ -71,7 +87,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 		</div>
 		<div>
 			{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
-			<textarea onChange={newTextOnChangeHandler} value={props.newText} style={{width: 250}}/>
+			{/*<textarea onChange={newTextOnChangeHandler} value={props.newText} style={{width: 250}}/>*/}
+			<textarea onChange={newTextOnChangeHandler} value={ProfilePage.newPostText} style={{width: 250}}/>
 			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
 			<div>
@@ -83,7 +100,8 @@ export const MyPosts = (props: MyPostPropsType) => {
 			{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
 			{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
 
-			{props.PostData.posts.map(el=> <Post message={el.message}
+			{/*{props.PostData.posts.map(el=> <Post message={el.message}*/}
+			{ProfilePage.posts.map(el=> <Post message={el.message}
 									likesCount={el.likesCount}
 									id={el.id}
 									key={el.id}
