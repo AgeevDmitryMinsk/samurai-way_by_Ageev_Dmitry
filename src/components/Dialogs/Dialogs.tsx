@@ -11,7 +11,7 @@ import {
 	//MessageType
 } from "../../redux/store";
 import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
-import {ReduxStoreType} from "../../redux/redux-store";
+//import {ReduxStoreType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
 	//DialogsData: DialogItemType[]

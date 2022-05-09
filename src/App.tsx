@@ -7,7 +7,7 @@ import {Profile} from './components/Profile/Profile'
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-import {ReduxStoreType} from "./redux/redux-store";
+//import {ReduxStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 //import {
 //RootStateType,
@@ -19,12 +19,12 @@ type AppPropsType = {
 	// addPost: (newPostMessage:string)=> void
 	// changeTextareaTitle: (newText: string) =>void
 	//store: StoreType
-	store: ReduxStoreType
+	//store: ReduxStoreType
 }
 
 const App: React.FC<AppPropsType> = (props) => {
 
-	const state = props.store.getState()
+	//const state = props.store.getState()
 
 	return (
 		<>
@@ -37,7 +37,8 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/'} component={Profile}/>*/}
 					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
 					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
-					<Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
+					<Route path={'/dialogs'} render={() => <DialogsContainer
+						//store={props.store}
 						//DialogsData={state.DialogsPage.dialogs}
 						//MessagesData={state.DialogsPage}
 						//dispatch={props.store.dispatch
@@ -49,7 +50,8 @@ const App: React.FC<AppPropsType> = (props) => {
 					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 
 					<Route path={'/profile'} render={() =>
-						<Profile store={props.store}
+						<Profile
+							//store={props.store}
 							//PostData={state.ProfilePage}
 							// addPost={props.store.addPost.bind(props.store)}
 							//changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
