@@ -5,11 +5,11 @@ import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 // import {
 // 	//ActionsTypes,
-// 	//addPostAC, changeNewTextAC,
+// 	//followAC, unFollowAC,
 // 	//PostDataType,
 // 	ProfilePageType
 // } from "../../../redux/store";
-//import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+//import {followAC, unFollowAC} from "../../../redux/profile-reducer";
 import {MyPostsPropsType} from "./MyPostsContainer";
 
 
@@ -22,8 +22,8 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 // 	//dispatch: (action: ActionsTypes) => void
 // }
 export const MyPosts = (props: MyPostsPropsType) => {
-	console.log(25, props.ProfilePage.posts)
-	console.log(26, props.ProfilePage.newPostText)
+	console.log(25, props.posts)
+	console.log(26, props.newPostText)
 
 
 //вынесем данные из компоненты в BLL в index.tsx
@@ -41,7 +41,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 		console.log(39)
 		props.addPost()
 		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-		//props.dispatch(addPostAC(props.newText))
+		//props.dispatch(followAC(props.newText))
 		// console.log(`props.newText из state = `, props.newText)
 		// console.log(`обновился список постов`, props.PostData.posts)
 		// console.log(props.newText)
@@ -61,9 +61,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
 		console.log(e.currentTarget.value)
 		//setTitle(e.currentTarget.value)
 		props.changeTextareaTitle(e.currentTarget.value)
-		// props.dispatch(changeNewTextAC(props.newText))
+		// props.dispatch(unFollowAC(props.newText))
 		//let newText2 = e.currentTarget.value
-		//props.dispatch(changeNewTextAC(newText2))
+		//props.dispatch(unFollowAC(newText2))
 		//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	}
 
@@ -78,7 +78,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 			{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
 			{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
 			<textarea onChange={newTextOnChangeHandler}
-					  value={props.ProfilePage.newPostText}
+					  value={props.newPostText}
 					  style={{width: 250}}/>
 			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
@@ -91,7 +91,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 			{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
 			{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
 
-			{props.ProfilePage.posts.map(el=> <Post message={el.message}
+			{props.posts.map(el=> <Post message={el.message}
 									likesCount={el.likesCount}
 									id={el.id}
 									key={el.id}

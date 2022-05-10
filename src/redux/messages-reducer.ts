@@ -4,14 +4,21 @@ import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 import {AddPostActionType, ChangeNewTextActionType} from "./profile-reducer";
-
+import {FollowActionType, SetUsersActionType, UnFollowActionType} from "./users-reducer";
 // export type DialogsPageType = {
 // 	messages: MessageType[]
 // 	dialogs: DialogItemType[]
 // 	newMessageText: string
 // }
 
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
+export type ActionsTypes =
+	AddPostActionType
+	| ChangeNewTextActionType
+	| changeNewMessageTextType
+	| addMessageType
+	| FollowActionType
+	| UnFollowActionType
+	| SetUsersActionType
 
 export type MessageType = {
 	message: string
@@ -44,15 +51,16 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
 	switch (action.type) {
 		case "UPDATE-NEW-MESSAGE-TEXT": {
 			//state.newMessageText = action.newMessage
-			return {...state, newMessageText: action.newMessage }
+			return {...state, newMessageText: action.newMessage}
 		}
 		case "ADD-MESSAGE": {
 			const newMessage: MessageType = {
 				id: v1(), message: state.newMessageText
 			}
 			//state.messages.push(newMessage)
-			state.newMessageText = ``
-			return {...state, messages: [...state.messages, newMessage]}
+			// let stateCopy = {...state}
+			// stateCopy.newMessageText = ``
+			return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
 		}
 		default:
 			return state

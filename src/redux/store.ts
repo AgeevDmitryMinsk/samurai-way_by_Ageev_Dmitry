@@ -118,11 +118,11 @@ export type StoreType = {
 	// changeTextareaTitle: (newText: string) => void
 	subscribe: (callback: () => void) => void
 	getState: () => RootStateType
-	// dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+	// dispatch: (action: FollowActionType | ChangeNewTextActionType) => void
 	dispatch: (action: ActionsTypes) => void
 }
 
-// type AddPostActionType = {
+// type FollowActionType = {
 // 	type: "ADD-POST"
 // 	newPostMessage: string
 // }
@@ -218,7 +218,7 @@ export const store: StoreType = {
 
 
 
-//export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
+//export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
 type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
 
 

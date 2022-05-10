@@ -1,28 +1,27 @@
 import React from 'react'
 import './App.css'
-
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
-//import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
-//import {ReduxStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
+//import {ReduxStoreType} from "./redux/redux-store";
+//import {Dialogs} from './components/Dialogs/Dialogs'
 //import {
 //RootStateType,
 //StoreType} from "./redux/state";
+// type AppPropsType = {
+// 	// state: RootStateType
+// 	// addPost: (newPostMessage:string)=> void
+// 	// changeTextareaTitle: (newText: string) =>void
+// 	//store: StoreType
+// 	//store: ReduxStoreType
+// }
 
-
-type AppPropsType = {
-	// state: RootStateType
-	// addPost: (newPostMessage:string)=> void
-	// changeTextareaTitle: (newText: string) =>void
-	//store: StoreType
-	//store: ReduxStoreType
-}
-
-const App: React.FC<AppPropsType> = () => {
+const App: React.FC = () => {
 
 	//const state = props.store.getState()
 
@@ -32,6 +31,7 @@ const App: React.FC<AppPropsType> = () => {
 			<div className={'app-wrapper'}>
 				<Header/>
 				<Navbar/>
+
 				<div className={'app-wrapper__content'}>
 					<>
 						{/*<Route path={'/profile'} component={Profile}/>*/}
@@ -47,9 +47,6 @@ const App: React.FC<AppPropsType> = () => {
 						{/*//dispatch={props.store.dispatch//.bind(props.store)*/}
 						{/*//bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store*/}
 						{/*// тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}*/}
-
-					</>
-					<>
 						{/*<Route path={'/'} component={Profile}/>*/}
 						{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
 						{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
@@ -61,10 +58,8 @@ const App: React.FC<AppPropsType> = () => {
 						//dispatch={props.store.dispatch
 						//	.bind(props.store)
 					/>}/>
-
-
-
 					<Route path={'/news'} component={News}/>
+					<Route path={'/users'} render={()=><UsersContainer/>}/>
 				</div>
 			</div>
 		</>

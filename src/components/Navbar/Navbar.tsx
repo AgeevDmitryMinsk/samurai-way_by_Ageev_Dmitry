@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink } from 'react-router-dom'
 import s from './Navbar.module.css'
 
 export const Navbar = () => {
@@ -60,6 +60,19 @@ export const Navbar = () => {
                     Settings
                 </NavLink>
             </div>
+
+            <div>
+                <NavLink
+                    to={'/users'}
+                    className={s.item}
+                    activeClassName={`${s.item} ${s.active}`}
+                >
+                    Users
+                </NavLink>
+            </div>
+
+
+
         </nav>
     )
 }

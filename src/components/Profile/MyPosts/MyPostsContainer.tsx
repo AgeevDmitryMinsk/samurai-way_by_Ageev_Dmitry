@@ -6,11 +6,11 @@
 // import {Post} from './Post/Post'
 // import {
 // 	ActionsTypes,
-// 	//addPostAC, changeNewTextAC,
+// 	//followAC, unFollowAC,
 // 	//PostDataType,
 // 	ProfilePageType
 // } from "../../../redux/store";
-// import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+// import {followAC, unFollowAC} from "../../../redux/profile-reducer";
 // import {MyPosts} from "./MyPosts";
 // import {StoreContext} from "../../../StoreContext";
 // //import {ReduxStoreType} from "../../../redux/redux-store";
@@ -34,8 +34,8 @@
 // 					function addPostHandler() {
 // 						//props.addPost(props.newText)
 // 						//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-// 						// props.store.dispatch(addPostAC(props.store.getState().ProfilePage.newPostText))
-// 						store.dispatch(addPostAC(store.getState().ProfilePage.newPostText))
+// 						// props.store.dispatch(followAC(props.store.getState().ProfilePage.newPostText))
+// 						store.dispatch(followAC(store.getState().ProfilePage.newPostText))
 //
 //
 // 						//console.log(`props.newText из state = `, props.newText)
@@ -56,10 +56,10 @@
 // 						//console.log(e.currentTarget.value)
 // 						//setTitle(e.currentTarget.value)
 // 						//props.changeTextareaTitle(e.currentTarget.value)
-// 						// props.dispatch(changeNewTextAC(props.newText))
+// 						// props.dispatch(unFollowAC(props.newText))
 // 						//let newText2 = e.currentTarget.value
-// 						// props.store.dispatch(changeNewTextAC(newText2))
-// 						store.dispatch(changeNewTextAC(newText2))
+// 						// props.store.dispatch(unFollowAC(newText2))
+// 						store.dispatch(unFollowAC(newText2))
 // 						//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 // 					}
 //
@@ -88,9 +88,7 @@ import {MyPosts} from "./MyPosts";
 import {Dispatch} from "redux";
 
 
-type mapStateToPropsType = {
-	ProfilePage: InitialStateProfilePageType
-}
+type mapStateToPropsType = InitialStateProfilePageType
 
 type mapDispatchToPropsType = {
 	addPost: () => void
@@ -101,7 +99,8 @@ export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		ProfilePage: state.ProfilePage
+		posts: state.ProfilePage.posts,
+		newPostText: state.ProfilePage.newPostText
 	}
 }
 

@@ -66,7 +66,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Dialogs:
 			<div>
 
-				{props.DialogsPage.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
+				{props.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
 				<>
 					{/*<DialogItem name={'Dima'} id={1}/>*/}
 					{/*<DialogItem name={DialogsData[0].name} id={DialogsData[0].id}/>*/}
@@ -77,7 +77,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</>
 			</div>
 			<div>
-				{props.DialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
+				{props.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
 				<>
 					{/*<Message message={'HI !!!'} id={1}/>*/}
 					{/*<Message message={'Hello'} id={2}/>*/}
@@ -89,7 +89,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<input onChange={newMessageOnChangeHandler} value={props.DialogsPage.newMessageText}/>
+				<input onChange={newMessageOnChangeHandler} value={props.newMessageText}/>
 				<button onClick={addMessageHandler}>send message</button>
 			</div>
 

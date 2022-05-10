@@ -28,9 +28,9 @@ export const profileReducer = (state=initialState, action: ActionsTypes): Profil
 			// this._state.ProfilePage.posts.push(newPost)
 			//state.posts.push(newPost)
 			// this._state.ProfilePage.newPostText = ``
-			state.newPostText = ``
+			//state.newPostText = ``
 			//onChange()
-			return {...state, posts: [...state.posts, newPost]}
+			return {...state, posts: [...state.posts, newPost], newPostText:''}
 		}
 		case "UPDATE-NEW-POST-TEXT": {
 			console.log(`UPDATE-NEW-POST-TEXT`)
@@ -58,7 +58,7 @@ export const addPostAC = (
 		type: "ADD-POST",
 		//newPostMessage: newPostMessage
 		//newPostMessage
-	} as const //  добавляем as const в случае типизации type AddPostActionType = ReturnType<typeof addPostAC>
+	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
 export const changeNewTextAC = (newText: string) => {
