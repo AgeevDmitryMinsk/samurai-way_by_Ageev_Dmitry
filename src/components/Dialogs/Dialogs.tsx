@@ -2,27 +2,27 @@ import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-	ActionsTypes,
-	//addMessageAC,
-	//changeNewMessageTextAC,
-	//DialogItemType,
-	DialogsPageType,
-	//MessageType
-} from "../../redux/store";
-import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
+// import {
+// 	//ActionsTypes,
+// 	//addMessageAC,
+// 	//changeNewMessageTextAC,
+// 	//DialogItemType,
+// 	DialogsPageType,
+// 	//MessageType
+// } from "../../redux/store";
+// import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
+import {DialogsPropsType} from "./DialogsContainer";
 //import {ReduxStoreType} from "../../redux/redux-store";
-
-type DialogsPropsType = {
-	//DialogsData: DialogItemType[]
-	// MessagesData: MessageType[]
-	MessagesData: DialogsPageType
-	//dispatch: (action: ActionsTypes) => void
-	//store: ReduxStoreType
-	newMessageOnChange: (newMessage: string) => void
-	addMessage: ()=>void
-	//store: ReduxStoreType
-}
+// type DialogsPropsType = {
+// 	//DialogsData: DialogItemType[]
+// 	// MessagesData: MessageType[]
+// 	MessagesData: DialogsPageType
+// 	//dispatch: (action: ActionsTypes) => void
+// 	//store: ReduxStoreType
+// 	newMessageOnChange: (newMessage: string) => void
+// 	addMessage: ()=>void
+// 	//store: ReduxStoreType
+// }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
@@ -53,9 +53,10 @@ export const Dialogs = (props: DialogsPropsType) => {
 	}
 
 	function addMessageHandler() {
+		//props.addMessage(props.DialogsPage.newMessageText)
 		props.addMessage()
 		//props.store.dispatch(addMessageAC(props.MessagesData.newMessageText))
-		console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
+		//console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
 	}
 
 	//console.log(props.DialogsData)
@@ -65,7 +66,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Dialogs:
 			<div>
 
-				{props.MessagesData.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
+				{props.DialogsPage.dialogs.map(el => <DialogItem name={el.name} id={el.id} key={el.id} photo={el.photo}/>)}
 				<>
 					{/*<DialogItem name={'Dima'} id={1}/>*/}
 					{/*<DialogItem name={DialogsData[0].name} id={DialogsData[0].id}/>*/}
@@ -76,7 +77,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</>
 			</div>
 			<div>
-				{props.MessagesData.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
+				{props.DialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>)}
 				<>
 					{/*<Message message={'HI !!!'} id={1}/>*/}
 					{/*<Message message={'Hello'} id={2}/>*/}
@@ -88,7 +89,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<input onChange={newMessageOnChangeHandler} value={props.MessagesData.newMessageText}/>
+				<input onChange={newMessageOnChangeHandler} value={props.DialogsPage.newMessageText}/>
 				<button onClick={addMessageHandler}>send message</button>
 			</div>
 

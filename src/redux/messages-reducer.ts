@@ -1,38 +1,58 @@
-import {ActionsTypes, DialogsPageType, MessageType} from "./store";
 import {v1} from "uuid";
 import Dima_photo from "../photos/Dima.png"
 import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
+import {AddPostActionType, ChangeNewTextActionType} from "./profile-reducer";
 
-const initialState: DialogsPageType = {
+// export type DialogsPageType = {
+// 	messages: MessageType[]
+// 	dialogs: DialogItemType[]
+// 	newMessageText: string
+// }
+
+export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
+
+export type MessageType = {
+	message: string
+	id: string
+}
+export type DialogItemType = {
+	id: string
+	name: string
+	photo: string
+}
+export type InitialStateType = typeof initialState
+
+const initialState = {
 	messages: [
 		{id: '1', message: 'HI from messages-reducer (connected redux by Dimich legacy code)!!!'},
 		{id: '2', message: 'Hello 3'},
 		{id: '3', message: 'Good Afternoon 3'},
-	],
+	] as MessageType[],
 	dialogs: [
 		{id: '1', name: 'Dima3', photo: Dima_photo},
 		{id: '2', name: 'Natasha3', photo: Natasha_photo},
 		{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
 		{id: '4', name: 'Vera3', photo: Vera_photo},
-	],
+	] as DialogItemType[],
 	newMessageText: ""
 }
 
-export const messagesReducer = (state=initialState, action:ActionsTypes) => {
-	switch (action.type){
+
+export const messagesReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+	switch (action.type) {
 		case "UPDATE-NEW-MESSAGE-TEXT": {
-			state.newMessageText = action.newMessage
-			return state
+			//state.newMessageText = action.newMessage
+			return {...state, newMessageText: action.newMessage }
 		}
 		case "ADD-MESSAGE": {
 			const newMessage: MessageType = {
-				id: v1(), message: action.newMessageAdd
+				id: v1(), message: state.newMessageText
 			}
-			state.messages.push(newMessage)
+			//state.messages.push(newMessage)
 			state.newMessageText = ``
-			return state
+			return {...state, messages: [...state.messages, newMessage]}
 		}
 		default:
 			return state
@@ -49,9 +69,11 @@ export const changeNewMessageTextAC = (newMessage: string) => {
 	} as const
 }
 
-export const addMessageAC = (newMessageAdd: string) => {
+export const addMessageAC = (
+//	newMessageAdd: string
+) => {
 	return {
 		type: "ADD-MESSAGE",
-		newMessageAdd
+		//newMessageAdd
 	} as const
 }

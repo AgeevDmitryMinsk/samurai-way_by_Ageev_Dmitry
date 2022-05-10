@@ -4,7 +4,7 @@ import './App.css'
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
-import {Dialogs} from './components/Dialogs/Dialogs'
+//import {Dialogs} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 //import {ReduxStoreType} from "./redux/redux-store";
@@ -22,7 +22,7 @@ type AppPropsType = {
 	//store: ReduxStoreType
 }
 
-const App: React.FC<AppPropsType> = (props) => {
+const App: React.FC<AppPropsType> = () => {
 
 	//const state = props.store.getState()
 
@@ -33,10 +33,27 @@ const App: React.FC<AppPropsType> = (props) => {
 				<Header/>
 				<Navbar/>
 				<div className={'app-wrapper__content'}>
+					<>
+						{/*<Route path={'/profile'} component={Profile}/>*/}
+						{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
+						{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
+					</>
+					<Route path={'/profile'} render={() =><Profile/>}/>
+					<>
+						{/*//store={props.store}*/}
+						{/*//PostData={state.ProfilePage}*/}
+						{/*// addPost={props.store.addPost.bind(props.store)}*/}
+						{/*//changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}*/}
+						{/*//dispatch={props.store.dispatch//.bind(props.store)*/}
+						{/*//bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store*/}
+						{/*// тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}*/}
 
-					{/*<Route path={'/'} component={Profile}/>*/}
-					{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
-					{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
+					</>
+					<>
+						{/*<Route path={'/'} component={Profile}/>*/}
+						{/*<Route path={'/dialogs'} component={Dialogs}/>*/}
+						{/*<Route path={'/dialogs'} render={()=> <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />}/>*/}
+					</>
 					<Route path={'/dialogs'} render={() => <DialogsContainer
 						//store={props.store}
 						//DialogsData={state.DialogsPage.dialogs}
@@ -45,21 +62,7 @@ const App: React.FC<AppPropsType> = (props) => {
 						//	.bind(props.store)
 					/>}/>
 
-					{/*<Route path={'/profile'} component={Profile}/>*/}
-					{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
-					{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 
-					<Route path={'/profile'} render={() =>
-						<Profile
-							//store={props.store}
-							//PostData={state.ProfilePage}
-							// addPost={props.store.addPost.bind(props.store)}
-							//changeTextareaTitle={props.store.changeTextareaTitle.bind(props.store)}
-							//dispatch={props.store.dispatch//.bind(props.store)
-							//bind(props.store) ДЛЯ ПРИВЯЗКИ КОНТЕКСТА ВЫЗОВА: this = props.store
-							// тк без bind(props.store): this ={PostData: {…}, dispatch: ƒ}
-
-						/>}/>
 
 					<Route path={'/news'} component={News}/>
 				</div>

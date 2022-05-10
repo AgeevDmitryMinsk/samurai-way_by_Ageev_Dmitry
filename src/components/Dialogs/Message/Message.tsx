@@ -1,6 +1,7 @@
 import s from "./Mesaage.module.css";
 import React from "react";
-import {MessageType} from "../../../redux/store";
+import {MessageType} from "../../../redux/messages-reducer";
+//import {MessageType} from "../../../redux/store";
 
 
 export const Message = (props: MessageType) => {

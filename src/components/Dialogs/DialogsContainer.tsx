@@ -1,63 +1,98 @@
-import React, {ChangeEvent} from 'react'
-import s from './Dialogs.module.css'
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Message";
-import {
-	ActionsTypes,
-	//addMessageAC,
-	//changeNewMessageTextAC,
-	//DialogItemType,
-	DialogsPageType, StoreType,
-	//MessageType
-} from "../../redux/store";
-import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
-//import {ReduxStoreType} from "../../redux/redux-store";
+// //import React, {ChangeEvent} from 'react'
+// import s from './Dialogs.module.css'
+// import {DialogItem} from "./DialogItem/DialogItem";
+// import {Message} from "./Message/Message";
+// import {
+// 	ActionsTypes,
+// 	//addMessageAC,
+// 	//changeNewMessageTextAC,
+// 	//DialogItemType,
+// 	DialogsPageType, StoreType,
+// 	//MessageType
+// } from "../../redux/store";
+// import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
+// //import {ReduxStoreType} from "../../redux/redux-store";
+//import {StoreContext} from "../../StoreContext";
+//type DialogsPropsType = {
+//DialogsData: DialogItemType[]
+// MessagesData: MessageType[]
+//MessagesData: DialogsPageType
+//dispatch: (action: ActionsTypes) => void
+//store: ReduxStoreType
+// store: StoreType}
+// export const DialogsContainer = (props: DialogsPropsType) => {
+// 	return (
+// 		<StoreContext.Consumer>
+// 			{
+// 				store => {
+// 					let state = store.getState().DialogsPage
+//
+// 					function newMessageOnChangeHandler(newMessage: string) {
+// 						// console.log(e.currentTarget.value)
+// 						// let newMessage = e.currentTarget.value
+// 						//props.store.dispatch(changeNewMessageTextAC(newMessage))
+// 						store.dispatch(changeNewMessageTextAC(newMessage))
+// 						//console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+// 					}
+//
+// 					function addMessageHandler() {
+// 						// props.store.dispatch(addMessageAC(props.store.getState().DialogsPage.newMessageText))
+// 						// store.dispatch(addMessageAC(props.store.getState().DialogsPage.newMessageText))
+// 						store.dispatch(addMessageAC(store.getState().DialogsPage.newMessageText))
+// 						//console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
+// 					}
+//
+// 					return (
+// 						<Dialogs MessagesData={store.getState().DialogsPage}
+// 											// props.store.getState().DialogsPage}
+// 								 newMessageOnChange={newMessageOnChangeHandler}
+// 								 addMessage={addMessageHandler}
+// 						/>
+// 					)
+// 				}
+// 			}
+// 		</StoreContext.Consumer>
+// 	)
+//
+//
+// }
+
+//import React from 'react';
+import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {AppRootStateType} from "../../redux/redux-store";
+import {addMessageAC, changeNewMessageTextAC, InitialStateType} from "../../redux/messages-reducer";
+import {Dispatch} from "redux";
 
-type DialogsPropsType = {
-	//DialogsData: DialogItemType[]
-	// MessagesData: MessageType[]
-	//MessagesData: DialogsPageType
-	//dispatch: (action: ActionsTypes) => void
-	//store: ReduxStoreType
-	// store: StoreType
+type mapStateToPropsType = {
+	DialogsPage: InitialStateType
+}
+type mapDispatchToPropsType = {
+	newMessageOnChange: (newMessage: string) => void
+	addMessage: () => void
 }
 
-export const DialogsContainer = (props: DialogsPropsType) => {
-	return (
-		<StoreContext.Consumer>
-			{
-				store => {
-					let state = store.getState().DialogsPage
 
-					function newMessageOnChangeHandler(newMessage: string) {
-						// console.log(e.currentTarget.value)
-						// let newMessage = e.currentTarget.value
-						//props.store.dispatch(changeNewMessageTextAC(newMessage))
-						store.dispatch(changeNewMessageTextAC(newMessage))
-						//console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
-					}
+export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-					function addMessageHandler() {
-						// props.store.dispatch(addMessageAC(props.store.getState().DialogsPage.newMessageText))
-						// store.dispatch(addMessageAC(props.store.getState().DialogsPage.newMessageText))
-						store.dispatch(addMessageAC(store.getState().DialogsPage.newMessageText))
-						//console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
-					}
-
-					return (
-						<Dialogs MessagesData={store.getState().DialogsPage}
-											// props.store.getState().DialogsPage}
-								 newMessageOnChange={newMessageOnChangeHandler}
-								 addMessage={addMessageHandler}
-						/>
-					)
-				}
-			}
-		</StoreContext.Consumer>
-	)
-
-
+function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
+	return {
+		DialogsPage: state.DialogsPage
+	}
 }
+
+function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+	return {
+		newMessageOnChange: (newMessage: string) => {
+			dispatch(changeNewMessageTextAC(newMessage))
+		},
+		addMessage: () => {
+			dispatch(addMessageAC())
+		}
+	}
+}
+
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
 

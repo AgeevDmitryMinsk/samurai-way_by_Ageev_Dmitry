@@ -8,11 +8,11 @@ import {addMessageType, changeNewMessageTextType, messagesReducer} from "./messa
 //import {rerenderEntireTree} from "../rerenderEntireTree";
 
 
-export type MessageType = {
+type MessageType = {
 	message: string
 	id: string
 }
-export type DialogItemType = {
+type DialogItemType = {
 	id: string
 	name: string
 	photo: string
@@ -29,7 +29,7 @@ export type DialogItemType = {
 // 	{id: '3', message: 'Good Afternoon 3'},
 //
 // ]
-export type PostDataType = {
+type PostDataType = {
 	id: string
 	message: string
 	likesCount: number
@@ -219,7 +219,7 @@ export const store: StoreType = {
 
 
 //export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
+type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
 
 
 
