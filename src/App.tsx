@@ -6,7 +6,7 @@ import {Profile} from './components/Profile/Profile'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {Users} from "./components/Users/Users";
+//import {Users} from "./components/Users/Users";
 import {UsersContainer} from "./components/Users/UsersContainer";
 //import {ReduxStoreType} from "./redux/redux-store";
 //import {Dialogs} from './components/Dialogs/Dialogs'
@@ -65,5 +65,5 @@ const App: React.FC = () => {
 		</>
 	)
 }
-
+// сделал merge ветки Lesson_43_by_Dimich_legacy_code в ветку main
 export default App
