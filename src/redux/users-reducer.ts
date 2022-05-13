@@ -22,6 +22,7 @@ export type UsersResponseType = {
 export type UserType = {
 	"name": string
 	"id": number,
+	uniqueUrlName?: null,
 	"photos": {
 		"small": null | string,
 		"large": null | string
@@ -33,8 +34,119 @@ export type UserType = {
 export type InitialStateUsersPageType = typeof initialState
 
 const initialState = {
-	// users: [] as Array<UsersDataType>
-	users: [] as Array<UserType>
+	 users: [] as Array<UserType>
+	// users: [
+	// 	{
+	// 		name: "sobraniebluee",
+	// 		id: 23966,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Aliher4ik",
+	// 		id: 23965,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Elenaya",
+	// 		id: 23964,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "kinghong556677",
+	// 		id: 23963,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "evgen_prog",
+	// 		id: 23962,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Ketsamesama",
+	// 		id: 23961,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "tinalychko",
+	// 		id: 23960,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Lida",
+	// 		id: 23959,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Vanya_iz_3a",
+	// 		id: 23958,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// 	{
+	// 		name: "Ponchik",
+	// 		id: 23957,
+	// 		uniqueUrlName: null,
+	// 		photos: {
+	// 			small: null,
+	// 			large: null,
+	// 		},
+	// 		status: null,
+	// 		followed: false,
+	// 	},
+	// ] as Array<UserType>
 }
 	//
 	// [

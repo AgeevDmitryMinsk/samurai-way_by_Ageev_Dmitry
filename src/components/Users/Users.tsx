@@ -38,10 +38,11 @@ import {UsersResponseType} from "../../redux/users-reducer";
 
 
 export const Users = (props: UsersPropsType) => {
+
+	// для избежания сайд-эффекта при первой загрузке компоненты делаем костыль-заглушку, т.е.
+	// оборачиваем код в функцию const getUsers(), затем в рендрере делаем копку GET USERS для вызова костыля
 	const getUsers = () => {
 		if (props.users.length === 0) {
-
-
 			return axios.get("https://social-network.samuraijs.com/api/1.0/users"
 				//, {	baseURL: "https://social-network.samuraijs.com/api/1.0",
 				// withCredentials: true,
@@ -51,7 +52,6 @@ export const Users = (props: UsersPropsType) => {
 					console.log(response.data)
 					props.setUsers(response.data.items)
 				})
-
 			// props.setUsers([
 			// 	{
 			// 		id: '1',
@@ -88,7 +88,6 @@ export const Users = (props: UsersPropsType) => {
 			// ] )
 		}
 	}
-
 
 	return (
 		<div>
