@@ -1,23 +1,40 @@
 import {ActionsTypes} from "./messages-reducer";
 
-export type UsersDataType = {
-	id: string
-	photo: string
-	followed: boolean
-	fullName: string
-	status: string
-	location: LocationType
+// export type UsersDataType = {
+// 	id: string
+// 	photo: string
+// 	followed: boolean
+// 	fullName: string
+// 	status: string
+// 	location: LocationType
+// }
+// type LocationType = {
+// 	city: string
+// 	country: string
+// }
+
+export type UsersResponseType = {
+	"items": UserType[],
+	"totalCount": number,
+	"error": null | string
 }
 
-type LocationType = {
-	city: string
-	country: string
+export type UserType = {
+	"name": string
+	"id": number,
+	"photos": {
+		"small": null | string,
+		"large": null | string
+	},
+	"status": null | string,
+	"followed": boolean
 }
 
 export type InitialStateUsersPageType = typeof initialState
 
 const initialState = {
-	users: [] as Array<UsersDataType>
+	// users: [] as Array<UsersDataType>
+	users: [] as Array<UserType>
 }
 	//
 	// [
@@ -60,7 +77,7 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 	switch (action.type) {
 		case "FOLLOW": {
 			return {
-				...state, users: state.users.map(el => el.id === action.userId
+				...state, users: state.users.map(el => el.id === action.id
 					? {...el, followed: true}
 					: el
 				)
@@ -91,14 +108,14 @@ export type UnFollowActionType = ReturnType<typeof unFollowAC>
 
 export type SetUsersActionType = ReturnType<typeof setUsersAC>
 
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
 	return {
 		type: "FOLLOW",
-		userId: userId,
+		id: userId,
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
-export const unFollowAC = (userId: string) => {
+export const unFollowAC = (userId: number) => {
 
 	return {
 		type: "UNFOLLOW",
@@ -107,7 +124,7 @@ export const unFollowAC = (userId: string) => {
 	} as const
 }
 
-export const setUsersAC = (users: Array<UsersDataType>) => {
+export const setUsersAC = (users: Array<UserType>) => {
 
 	return {
 		type: "SET-USERS",
