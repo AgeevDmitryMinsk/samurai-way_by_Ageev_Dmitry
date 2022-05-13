@@ -1,6 +1,4 @@
-import React, {ChangeEvent,
-//	useState
-} from 'react'
+import React, {ChangeEvent,} from 'react'
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 // import {
@@ -13,7 +11,6 @@ import {Post} from './Post/Post'
 import {MyPostsPropsType} from "./MyPostsContainer";
 
 
-
 // type MyPostPropsType = {
 // 	PostData: ProfilePageType
 // 	newText: string
@@ -21,7 +18,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 // 	changeTextareaTitle: (newText: string) => void
 // 	//dispatch: (action: ActionsTypes) => void
 // }
-export const MyPosts = (props: MyPostsPropsType) => {
+export function MyPosts(props: MyPostsPropsType) {
 	console.log(25, props.posts)
 	console.log(26, props.newPostText)
 
@@ -56,7 +53,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 		//setTitle(``)
 	}
 
-	function newTextOnChangeHandler(e:ChangeEvent<HTMLTextAreaElement>) {
+	function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
 		//debugger
 		console.log(e.currentTarget.value)
 		//setTitle(e.currentTarget.value)
@@ -71,37 +68,37 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
 	return (
 		<>
-		<div className={s.myPosts}>
-			My posts:
-		</div>
-		<div>
-			{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
-			{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
-			<textarea onChange={newTextOnChangeHandler}
-					  value={props.newPostText}
-					  style={{width: 250}}/>
-			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
-
-			<div>
-				<button onClick={addPostHandler}>Add post</button>
+			<div className={s.myPosts}>
+				My posts:
 			</div>
+			<div>
+				{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
+				{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
+				<textarea onChange={newTextOnChangeHandler}
+						  value={props.newPostText}
+						  style={{width: 250}}/>
+				{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
-		</div>
-		<div className={s.posts}>
-			{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
-			{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
+				<div>
+					<button onClick={addPostHandler}>Add post</button>
+				</div>
 
-			{props.posts.map(el=> <Post message={el.message}
-									likesCount={el.likesCount}
-									id={el.id}
-									key={el.id}
-			/>)}
+			</div>
+			<div className={s.posts}>
+				{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
+				{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
 
-			{/*<Post message={PostData[0].message}*/}
-			{/*	  likesCount={PostData[0].likesCount}*/}
-			{/*	  id={PostData[0].id} />*/}
+				{props.posts.map(el => <Post message={el.message}
+											 likesCount={el.likesCount}
+											 id={el.id}
+											 key={el.id}
+				/>)}
 
-		</div>
-</>
-)
+				{/*<Post message={PostData[0].message}*/}
+				{/*	  likesCount={PostData[0].likesCount}*/}
+				{/*	  id={PostData[0].id} />*/}
+
+			</div>
+		</>
+	)
 }
