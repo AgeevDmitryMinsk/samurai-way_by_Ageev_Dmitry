@@ -37,52 +37,55 @@ import {UsersResponseType} from "../../redux/users-reducer";
 
 export class Users extends React.Component<UsersPropsType> {
 
-	constructor(props: any) {
-		 super(props);
-			 axios.get("https://social-network.samuraijs.com/api/1.0/users"
-				//, {	baseURL: "https://social-network.samuraijs.com/api/1.0",
-				// withCredentials: true,
-				// headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
-			).then((response: AxiosResponse<UsersResponseType>) => {
-				//debugger
-				console.log(response.data)
-				this.props.setUsers(response.data.items)
-			})
-			// props.setUsers([
-			// 	{
-			// 		id: '1',
-			// 		photo: Dima_photo,
-			// 		followed: false,
-			// 		fullName: "Dmitry A",
-			// 		status: `I'm a boss`,
-			// 		location: {city: "Minsk", country: "Belarus"}
-			// 	},
-			// 	{
-			// 		id: '2',
-			// 		photo: Natasha_photo,
-			// 		followed: true,
-			// 		fullName: "Natalia A",
-			// 		status: `I'm a house keeper`,
-			// 		location: {city: "Minsk", country: "Belarus"}
-			// 	},
-			// 	{
-			// 		id: '3',
-			// 		photo: Ksenia_photo,
-			// 		followed: true,
-			// 		fullName: "Ksenia A",
-			// 		status: `I'm a student`,
-			// 		location: {city: "Minsk", country: "Belarus"}
-			// 	},
-			// 	{
-			// 		id: '4',
-			// 		photo: Vera_photo,
-			// 		followed: true,
-			// 		fullName: "Vera A",
-			// 		status: `I'm a student`,
-			// 		location: {city: "Minsk", country: "Belarus"}
-			// 	}
-			// ] )
+	// constructor(props: UsersPropsType) {
+	// 	 super(props);
+	// }
+
+	componentDidMount() { axios.get("https://social-network.samuraijs.com/api/1.0/users"
+		//, {	baseURL: "https://social-network.samuraijs.com/api/1.0",
+		// withCredentials: true,
+		// headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
+	).then((response: AxiosResponse<UsersResponseType>) => {
+		//debugger
+		console.log(response.data)
+		this.props.setUsers(response.data.items)
+	})
+		// props.setUsers([
+		// 	{
+		// 		id: '1',
+		// 		photo: Dima_photo,
+		// 		followed: false,
+		// 		fullName: "Dmitry A",
+		// 		status: `I'm a boss`,
+		// 		location: {city: "Minsk", country: "Belarus"}
+		// 	},
+		// 	{
+		// 		id: '2',
+		// 		photo: Natasha_photo,
+		// 		followed: true,
+		// 		fullName: "Natalia A",
+		// 		status: `I'm a house keeper`,
+		// 		location: {city: "Minsk", country: "Belarus"}
+		// 	},
+		// 	{
+		// 		id: '3',
+		// 		photo: Ksenia_photo,
+		// 		followed: true,
+		// 		fullName: "Ksenia A",
+		// 		status: `I'm a student`,
+		// 		location: {city: "Minsk", country: "Belarus"}
+		// 	},
+		// 	{
+		// 		id: '4',
+		// 		photo: Vera_photo,
+		// 		followed: true,
+		// 		fullName: "Vera A",
+		// 		status: `I'm a student`,
+		// 		location: {city: "Minsk", country: "Belarus"}
+		// 	}
+		// ] )
 	}
+
 	render() {
 
 		// для избежания сайд-эффекта при первой загрузке компоненты делаем костыль-заглушку, т.е.
@@ -134,7 +137,7 @@ export class Users extends React.Component<UsersPropsType> {
 		// 	// 	// ] )
 		// 	// }
 		// }
-debugger
+//debugger
 		return (
 			<div>
 				{/*<button onClick={getUsers}>GET USERS</button>*/}
