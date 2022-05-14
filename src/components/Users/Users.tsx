@@ -33,6 +33,9 @@ import {UsersResponseType} from "../../redux/users-reducer";
 // 		//dispatch(setUsersAC(res.data.items))
 // 	})
 // }
+//, {	baseURL: "https://social-network.samuraijs.com/api/1.0",
+// withCredentials: true,
+// headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
 
 
 export class Users extends React.Component<UsersPropsType> {
@@ -41,15 +44,14 @@ export class Users extends React.Component<UsersPropsType> {
 	// 	 super(props);
 	// }
 
-	componentDidMount() { axios.get("https://social-network.samuraijs.com/api/1.0/users"
-		//, {	baseURL: "https://social-network.samuraijs.com/api/1.0",
-		// withCredentials: true,
-		// headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
-	).then((response: AxiosResponse<UsersResponseType>) => {
-		//debugger
-		console.log(response.data)
-		this.props.setUsers(response.data.items)
-	})
+	componentDidMount() {
+		axios
+			.get("https://social-network.samuraijs.com/api/1.0/users?page=22&count=5")
+			.then((response: AxiosResponse<UsersResponseType>) => {
+				console.log(response.data)
+				console.log(`totalCount/count = `, response.data.totalCount/5 , this.props.totalUsersCount/this.props.pageSize)
+				this.props.setUsers(response.data.items)
+			})
 		// props.setUsers([
 		// 	{
 		// 		id: '1',
@@ -87,6 +89,8 @@ export class Users extends React.Component<UsersPropsType> {
 	}
 
 	render() {
+		let pagesCount = this.props.totalUsersCount/this.props.pageSize
+		console.log(pagesCount)
 
 		// для избежания сайд-эффекта при первой загрузке компоненты делаем костыль-заглушку, т.е.
 		// оборачиваем код в функцию const getUsers(), затем в рендрере делаем копку GET USERS для вызова костыля
@@ -139,26 +143,34 @@ export class Users extends React.Component<UsersPropsType> {
 		// }
 //debugger
 		return (
-			<div>
-				{/*<button onClick={getUsers}>GET USERS</button>*/}
-				{this.props.users.map(el => (
-					<div key={el.id} className={styles.container}>
-						<div className={styles.item}>
-							<div>
-								{/*<img src={el.photo} alt="usersAvatar"/>*/}
-								<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
-							</div>
-							{el.followed ?
+			<>
+				<div>
+					<span>1</span>
+					<span className={styles.selectedPage}>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+				</div>
+				<div>
+					{/*<button onClick={getUsers}>GET USERS</button>*/}
+					{this.props.users.map(el => (
+						<div key={el.id} className={styles.container}>
+							<div className={styles.item}>
 								<div>
-									<button onClick={() => this.props.unFollow(el.id)}>Follow</button>
+									{/*<img src={el.photo} alt="usersAvatar"/>*/}
+									<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
 								</div>
-								:
-								<div>
-									<button onClick={() => this.props.follow(el.id)}>Unfollow</button>
-								</div>}
-						</div>
+								{el.followed ?
+									<div>
+										<button onClick={() => this.props.unFollow(el.id)}>Follow</button>
+									</div>
+									:
+									<div>
+										<button onClick={() => this.props.follow(el.id)}>Unfollow</button>
+									</div>}
+							</div>
 
-						<span className={styles.description}>
+							<span className={styles.description}>
 						<div className={styles.item}>
 							<div style={{
 								fontWeight: "bold",
@@ -169,13 +181,14 @@ export class Users extends React.Component<UsersPropsType> {
 							<div>{el.status}</div>
 						</div>
 
-							{/*<div className={styles.item}>*/}
-							{/*	<div>{el.location.country}</div>*/}
-							{/*	<div>{el.location.city}</div>*/}
-							{/*</div>*/}
+								{/*<div className={styles.item}>*/}
+								{/*	<div>{el.location.country}</div>*/}
+								{/*	<div>{el.location.city}</div>*/}
+								{/*</div>*/}
 					</span>
-					</div>))}
-			</div>
+						</div>))}
+				</div>
+			</>
 		);
 	}
 }

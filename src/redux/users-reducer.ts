@@ -34,7 +34,10 @@ export type UserType = {
 export type InitialStateUsersPageType = typeof initialState
 
 const initialState = {
-	 users: [] as Array<UserType>
+	users: [] as Array<UserType>,
+	pageSize: 5,
+	totalUsersCount: 0,
+	currentPage: 1
 	// users: [
 	// 	{
 	// 		name: "sobraniebluee",
@@ -148,41 +151,41 @@ const initialState = {
 	// 	},
 	// ] as Array<UserType>
 }
-	//
-	// [
-	// {
-	// 	id: '1',
-	// 	photo: Dima_photo,
-	// 	followed: false,
-	// 	fullName: "Dmitry A",
-	// 	status: `I'm a boss`,
-	// 	location: {city: "Minsk", country: "Belarus"}
-	// },
-	// 	{
-	// 		id: '2',
-	// 		photo: Natasha_photo,
-	// 		followed: true,
-	// 		fullName: "Natalia A",
-	// 		status: `I'm a house keeper`,
-	// 		location: {city: "Minsk", country: "Belarus"}
-	// 	},
-	// 	{
-	// 		id: '3',
-	// 		photo: Ksenia_photo,
-	// 		followed: true,
-	// 		fullName: "Ksenia A",
-	// 		status: `I'm a student`,
-	// 		location: {city: "Minsk", country: "Belarus"}
-	// 	},
-	// 	{
-	// 		id: '4',
-	// 		photo: Vera_photo,
-	// 		followed: true,
-	// 		fullName: "Vera A",
-	// 		status: `I'm a student`,
-	// 		location: {city: "Minsk", country: "Belarus"}
-	// 	}
-	// ]
+//
+// [
+// {
+// 	id: '1',
+// 	photo: Dima_photo,
+// 	followed: false,
+// 	fullName: "Dmitry A",
+// 	status: `I'm a boss`,
+// 	location: {city: "Minsk", country: "Belarus"}
+// },
+// 	{
+// 		id: '2',
+// 		photo: Natasha_photo,
+// 		followed: true,
+// 		fullName: "Natalia A",
+// 		status: `I'm a house keeper`,
+// 		location: {city: "Minsk", country: "Belarus"}
+// 	},
+// 	{
+// 		id: '3',
+// 		photo: Ksenia_photo,
+// 		followed: true,
+// 		fullName: "Ksenia A",
+// 		status: `I'm a student`,
+// 		location: {city: "Minsk", country: "Belarus"}
+// 	},
+// 	{
+// 		id: '4',
+// 		photo: Vera_photo,
+// 		followed: true,
+// 		fullName: "Vera A",
+// 		status: `I'm a student`,
+// 		location: {city: "Minsk", country: "Belarus"}
+// 	}
+// ]
 
 
 export const usersReducer = (state: InitialStateUsersPageType = initialState, action: ActionsTypes): InitialStateUsersPageType => {
@@ -205,7 +208,8 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 		}
 		case "SET-USERS": {
 			return {
-				...state, users: [...state.users, ...action.users]
+				// ...state, users: [...state.users, ...action.users] - неправильно !!!
+				...state, users: [...action.users]
 			}
 		}
 
