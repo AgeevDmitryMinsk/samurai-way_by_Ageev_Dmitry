@@ -82,7 +82,6 @@ export class Users extends React.Component<UsersPropsType> {
 			// 		location: {city: "Minsk", country: "Belarus"}
 			// 	}
 			// ] )
-
 	}
 	render() {
 
