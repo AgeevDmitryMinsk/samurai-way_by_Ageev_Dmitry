@@ -46,11 +46,12 @@ export class Users extends React.Component<UsersPropsType> {
 
 	componentDidMount() {
 		axios
-			.get("https://social-network.samuraijs.com/api/1.0/users?page=22&count=5")
+			.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
 			.then((response: AxiosResponse<UsersResponseType>) => {
 				console.log(response.data)
-				console.log(`totalCount/count = `, response.data.totalCount/5 , this.props.totalUsersCount/this.props.pageSize)
+				console.log(`totalCount/count = `, response.data.totalCount / 5, this.props.totalUsersCount / this.props.pageSize)
 				this.props.setUsers(response.data.items)
+				this.props.setUsersTotalCount(response.data.totalCount)
 			})
 		// props.setUsers([
 		// 	{
@@ -88,9 +89,29 @@ export class Users extends React.Component<UsersPropsType> {
 		// ] )
 	}
 
+	onChangeCurrentPage = (currPage: number) => {
+		this.props.setCurrentPage(currPage)
+		axios
+			.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`)
+			.then((response: AxiosResponse<UsersResponseType>) => {
+				console.log(response.data)
+				console.log(`totalCount/count = `, response.data.totalCount / 5, this.props.totalUsersCount / this.props.pageSize)
+				this.props.setUsers(response.data.items)
+			})
+	}
+
 	render() {
-		let pagesCount = this.props.totalUsersCount/this.props.pageSize
+
+		console.log('Users Class com[pent')
+		// количество отображаемых страниц округляем в большую сторону:
+		let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 		console.log(pagesCount)
+
+		let pagesArray = []
+		for (let i = 1; i <= pagesCount; i++) {
+			pagesArray.push(i)
+		}
+		console.log(pagesArray)
 
 		// для избежания сайд-эффекта при первой загрузке компоненты делаем костыль-заглушку, т.е.
 		// оборачиваем код в функцию const getUsers(), затем в рендрере делаем копку GET USERS для вызова костыля
@@ -145,11 +166,20 @@ export class Users extends React.Component<UsersPropsType> {
 		return (
 			<>
 				<div>
-					<span>1</span>
-					<span className={styles.selectedPage}>2</span>
-					<span>3</span>
-					<span>4</span>
-					<span>5</span>
+					{pagesArray.map((el: number) => {
+						return <span key={el}
+									 className={this.props.currentPage === el ? styles.selectedPage : ''}
+									 onClick={() => this.onChangeCurrentPage(el)}
+									 style={{padding: 10, cursor: "pointer"}}>
+						{el}
+						</span>
+					})}
+
+					{/*// <span>1</span>*/}
+					{/*// <span className={styles.selectedPage}>2</span>*/}
+					{/*// <span>3</span>*/}
+					{/*// <span>4</span>*/}
+					{/*// <span>5</span>*/}
 				</div>
 				<div>
 					{/*<button onClick={getUsers}>GET USERS</button>*/}
