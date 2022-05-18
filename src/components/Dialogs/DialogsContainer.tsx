@@ -61,8 +61,7 @@
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
 import {AppRootStateType} from "../../redux/redux-store";
-import {addMessageAC, changeNewMessageTextAC, InitialStateType} from "../../redux/messages-reducer";
-import {Dispatch} from "redux";
+import {addMessage, InitialStateType, newMessageOnChange} from "../../redux/messages-reducer";
 
 type mapStateToPropsType =  InitialStateType
 type mapDispatchToPropsType = {
@@ -81,18 +80,23 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	}
 }
 
-function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
-	return {
-		newMessageOnChange: (newMessage: string) => {
-			dispatch(changeNewMessageTextAC(newMessage))
-		},
-		addMessage: () => {
-			dispatch(addMessageAC())
-		}
-	}
-}
+// function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+// 	return {
+// 		newMessageOnChange: (newMessage: string) => {
+// 			dispatch(changeNewMessageTextAC(newMessage))
+// 		},
+// 		addMessage: () => {
+// 			dispatch(addMessageAC())
+// 		}
+// 	}
+// }
 
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+//export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps,
+	{
+		newMessageOnChange,
+		addMessage		}
+	)(Dialogs)
 
 

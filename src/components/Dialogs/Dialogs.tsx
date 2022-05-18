@@ -59,6 +59,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 		//console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
 	}
 
+	function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === `Enter`) {
+			addMessageHandler()
+		}
+	}
+
 	//console.log(props.DialogsData)
 	return (
 
@@ -89,7 +95,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<input onChange={newMessageOnChangeHandler} value={props.newMessageText}/>
+				<input onChange={newMessageOnChangeHandler}
+					   onKeyPress={ onKeyPressInputHandle}
+					   value={props.newMessageText} />
 				<button onClick={addMessageHandler}>send message</button>
 			</div>
 

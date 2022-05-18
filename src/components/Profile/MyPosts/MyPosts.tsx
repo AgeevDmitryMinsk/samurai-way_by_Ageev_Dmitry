@@ -66,6 +66,12 @@ export function MyPosts(props: MyPostsPropsType) {
 
 	// ]
 
+	function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+		if (e.key === "Enter") {
+			addPostHandler()
+		}
+	}
+
 	return (
 		<>
 			<div className={s.myPosts}>
@@ -75,6 +81,7 @@ export function MyPosts(props: MyPostsPropsType) {
 				{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
 				{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
 				<textarea onChange={newTextOnChangeHandler}
+						  onKeyPress={onKeyPressHandler}
 						  value={props.newPostText}
 						  style={{width: 250}}/>
 				{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}

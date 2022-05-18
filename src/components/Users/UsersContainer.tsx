@@ -1,22 +1,23 @@
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-	followAC,
+	follow,
 	InitialStateUsersPageType,
-	setCurrentPageAC, setIsFetchingAC,
-	setUsersAC,
-	setUsersTotalCountAC,
-	unFollowAC, UsersResponseType,
+	setCurrentPage,
+	setIsFetching,
+	setUsers,
+	setUsersTotalCount,
+	unFollow,
+	UsersResponseType,
 	UserType,
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
 
 //import {UsersApiComponent} from "./UsersApiComponent";
 import React from "react";
 import axios, {AxiosResponse} from "axios";
-import {Users} from "./Users";
+//import {Users} from "./Users";
 import {UsersF} from "./UsersF";
-import spinnerSVG from "../../photos/Spinner-1s-200px_transparent.svg"
+//import spinnerSVG from "../../photos/Spinner-1s-200px_transparent.svg"
 import {Preloader} from "../common/Preloader";
 
 class UsersApiComponent extends React.Component<UsersPropsType> {
@@ -103,28 +104,45 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 
 }
 
-function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
-	return {
-		follow: (userId: number) => {
-			dispatch(followAC(userId))
-		},
-		unFollow: (userId: number) => {
-			dispatch(unFollowAC(userId))
-		},
-		setUsers: (users: Array<UserType>) => {
-			dispatch(setUsersAC(users))
-		},
-		setCurrentPage: (currentPage: number) => {
-			dispatch(setCurrentPageAC(currentPage))
-		},
-		setUsersTotalCount: (totalCount: number) => {
-			dispatch(setUsersTotalCountAC(totalCount))
-		},
-		setIsFetching: (isFetching: boolean) => {
-			dispatch(setIsFetchingAC(isFetching))
-		}
-	}
-}
+// function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+// 	return {
+// 		follow: (userId: number) => {
+// 			dispatch(followAC(userId))
+// 		},
+// 		unFollow: (userId: number) => {
+// 			dispatch(unFollowAC(userId))
+// 		},
+// 		setUsers: (users: Array<UserType>) => {
+// 			dispatch(setUsersAC(users))
+// 		},
+// 		setCurrentPage: (currentPage: number) => {
+// 			dispatch(setCurrentPageAC(currentPage))
+// 		},
+// 		setUsersTotalCount: (totalCount: number) => {
+// 			dispatch(setUsersTotalCountAC(totalCount))
+// 		},
+// 		setIsFetching: (isFetching: boolean) => {
+// 			dispatch(setIsFetchingAC(isFetching))
+// 		}
+// 	}
+// }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent)
+export const UsersContainer = connect(mapStateToProps,
+	// {
+	// 	follow: followAC,
+	// 	unFollow: unFollowAC,
+	// 	setUsers: setUsersAC,
+	// 	setCurrentPage: setCurrentPageAC,
+	// 	setUsersTotalCount: setUsersTotalCountAC,
+	// 	setIsFetching: setIsFetchingAC
+	// }
+	{
+		follow,
+		unFollow,
+		setUsers,
+		setCurrentPage,
+		setUsersTotalCount,
+		setIsFetching
+	}
+)(UsersApiComponent)
 //export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)

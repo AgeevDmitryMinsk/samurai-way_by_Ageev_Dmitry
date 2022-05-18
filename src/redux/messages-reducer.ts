@@ -75,18 +75,21 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
 			return state
 	}
 }
+//export type changeNewMessageTextType = ReturnType<typeof newMessageOnChangeAC>
+export type changeNewMessageTextType = ReturnType<typeof newMessageOnChange>
 
-export type changeNewMessageTextType = ReturnType<typeof changeNewMessageTextAC>
-export type addMessageType = ReturnType<typeof addMessageAC>
+//export type addMessageType = ReturnType<typeof addMessageAC>
+export type addMessageType = ReturnType<typeof addMessage>
 
-export const changeNewMessageTextAC = (newMessage: string) => {
+export const newMessageOnChange = (newMessage: string) => {
 	return {
 		type: "UPDATE-NEW-MESSAGE-TEXT",
 		newMessage
 	} as const
 }
 
-export const addMessageAC = (
+//export const addMessageAC = (
+export const addMessage = (
 //	newMessageAdd: string
 ) => {
 	return {
