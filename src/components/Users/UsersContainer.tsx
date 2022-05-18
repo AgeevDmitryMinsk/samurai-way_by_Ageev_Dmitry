@@ -15,6 +15,7 @@ import {Dispatch} from "redux";
 import React from "react";
 import axios, {AxiosResponse} from "axios";
 import {Users} from "./Users";
+import {UsersF} from "./UsersF";
 
 class UsersApiComponent extends React.Component<UsersPropsType> {
 
@@ -30,6 +31,7 @@ class UsersApiComponent extends React.Component<UsersPropsType> {
 				console.log(`totalCount/count = `, response.data.totalCount / 5, this.props.totalUsersCount / this.props.pageSize)
 				this.props.setUsers(response.data.items)
 				this.props.setUsersTotalCount(response.data.totalCount)
+
 			})
 	}
 
@@ -41,17 +43,23 @@ class UsersApiComponent extends React.Component<UsersPropsType> {
 				console.log(response.data)
 				console.log(`totalCount/count = `, response.data.totalCount / 5, this.props.totalUsersCount / this.props.pageSize)
 				this.props.setUsers(response.data.items)
+				//this.props.setUsersTotalCount(response.data.totalCount)
 			})
 	}
 
 	render() {
-		return <Users totalUsersCount={this.props.totalUsersCount}
+		return <UsersF totalUsersCount={this.props.totalUsersCount}
+		// return <Users totalUsersCount={this.props.totalUsersCount}
 					  pageSize={this.props.pageSize}
 					  currentPage={this.props.currentPage}
 					  onChangeCurrentPage={this.onChangeCurrentPage}
 					  users={this.props.users}
 					  unFollow={this.props.unFollow}
-					  follow={this.props.follow}/>
+					  follow={this.props.follow}
+					   setUsers={this.props.setUsers}
+					   setUsersTotalCount={this.props.setUsersTotalCount}
+					   setCurrentPage={this.props.setCurrentPage}
+		/>
 	}
 }
 
