@@ -52,8 +52,8 @@ export const UsersF = (props: UsersPropsTypeF) => {
 		//unFollow, follow
 	} = props;
 
-	console.log('Users Functional com[pent')
-
+	// console.log('Users Functional com[pent')
+	// console.log(props.isFetching)
 	// useEffect(() => {
 	// 	axios
 	// 		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
@@ -83,8 +83,8 @@ export const UsersF = (props: UsersPropsTypeF) => {
 	for (let i = 1; i <= pagesCount; i++) { //!!! будут лагать, если написать i <= props.totalUsersCount вместо i <= pagesCount т.к. соотношение запросов 19007:191
 		pageArray.push(i)
 	}
-	console.log(pageArray)
-	console.log(totalUsersCount, pagesCount)
+	// console.log(pageArray)
+	// console.log(totalUsersCount, pagesCount)
 
 	return (
 		<>{pageArray.map(el => {

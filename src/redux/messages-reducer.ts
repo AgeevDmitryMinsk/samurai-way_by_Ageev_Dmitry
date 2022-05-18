@@ -6,7 +6,7 @@ import Ksenia_photo from "../photos/Ksenia.png"
 import {AddPostActionType, ChangeNewTextActionType} from "./profile-reducer";
 import {
 	FollowActionType,
-	SetCurrentPageActionType,
+	SetCurrentPageActionType, setIsFetchingActionType,
 	SetUsersActionType,
 	setUsersTotalCountActionType,
 	UnFollowActionType
@@ -27,6 +27,7 @@ export type ActionsTypes =
 	| SetUsersActionType
 	| SetCurrentPageActionType
 	| setUsersTotalCountActionType
+	| setIsFetchingActionType
 
 export type MessageType = {
 	message: string
