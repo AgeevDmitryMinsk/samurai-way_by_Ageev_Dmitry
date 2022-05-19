@@ -35,7 +35,8 @@ const App: React.FC = () => {
 						{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 					</>
 					{/*<Route path={'/profile'} render={() =><Profile/>}/>*/}
-					<Route path={'/profile'} render={() =><ProfileContainer/>}/>
+					<Route path={'/profile/'} render={() =><ProfileContainer/>}/>
+					<Route path={'/profile/:userId/'} render={() =><ProfileContainer/>}/>
 					<>
 						{/*//store={props.store}*/}
 						{/*//PostData={state.ProfilePage}*/}
