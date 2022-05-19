@@ -7,7 +7,7 @@ import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 // type AppPropsType = {
 // 	// state: RootStateType
@@ -35,7 +35,7 @@ const App: React.FC = () => {
 						{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 					</>
 					{/*<Route path={'/profile'} render={() =><Profile/>}/>*/}
-					<Route path={'/profile'} render={() =><ProfileContainer/>}/>
+					<Route path={'/profile/:userId'} render={() =><ProfileContainer/>}/>
 					<>
 						{/*//store={props.store}*/}
 						{/*//PostData={state.ProfilePage}*/}
