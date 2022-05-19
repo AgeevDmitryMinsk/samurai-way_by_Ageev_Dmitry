@@ -7,6 +7,7 @@ import Dima_photo from "../../photos/Dima.png";
 // import Vera_photo from "../../photos/Vera.png";
 import axios, {AxiosResponse} from "axios";
 import {UsersResponseType} from "../../redux/users-reducer";
+import {NavLink} from 'react-router-dom';
 // import {setUsersAC, UsersResponseType} from "../../redux/users-reducer";
 // import {ThunkAction, ThunkDispatch} from "redux-thunk";
 // // API KEY: 57f858ff-ce33-4672-b278-3f2f1b802b55
@@ -39,14 +40,15 @@ import {UsersResponseType} from "../../redux/users-reducer";
 // headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
 
 type UsersPropsTypeF = UsersPropsType & {
-	onChangeCurrentPage:(el:number) => void
+	onChangeCurrentPage: (el: number) => void
 }
 export const UsersF = (props: UsersPropsTypeF) => {
-	let {setUsers,
+	let {
+		setUsers,
 		//users,
 		//setUsersTotalCount,
 		totalUsersCount,
-		pageSize, 
+		pageSize,
 		//setCurrentPage,
 		//currentPage,
 		//unFollow, follow
@@ -77,7 +79,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 	// 	props.setCurrentPage(curPage)
 	// }
 
-	let pagesCount = Math.ceil(totalUsersCount/pageSize)
+	let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
 	let pageArray = []// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
 	for (let i = 1; i <= pagesCount; i++) { //!!! будут лагать, если написать i <= props.totalUsersCount вместо i <= pagesCount т.к. соотношение запросов 19007:191
@@ -91,7 +93,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 			return <span key={el}
 						 className={props.currentPage === el ? styles.selectedPage : ''}
 						 onClick={() => props.onChangeCurrentPage(el)}
-						 style={{padding:10, cursor:"pointer"}}>
+						 style={{padding: 10, cursor: "pointer"}}>
 				{el}
 			</span>
 		})}
@@ -109,7 +111,10 @@ export const UsersF = (props: UsersPropsTypeF) => {
 						<div className={styles.item}>
 							<div>
 								{/*<img src={el.photo} alt="usersAvatar"/>*/}
-								<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
+								<NavLink to={`/profile/` + el.id} >
+									<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
+								</NavLink>
+
 							</div>
 							{el.followed ?
 								<div>

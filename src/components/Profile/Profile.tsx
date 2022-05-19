@@ -5,6 +5,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 //import {MyPosts} from "./MyPosts/MyPosts";
 //import {ActionsTypes,	//PostDataType,	ProfilePageType} from "../../redux/store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {UsersProfileResponseType} from "./ProfileContainer";
 //import {ReduxStoreType} from "../../redux/redux-store";
 // type ProfilePropsType = {
 // 	//PostData: ProfilePageType
@@ -13,14 +14,18 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 // 	//dispatch: (action: ActionsTypes) => void
 // 	//store: ReduxStoreType
 // }
-export const Profile = () => {
+
+type ProfileType = {
+	profile: UsersProfileResponseType | null
+}
+export const Profile = (props: ProfileType) => {
 
 
 	return (
 		<div>
 			Main content
 
-			<ProfileInfo/>
+			<ProfileInfo profile = {props.profile}/>
 			<MyPostsContainer/>
 			<>
 				{/*//PostData={props.PostData}*/}

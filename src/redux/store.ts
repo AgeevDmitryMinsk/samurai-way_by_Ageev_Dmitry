@@ -5,6 +5,7 @@ import Ksenia_photo from "../photos/Ksenia.png"
 //import {v1} from "uuid";
 import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./profile-reducer";
 import {addMessageType, changeNewMessageTextType, messagesReducer} from "./messages-reducer";
+import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 //import {rerenderEntireTree} from "../rerenderEntireTree";
 
 
@@ -50,7 +51,6 @@ export type RootStateType = {
 export type ProfilePageType = {
 	posts: PostDataType[]
 	newPostText: string
-
 }
 
 export type DialogsPageType = {
@@ -180,9 +180,10 @@ export const store: StoreType = {
 	// },
 
 	dispatch(action) {
-		this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
-		this._state.DialogsPage = messagesReducer(this._state.DialogsPage, action)
-		this._onChange()
+		//this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
+		//this._state.DialogsPage = messagesReducer(this._state.DialogsPage, action)
+		//this._onChange()
+
 		// if (action.type === "ADD-POST") {
 		// 	//console.log(`addPost,addPost,addPost`)
 		// 	const newPost: PostDataType = {

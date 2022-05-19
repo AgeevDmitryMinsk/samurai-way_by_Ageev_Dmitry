@@ -83,7 +83,13 @@
 
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../../redux/redux-store";
-import {addPostAC, changeNewTextAC, InitialStateProfilePageType} from "../../../redux/profile-reducer";
+import {
+	addPost,
+	// addPostAC,
+	// changeNewTextAC,
+	changeTextareaTitle,
+	InitialStateProfilePageType
+} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {Dispatch} from "redux";
 
@@ -100,21 +106,29 @@ export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		posts: state.ProfilePage.posts,
-		newPostText: state.ProfilePage.newPostText
+		newPostText: state.ProfilePage.newPostText,
+		profile: state.ProfilePage.profile
 	}
 }
 
-function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
-	return {
-		addPost: () => {
-			dispatch(addPostAC())
-		},
-		changeTextareaTitle: (newText: string) => {
-			//debugger
-			dispatch(changeNewTextAC(newText))
+// function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+// 	return {
+// 		addPost: () => {
+// 			dispatch(addPostAC())
+// 		},
+// 		changeTextareaTitle: (newText: string) => {
+// 			//debugger
+// 			dispatch(changeNewTextAC(newText))
+//
+// 		}
+// 	}
+// }
 
-		}
+// export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps,
+	{
+		addPost,
+		changeTextareaTitle
 	}
-}
 
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+	)(MyPosts)

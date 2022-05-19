@@ -2,11 +2,12 @@ import React from 'react'
 import './App.css'
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
-import {Profile} from './components/Profile/Profile'
+//import {Profile} from './components/Profile/Profile'
 import {Route} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 // type AppPropsType = {
 // 	// state: RootStateType
@@ -33,7 +34,8 @@ const App: React.FC = () => {
 						{/*<Route path={'/profile'} component={()=> <Profile PostData={props.PostData}/>}/>*/}
 						{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 					</>
-					<Route path={'/profile'} render={() =><Profile/>}/>
+					{/*<Route path={'/profile'} render={() =><Profile/>}/>*/}
+					<Route path={'/profile'} render={() =><ProfileContainer/>}/>
 					<>
 						{/*//store={props.store}*/}
 						{/*//PostData={state.ProfilePage}*/}
