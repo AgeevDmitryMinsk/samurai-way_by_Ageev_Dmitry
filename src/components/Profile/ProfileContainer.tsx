@@ -11,10 +11,11 @@ class ProfileApiContainer extends React.Component<PropsType> {
 	componentDidMount() {
 		let userId = this.props.match.params.userId
 		console.log(this.props.match.params.userId)
+		if (!userId) { userId = `2`}
 
 		axios
-			.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userId)
-			//.get(`https://social-network.samuraijs.com/api/1.0//profile/2`)
+			.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+			//.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
 			.then((response: AxiosResponse<UsersProfileResponseType>) => {
 				console.log(response.data)
 				this.props.setUserProfile(response.data)
