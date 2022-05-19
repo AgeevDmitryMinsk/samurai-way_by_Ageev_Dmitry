@@ -35,8 +35,8 @@ const App: React.FC = () => {
 						{/*<Route path={'/profile'} render={()=> <Profile PostData={props.PostData}/>}/>*/}
 					</>
 					{/*<Route path={'/profile'} render={() =><Profile/>}/>*/}
-					<Route path={'/profile/'} render={() =><ProfileContainer/>}/>
-					<Route path={'/profile/:userId/'} render={() =><ProfileContainer/>}/>
+					{/*<Route path={'/profile/'} render={() =><ProfileContainer/>}/>*/}
+					<Route path={'/profile/:userId/'} render={() => <ProfileContainer/>}/>
 					<>
 						{/*//store={props.store}*/}
 						{/*//PostData={state.ProfilePage}*/}
@@ -57,7 +57,7 @@ const App: React.FC = () => {
 						//	.bind(props.store)
 					/>}/>
 					<Route path={'/news'} component={News}/>
-					<Route path={'/users'} render={()=><UsersContainer/>}/>
+					<Route path={'/users'} render={() => <UsersContainer/>}/>
 				</div>
 			</div>
 		</>

@@ -9,27 +9,16 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 class ProfileApiContainer extends React.Component<PropsType> {
 
 	componentDidMount() {
-		if (!this.props.match.params.userId) {
-			axios
-				//.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userId)
-				.get(`https://social-network.samuraijs.com/api/1.0//profile/2`)
-				.then((response: AxiosResponse<UsersProfileResponseType>) => {
-					console.log(response.data)
-					this.props.setUserProfile(response.data)
-				})
-		} else {
-			let userId = this.props.match.params.userId
-			console.log(this.props.match.params.userId)
+		let userId = this.props.match.params.userId
+		console.log(this.props.match.params.userId)
 
-			axios
-				.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userId)
-				//.get(`https://social-network.samuraijs.com/api/1.0//profile/2`)
-				.then((response: AxiosResponse<UsersProfileResponseType>) => {
-					console.log(response.data)
-					this.props.setUserProfile(response.data)
-				})
-		}
-
+		axios
+			.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userId)
+			//.get(`https://social-network.samuraijs.com/api/1.0//profile/2`)
+			.then((response: AxiosResponse<UsersProfileResponseType>) => {
+				console.log(response.data)
+				this.props.setUserProfile(response.data)
+			})
 	}
 
 	render() {
@@ -39,11 +28,6 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		);
 	}
 }
-
-type PathParamsType = {
-	userId: string
-}
-
 
 export type UsersProfileResponseType = {
 	aboutMe: string
@@ -68,8 +52,10 @@ export type UsersProfileResponseType = {
 }
 
 export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
+
 type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
 
+type PathParamsType = {	userId: string}
 type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
 }
