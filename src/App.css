@@ -19,9 +19,19 @@
 
 .app-wrapper__content {
     grid-area: c;
+    display: flex;
     background-color: darkseagreen;
     padding: 10px;
     border-radius: 5px;
+    /*max-width: 1200px;*/
+    /*word-wrap: break-word;*/
+    /*hyphens: auto;*/
+    flex-wrap: wrap;
+    /*width: min-content*/
+    /*word-wrap: break-word;*/
+    /*word-break: break-word;*/
+    /*text-align: left;*/
+    /*justify-content: space-between;*/
 }
 
 

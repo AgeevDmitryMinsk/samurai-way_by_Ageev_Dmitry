@@ -1,13 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import Dima_photo from "../../photos/Dima.png";
+import {NavLink} from 'react-router-dom';
 // import Natasha_photo from "../../photos/Natasha.png";
 // import Ksenia_photo from "../../photos/Ksenia.png";
 // import Vera_photo from "../../photos/Vera.png";
-import axios, {AxiosResponse} from "axios";
-import {UsersResponseType} from "../../redux/users-reducer";
-import {NavLink} from 'react-router-dom';
 // import {setUsersAC, UsersResponseType} from "../../redux/users-reducer";
 // import {ThunkAction, ThunkDispatch} from "redux-thunk";
 // // API KEY: 57f858ff-ce33-4672-b278-3f2f1b802b55

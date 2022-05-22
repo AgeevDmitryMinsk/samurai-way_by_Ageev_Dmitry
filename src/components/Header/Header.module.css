@@ -2,10 +2,19 @@
     grid-area: h;
     background-color: dimgrey;
     border-radius: 5px;
+    height: 62px;
 }
 .header img {
     width: 50px;
     max-width: 100%;
     border-radius: 10px;
     padding: 5px;
+}
+
+.login_block {
+    float: right;
+    color: white;
+}
+.login_block a {
+    color: cyan;
 }
