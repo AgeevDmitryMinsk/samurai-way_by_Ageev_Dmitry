@@ -6,12 +6,13 @@ import Ksenia_photo from "../photos/Ksenia.png"
 import {AddPostActionType, ChangeNewTextActionType, SetUserProfileActionType} from "./profile-reducer";
 import {
 	FollowActionType,
-	SetCurrentPageActionType, setIsFetchingActionType,
+	SetCurrentPageActionType,
+	setIsFetchingActionType,
 	SetUsersActionType,
 	setUsersTotalCountActionType,
 	UnFollowActionType
 } from "./users-reducer";
-import {setAuthUserProfileType, setIsFetchingAuth, setUserDataType} from "./auth-reducer";
+import {setAuthUserProfileType, setIsFetchingAuthType, setUserDataType} from "./auth-reducer";
 // export type DialogsPageType = {
 // 	messages: MessageType[]
 // 	dialogs: DialogItemType[]
@@ -31,7 +32,7 @@ export type ActionsTypes =
 	| setIsFetchingActionType
 	| SetUserProfileActionType
 	| setUserDataType
-	| setIsFetchingAuth
+	| setIsFetchingAuthType
 	| setAuthUserProfileType
 
 export type MessageType = {

@@ -2,7 +2,6 @@ import React from 'react';
 import content_logo from "../../../photos/beach.png";
 import s from './ProfileInfo.module.css'
 import {UsersProfileResponseType} from "../ProfileContainer";
-import {Preloader} from "../../common/Preloader";
 
 
 type ProfileInfoType = {

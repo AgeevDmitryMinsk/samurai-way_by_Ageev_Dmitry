@@ -18,7 +18,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 	componentDidMount() {
 		this.props.setIsFetchingAuth(true)
 		axios
-			.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: false})
+			.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
 			.then((response: AxiosResponse<AuthResponseType>) => {
 				//debugger
 				if (response.data.resultCode === 0) {

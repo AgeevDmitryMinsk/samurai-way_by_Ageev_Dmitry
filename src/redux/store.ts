@@ -3,9 +3,13 @@ import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 //import {v1} from "uuid";
-import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./profile-reducer";
-import {addMessageType, changeNewMessageTextType, messagesReducer} from "./messages-reducer";
-import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {AddPostActionType, ChangeNewTextActionType,
+//	profileReducer
+} from "./profile-reducer";
+import {addMessageType, changeNewMessageTextType,
+//	messagesReducer
+} from "./messages-reducer";
+//import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 //import {rerenderEntireTree} from "../rerenderEntireTree";
 
 

@@ -17,7 +17,11 @@ export type AuthResponseType = {
 	messages: Array<string>,
 	data: AuthDataType
 }
-// { [key: string]: any[] } = {};
+export type FollowResponseType = {
+	resultCode: number
+	messages: Array<string>
+	data: {}
+}
 export type AuthDataType = {
 	id: string
 	login: string

@@ -3,79 +3,18 @@ import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import Dima_photo from "../../photos/Dima.png";
 import {NavLink} from 'react-router-dom';
-// import Natasha_photo from "../../photos/Natasha.png";
-// import Ksenia_photo from "../../photos/Ksenia.png";
-// import Vera_photo from "../../photos/Vera.png";
-// import {setUsersAC, UsersResponseType} from "../../redux/users-reducer";
-// import {ThunkAction, ThunkDispatch} from "redux-thunk";
-// // API KEY: 57f858ff-ce33-4672-b278-3f2f1b802b55
-// //Ваш ID: 22100
-// type ThunkType = ThunkAction<any, any, any, any>
-// type ThunkDispatch1 = ThunkDispatch<any, any, any>
-// const instance = axios.create({
-// 	baseURL: "https://social-network.samuraijs.com/api/1.0",
-// 	withCredentials: true,
-// 	headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}
-// })
-//
-// export const api = {
-// 	getUsers() {
-// 		return instance.get<UsersResponseType>("/users")
-// 	}
-// }
-// export const getUsersSS = ():ThunkType  => (dispatch: ThunkDispatch1 ) => {
-// export const getUsersSS = () => {
-// 	debugger
-// 	console.log(29)
-// 	api.getUsers().then(res=> {
-// 		console.log(res.data.items)
-// 		//dispatch(setUsersAC(res.data.items))
-// 	})
-// }
-//axios.get("https://social-network.samuraijs.com/api/1.0/users?page=22&count=2",
-// {baseURL: "https://social-network.samuraijs.com/api/1.0",
-// withCredentials: true,
-// headers: {"API-KEY" : "57f858ff-ce33-4672-b278-3f2f1b802b55"}}
+import axios, {AxiosResponse} from "axios";
+import {FollowResponseType} from "../../redux/auth-reducer";
+
 
 type UsersPropsTypeF = UsersPropsType & {
 	onChangeCurrentPage: (el: number) => void
 }
 export const UsersF = (props: UsersPropsTypeF) => {
 	let {
-		setUsers,
-		//users,
-		//setUsersTotalCount,
 		totalUsersCount,
 		pageSize,
-		//setCurrentPage,
-		//currentPage,
-		//unFollow, follow
 	} = props;
-
-	// console.log('Users Functional com[pent')
-	// console.log(props.isFetching)
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
-	// 		.then((response: AxiosResponse<UsersResponseType>) => {
-	// 			//console.log(response.data.items)
-	// 			setUsers(response.data.items)
-	// 			setUsersTotalCount(response.data.totalCount)
-	// 		})
-	// }, [currentPage, pageSize, setUsers, setUsersTotalCount])
-
-	// useEffect(()=>{
-	// 	axios
-	// 		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-	// 		.then((response: AxiosResponse<UsersResponseType>) => {
-	// 			console.log(response.data.items)
-	// 			setUsers(response.data.items)
-	// 		})
-	// }, [props.currentPage, props.pageSize] )
-
-	// const onChangeCurrentPage = (curPage:number) => {
-	// 	props.setCurrentPage(curPage)
-	// }
 
 	let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
@@ -83,8 +22,6 @@ export const UsersF = (props: UsersPropsTypeF) => {
 	for (let i = 1; i <= pagesCount; i++) { //!!! будут лагать, если написать i <= props.totalUsersCount вместо i <= pagesCount т.к. соотношение запросов 19007:191
 		pageArray.push(i)
 	}
-	// console.log(pageArray)
-	// console.log(totalUsersCount, pagesCount)
 
 	return (
 		<>{pageArray.map(el => {
@@ -95,34 +32,59 @@ export const UsersF = (props: UsersPropsTypeF) => {
 				{el}
 			</span>
 		})}
-			<>{/*<div>*/}
-				{/*	<span>1</span>*/}
-				{/*	<span className={styles.selectedPage}>2</span>*/}
-				{/*	<span>3</span>*/}
-				{/*	<span>4</span>*/}
-				{/*	<span>5</span>*/}
-				{/*</div>*/}</>
 			<div>
-				{/*<button onClick={getUsers}>GET USERS</button>*/}
 				{props.users.map(el => (
 					<div key={el.id} className={styles.container}>
 						<div className={styles.item}>
 							<div>
-								{/*<img src={el.photo} alt="usersAvatar"/>*/}
-								<NavLink to={`/profile/` + el.id} >
+								<NavLink to={`/profile/` + el.id}>
 									<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
 								</NavLink>
 
 							</div>
-							{el.followed ?
-								<div>
-									<button onClick={() => props.unFollow(el.id)}>Follow</button>
+							{el.followed ? <div>
+									<button onClick={() => {
+										axios
+											.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+												{
+													withCredentials: true,
+													headers: {
+														"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+													}
+												})
+											.then((response: AxiosResponse<FollowResponseType>) => {
+												if (response.data.resultCode === 0) {
+													// props.follow(el.id)
+													props.unFollow(el.id)
+												}
+											})
+
+									}}>Unfollow
+									</button>
 								</div>
-								:
-								<div>
-									<button onClick={() => props.follow(el.id)}>Unfollow</button>
+								: <div>
+									<button onClick={() => {
+										axios
+											.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+												{},
+												{
+													withCredentials: true,
+													headers: {
+														"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+													}
+												})
+											.then((response: AxiosResponse<FollowResponseType>) => {
+												if (response.data.resultCode === 0) {
+													// props.unFollow(el.id)
+													props.follow(el.id)
+												}
+											})
+
+									}}>Follow
+									</button>
 								</div>}
 						</div>
+
 
 						<span className={styles.description}>
 						<div className={styles.item}>
@@ -130,15 +92,10 @@ export const UsersF = (props: UsersPropsTypeF) => {
 								fontWeight: "bold",
 								color: "#134711a1"
 							}}>
-								{/*{el.fullName}</div>*/}
+
 								{el.name}</div>
 							<div>{el.status}</div>
 						</div>
-
-							{/*<div className={styles.item}>*/}
-							{/*	<div>{el.location.country}</div>*/}
-							{/*	<div>{el.location.city}</div>*/}
-							{/*</div>*/}
 					</span>
 					</div>))}
 			</div>

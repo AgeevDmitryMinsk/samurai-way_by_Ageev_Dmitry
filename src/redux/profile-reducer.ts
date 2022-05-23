@@ -1,4 +1,3 @@
-import {ProfilePageType} from "./store";
 import {v1} from "uuid";
 import {ActionsTypes} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";

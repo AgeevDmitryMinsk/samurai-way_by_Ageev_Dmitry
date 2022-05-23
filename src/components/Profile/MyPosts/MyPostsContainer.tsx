@@ -91,7 +91,6 @@ import {
 	InitialStateProfilePageType
 } from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import {Dispatch} from "redux";
 
 
 type mapStateToPropsType = InitialStateProfilePageType
