@@ -5,17 +5,17 @@ import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 //export type InitialAuthStatePageType = typeof initialState
 
 export type InitialAuthStatePageType = {
-	data: AuthDataType[]
+	data: AuthDataType,
 	isAuth: boolean,
 	isFetchingAuth: boolean,
-	profile: UsersProfileResponseType[]
+	profile: UsersProfileResponseType
 
 }
 
 export type AuthResponseType = {
 	resultCode: number
 	messages: Array<string>,
-	data: AuthDataType[]
+	data: AuthDataType
 }
 // { [key: string]: any[] } = {};
 export type AuthDataType = {
@@ -25,10 +25,10 @@ export type AuthDataType = {
 }
 
 const initialState = {
-	data: [] as AuthDataType[],
+	data: {} as AuthDataType,
 	isAuth: false,
 	isFetchingAuth: false,
-	profile: [] as UsersProfileResponseType[]
+	profile: {} as UsersProfileResponseType
 }
 export const authReducer = (state  = initialState, action: ActionsTypes): InitialAuthStatePageType => {
 	switch (action.type) {
@@ -60,11 +60,11 @@ export const authReducer = (state  = initialState, action: ActionsTypes): Initia
 }
 
 export type setUserDataType = ReturnType<typeof setAuthUserData>
-export type setIsFetchingAuth = ReturnType<typeof setIsFetchingAuth>
+export type setIsFetchingAuthType = ReturnType<typeof setIsFetchingAuth>
 export type setAuthUserProfileType = ReturnType<typeof setAuthUserProfile>
 
 //ActionCreator setAuthUserData:
-export const setAuthUserData = (data: Array<AuthDataType>) => {
+export const setAuthUserData = (data: AuthDataType) => {
 	return {
 		type: "SET_USER_DATA",
 		data
@@ -77,7 +77,7 @@ export const setIsFetchingAuth = (isFetchingAuth: boolean) => {
 	} as const
 }
 
-export const setAuthUserProfile = (profile: Array<UsersProfileResponseType>) => {
+export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 	return {
 		type: "SET-AUTH-USER-PROFILE",
 		profile

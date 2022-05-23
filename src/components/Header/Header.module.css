@@ -2,19 +2,27 @@
     grid-area: h;
     background-color: dimgrey;
     border-radius: 5px;
-    height: 62px;
+    /*height: 100px;*/
+    display: flex;
+    justify-content: space-between;
 }
+
 .header img {
-    width: 50px;
-    max-width: 100%;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
     padding: 5px;
 }
 
 .login_block {
-    float: right;
     color: white;
+    display: inline-flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    justify-content: flex-start;
+    align-items: end;
 }
+
 .login_block a {
     color: cyan;
 }
