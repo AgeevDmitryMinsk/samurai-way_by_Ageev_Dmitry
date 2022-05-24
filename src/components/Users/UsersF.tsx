@@ -47,8 +47,9 @@ export const UsersF = (props: UsersPropsTypeF) => {
 								</div>
 								{el.followed ? <div>
 										<button disabled={props.isFollowingInProgress.some(id => id === el.id)}
+											// если id есть в массиве isFollowingInProgress то метод some находит ее и цвет будет серым и состояние disabled:
+											// можно также сделать через includes: <button disabled={props.isFollowingInProgress.includes(el.id)}
 												style={{background: props.isFollowingInProgress.some(id => id === el.id) ? "gray" : "fuchsia"}}
-											// className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
 												onClick={() => {
 													// axios
 													// 	.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,

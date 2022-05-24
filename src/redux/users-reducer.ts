@@ -1,18 +1,5 @@
 import {ActionsTypes} from "./messages-reducer";
-import {log} from "util";
 
-// export type UsersDataType = {
-// 	id: string
-// 	photo: string
-// 	followed: boolean
-// 	fullName: string
-// 	status: string
-// 	location: LocationType
-// }
-// type LocationType = {
-// 	city: string
-// 	country: string
-// }
 
 export type UsersResponseType = {
 	"items": UserType[],
@@ -44,7 +31,7 @@ const initialState = {
 	isFetching: false,
 	// isFollowingInProgress: false
 	isFollowingInProgress: [] as isFollowingInProgressType, // внутрь массива [] будем добавлять id того юзера, которого будем follow/unfollow
-	isFetchingButtonFollowUnfollow: false
+	isFetchingButtonFollowUnfollow: false // хочу отслеживать в консоли состояние кнопки follow/unfollow true или false по ответу сервера
 }
 
 
