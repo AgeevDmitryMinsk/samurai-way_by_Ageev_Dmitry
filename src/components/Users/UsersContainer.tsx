@@ -8,26 +8,32 @@ import {
 	setUsers,
 	setUsersTotalCount,
 	unFollow,
-	UsersResponseType,
 	UserType,
 } from "../../redux/users-reducer";
 
 import React from "react";
-import axios, {AxiosResponse} from "axios";
 import {UsersF} from "./UsersF";
 import {Preloader} from "../common/Preloader";
+import {api} from "../../api/api";
+
 
 class UsersApiComponent extends React.Component<UsersPropsType> {
 
 	componentDidMount() {
 		this.props.setIsFetching(true)
-		axios
-			.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-				{withCredentials: true})
-			.then((response: AxiosResponse<UsersResponseType>) => {
+		// axios
+		// 	.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+		// 		{withCredentials: true}
+		// 	)
+
+
+		api.getUsers(this.props.currentPage, this.props.pageSize)
+			//.then((response: AxiosResponse<UsersResponseType>) => {
+			.then((data) => {
 				this.props.setIsFetching(false)
-				this.props.setUsers(response.data.items)
-				this.props.setUsersTotalCount(response.data.totalCount)
+				// this.props.setUsers(response.data.items)
+				this.props.setUsers(data.items)
+				this.props.setUsersTotalCount(data.totalCount)
 
 			})
 	}
@@ -35,12 +41,16 @@ class UsersApiComponent extends React.Component<UsersPropsType> {
 	onChangeCurrentPage = (currPage: number) => {
 		this.props.setIsFetching(true)
 		this.props.setCurrentPage(currPage)
-		axios
-			.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`,
-				{withCredentials: true})
-			.then((response: AxiosResponse<UsersResponseType>) => {
+		// axios
+		// 	.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`,
+		// 		{withCredentials: true}
+		// 	)
+		api.getUsers(currPage, this.props.pageSize)
+			// .then((response: AxiosResponse<UsersResponseType>) => {
+			.then((data) => {
 				this.props.setIsFetching(false)
-				this.props.setUsers(response.data.items)
+				// this.props.setUsers(response.data.items)
+				this.props.setUsers(data.items)
 			})
 	}
 

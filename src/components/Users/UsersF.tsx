@@ -3,8 +3,8 @@ import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import Dima_photo from "../../photos/Dima.png";
 import {NavLink} from 'react-router-dom';
-import axios, {AxiosResponse} from "axios";
-import {FollowResponseType} from "../../redux/auth-reducer";
+import {api} from "../../api/api";
+
 
 
 type UsersPropsTypeF = UsersPropsType & {
@@ -33,60 +33,67 @@ export const UsersF = (props: UsersPropsTypeF) => {
 			</span>
 		})}
 			<div>
-				{props.users.map(el => (
-					<div key={el.id} className={styles.container}>
-						<div className={styles.item}>
-							<div>
-								<NavLink to={`/profile/` + el.id}>
-									<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
-								</NavLink>
+				{props.users.map(el => {
+					console.log(el.id, el.followed)
+					return(
+						<div key={el.id} className={styles.container}>
+							<div className={styles.item}>
+								<div>
+									<NavLink to={`/profile/` + el.id}>
+										<img src={el.photos.large || Dima_photo} alt="usersAvatar"/>
+									</NavLink>
 
-							</div>
-							{el.followed ? <div>
-									<button onClick={() => {
-										axios
-											.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-												{
-													withCredentials: true,
-													headers: {
-														"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
-													}
-												})
-											.then((response: AxiosResponse<FollowResponseType>) => {
-												if (response.data.resultCode === 0) {
-													// props.follow(el.id)
-													props.unFollow(el.id)
-												}
-											})
-
-									}}>Unfollow
-									</button>
 								</div>
-								: <div>
-									<button onClick={() => {
-										axios
-											.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-												{},
-												{
-													withCredentials: true,
-													headers: {
-														"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+								{el.followed ? <div>
+										<button onClick={() => {
+											// axios
+											// 	.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+											// 		{
+											// 			withCredentials: true,
+											// 			headers: {
+											// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+											// 			}
+											// 		})
+											api.getUnfollow(el.id)
+												// .then((response: AxiosResponse<FollowResponseType>) => {
+												.then((data) => {
+													if (data.resultCode === 0) {
+														// props.follow(el.id)
+														props.unFollow(el.id)
 													}
 												})
-											.then((response: AxiosResponse<FollowResponseType>) => {
-												if (response.data.resultCode === 0) {
-													// props.unFollow(el.id)
-													props.follow(el.id)
-												}
-											})
 
-									}}>Follow
-									</button>
-								</div>}
-						</div>
+										}}>Unfollow
+										</button>
+									</div>
+									: <div>
+										<button onClick={() => {
+											// axios
+											// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+											// 		{},
+											// 		{
+											// 			withCredentials: true,
+											// 			headers: {
+											// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+											// 			}
+											// 		})
+											api.getFollow(el.id)
+												// .then((response: AxiosResponse<FollowResponseType>) => {
+												.then((data) => {
+													// if (response.data.resultCode === 0) {
+													if (data.resultCode === 0) {
+														// props.unFollow(el.id)
+														props.follow(el.id)
+													}
+												})
+
+										}}>Follow
+										</button>
+									</div>}
+							</div>
 
 
-						<span className={styles.description}>
+							<span className={styles.description}>
 						<div className={styles.item}>
 							<div style={{
 								fontWeight: "bold",
@@ -97,7 +104,8 @@ export const UsersF = (props: UsersPropsTypeF) => {
 							<div>{el.status}</div>
 						</div>
 					</span>
-					</div>))}
+						</div>)
+				})}
 			</div>
 		</>
 	);
