@@ -47,8 +47,8 @@ export const UsersF = (props: UsersPropsTypeF) => {
 								</div>
 								{el.followed ? <div>
 										<button
-											 className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
-											// 	style={{background: props.isFollowingInProgress ? "aqua": "gray" }}
+											 // className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
+											 	style={{background: props.isFollowingInProgress ? "gray": "fuchsia" }}
 												disabled={props.isFollowingInProgress}
 												onClick={() => {
 													// axios
@@ -78,8 +78,8 @@ export const UsersF = (props: UsersPropsTypeF) => {
 									</div>
 									: <div>
 										<button
-											className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
-											// style={{background: props.isFollowingInProgress ? "aqua": "gray" }}
+											// className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
+											 style={{background: props.isFollowingInProgress ? "gray": "aqua" }}
 											disabled={props.isFollowingInProgress} onClick={() => {
 											// axios
 											// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,

@@ -42,7 +42,8 @@
 }
 
 .button {
-    background: cyan;
+    /*background: cyan;*/
+    background: fuchsia;
 }
 .buttonDisabled {
     background: grey;
