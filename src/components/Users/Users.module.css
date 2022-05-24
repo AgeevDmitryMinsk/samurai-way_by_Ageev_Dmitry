@@ -40,3 +40,10 @@
 .selectedPage {
     font-weight: bold;
 }
+
+.button {
+    background: cyan;
+}
+.buttonDisabled {
+    background: grey;
+}

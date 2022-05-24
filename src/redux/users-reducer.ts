@@ -38,155 +38,10 @@ const initialState = {
 	pageSize: 5,
 	totalUsersCount: 10,
 	currentPage: 1,
-	isFetching: false
-	// users: [
-	// 	{
-	// 		name: "sobraniebluee",
-	// 		id: 23966,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Aliher4ik",
-	// 		id: 23965,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Elenaya",
-	// 		id: 23964,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "kinghong556677",
-	// 		id: 23963,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "evgen_prog",
-	// 		id: 23962,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Ketsamesama",
-	// 		id: 23961,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "tinalychko",
-	// 		id: 23960,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Lida",
-	// 		id: 23959,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Vanya_iz_3a",
-	// 		id: 23958,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// 	{
-	// 		name: "Ponchik",
-	// 		id: 23957,
-	// 		uniqueUrlName: null,
-	// 		photos: {
-	// 			small: null,
-	// 			large: null,
-	// 		},
-	// 		status: null,
-	// 		followed: false,
-	// 	},
-	// ] as Array<UserType>
+	isFetching: false,
+	isFollowingInProgress: false
 }
-//
-// [
-// {
-// 	id: '1',
-// 	photo: Dima_photo,
-// 	followed: false,
-// 	fullName: "Dmitry A",
-// 	status: `I'm a boss`,
-// 	location: {city: "Minsk", country: "Belarus"}
-// },
-// 	{
-// 		id: '2',
-// 		photo: Natasha_photo,
-// 		followed: true,
-// 		fullName: "Natalia A",
-// 		status: `I'm a house keeper`,
-// 		location: {city: "Minsk", country: "Belarus"}
-// 	},
-// 	{
-// 		id: '3',
-// 		photo: Ksenia_photo,
-// 		followed: true,
-// 		fullName: "Ksenia A",
-// 		status: `I'm a student`,
-// 		location: {city: "Minsk", country: "Belarus"}
-// 	},
-// 	{
-// 		id: '4',
-// 		photo: Vera_photo,
-// 		followed: true,
-// 		fullName: "Vera A",
-// 		status: `I'm a student`,
-// 		location: {city: "Minsk", country: "Belarus"}
-// 	}
-// ]
+
 
 
 export const usersReducer = (state: InitialStateUsersPageType = initialState, action: ActionsTypes): InitialStateUsersPageType => {
@@ -228,6 +83,11 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 				...state, isFetching: action.isFetching
 			}
 		}
+		case "TOGGLE-IS-FOLLOWING-IN-PROGRESS": {
+			return {
+				...state, isFollowingInProgress: action.isFollowingInProgress
+			}
+		}
 
 
 		default:
@@ -247,6 +107,8 @@ export type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
 export type setUsersTotalCountActionType = ReturnType<typeof setUsersTotalCount>
 
 export type setIsFetchingActionType = ReturnType<typeof  setIsFetching>
+
+export type setIsFollowingInProgressType = ReturnType<typeof setIsFollowingInProgress>
 
 // export const followAC = (userId: number) => {
 export const follow = (userId: number) => {
@@ -296,5 +158,12 @@ export const setIsFetching = (isFetching: boolean) => {
 	return {
 		type: "TOGGLE-IS-FETCHING",
 		isFetching: isFetching
+	} as const
+}
+
+export const setIsFollowingInProgress = (isFollowingInProgress: boolean) => {
+	return {
+		type: "TOGGLE-IS-FOLLOWING-IN-PROGRESS",
+		isFollowingInProgress
 	} as const
 }

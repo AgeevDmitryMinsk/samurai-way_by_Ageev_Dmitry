@@ -4,7 +4,7 @@ import {
 	follow,
 	InitialStateUsersPageType,
 	setCurrentPage,
-	setIsFetching,
+	setIsFetching, setIsFollowingInProgress,
 	setUsers,
 	setUsersTotalCount,
 	unFollow,
@@ -71,6 +71,8 @@ class UsersApiComponent extends React.Component<UsersPropsType> {
 						  setCurrentPage={this.props.setCurrentPage}
 						  setIsFetching={this.props.setIsFetching}
 						  isFetching={this.props.isFetching}
+						  isFollowingInProgress={this.props.isFollowingInProgress}
+						  setIsFollowingInProgress={this.props.setIsFollowingInProgress}
 
 				/>}
 			</>)
@@ -87,6 +89,7 @@ type mapDispatchToPropsType = {
 	setCurrentPage: (currentPage: number) => void
 	setUsersTotalCount: (totalCount: number) => void
 	setIsFetching: (isFetching: boolean) => void
+	setIsFollowingInProgress: (isFollowingInProgress: boolean)=> void
 }
 
 
@@ -98,7 +101,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		pageSize: state.usersPage.pageSize,
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching
+		isFetching: state.usersPage.isFetching,
+		isFollowingInProgress: state.usersPage.isFollowingInProgress
 	}
 
 }
@@ -141,7 +145,8 @@ export const UsersContainer = connect(mapStateToProps,
 		setUsers,
 		setCurrentPage,
 		setUsersTotalCount,
-		setIsFetching
+		setIsFetching,
+		setIsFollowingInProgress
 	}
 )(UsersApiComponent)
 //export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)

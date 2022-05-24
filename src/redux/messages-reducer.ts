@@ -7,7 +7,7 @@ import {AddPostActionType, ChangeNewTextActionType, SetUserProfileActionType} fr
 import {
 	FollowActionType,
 	SetCurrentPageActionType,
-	setIsFetchingActionType,
+	setIsFetchingActionType, setIsFollowingInProgressType,
 	SetUsersActionType,
 	setUsersTotalCountActionType,
 	UnFollowActionType
@@ -34,6 +34,7 @@ export type ActionsTypes =
 	| setUserDataType
 	| setIsFetchingAuthType
 	| setAuthUserProfileType
+	| setIsFollowingInProgressType
 
 export type MessageType = {
 	message: string
