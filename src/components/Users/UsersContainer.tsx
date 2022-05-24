@@ -1,57 +1,44 @@
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-	follow,
+	follow, followThunkCreator, getUsersThunkCreator,
 	InitialStateUsersPageType,
 	setCurrentPage,
 	setIsFetching, setIsFollowingInProgress,
 	setUsers,
 	setUsersTotalCount,
-	unFollow,
+	unFollow, unFollowThunkCreator,
 	UserType,
 } from "../../redux/users-reducer";
 
 import React from "react";
 import {UsersF} from "./UsersF";
 import {Preloader} from "../common/Preloader";
-import {api} from "../../api/api";
+//import {api} from "../../api/api";
 
 
-class UsersApiComponent extends React.Component<UsersPropsType> {
+// class UsersApiComponent extends React.Component<UsersPropsType> {
+class UsersApiComponent extends React.Component<any> { // ??? какой тип сделать здесь
 
 	componentDidMount() {
-		this.props.setIsFetching(true)
-		// axios
-		// 	.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-		// 		{withCredentials: true}
-		// 	)
-
-
-		api.getUsers(this.props.currentPage, this.props.pageSize)
-			//.then((response: AxiosResponse<UsersResponseType>) => {
-			.then((data) => {
-				this.props.setIsFetching(false)
-				// this.props.setUsers(response.data.items)
-				this.props.setUsers(data.items)
-				this.props.setUsersTotalCount(data.totalCount)
-
-			})
+		this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
 	}
 
 	onChangeCurrentPage = (currPage: number) => {
-		this.props.setIsFetching(true)
-		this.props.setCurrentPage(currPage)
-		// axios
-		// 	.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`,
-		// 		{withCredentials: true}
-		// 	)
-		api.getUsers(currPage, this.props.pageSize)
-			// .then((response: AxiosResponse<UsersResponseType>) => {
-			.then((data) => {
-				this.props.setIsFetching(false)
-				// this.props.setUsers(response.data.items)
-				this.props.setUsers(data.items)
-			})
+		this.props.getUsersThunkCreator(currPage, this.props.pageSize)
+		// this.props.setIsFetching(true)
+		// this.props.setCurrentPage(currPage)
+		// // axios
+		// // 	.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${this.props.pageSize}`,
+		// // 		{withCredentials: true}
+		// // 	)
+		// api.getUsers(currPage, this.props.pageSize)
+		// 	// .then((response: AxiosResponse<UsersResponseType>) => {
+		// 	.then((data) => {
+		// 		this.props.setIsFetching(false)
+		// 		// this.props.setUsers(response.data.items)
+		// 		this.props.setUsers(data.items)
+		// 	})
 	}
 
 	render() {
@@ -148,7 +135,10 @@ export const UsersContainer = connect(mapStateToProps,
 		setCurrentPage,
 		setUsersTotalCount,
 		setIsFetching,
-		setIsFollowingInProgress
+		setIsFollowingInProgress,
+		getUsersThunkCreator,
+		followThunkCreator,
+		unFollowThunkCreator
 	}
 )(UsersApiComponent)
 //export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)
