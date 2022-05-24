@@ -73,6 +73,7 @@ class UsersApiComponent extends React.Component<UsersPropsType> {
 						  isFetching={this.props.isFetching}
 						  isFollowingInProgress={this.props.isFollowingInProgress}
 						  setIsFollowingInProgress={this.props.setIsFollowingInProgress}
+						  isFetchingButtonFollowUnfollow = {this.props.isFetchingButtonFollowUnfollow}
 
 				/>}
 			</>)
@@ -89,7 +90,7 @@ type mapDispatchToPropsType = {
 	setCurrentPage: (currentPage: number) => void
 	setUsersTotalCount: (totalCount: number) => void
 	setIsFetching: (isFetching: boolean) => void
-	setIsFollowingInProgress: (isFetching: boolean, userId: number)=> void
+	setIsFollowingInProgress: (isFetchingButtonFollowUnfollow: boolean, userId: number)=> void
 }
 
 
@@ -102,7 +103,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
 		isFetching: state.usersPage.isFetching,
-		isFollowingInProgress: state.usersPage.isFollowingInProgress
+		isFollowingInProgress: state.usersPage.isFollowingInProgress,
+		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow
 	}
 
 }

@@ -1,4 +1,5 @@
 import {ActionsTypes} from "./messages-reducer";
+import {log} from "util";
 
 // export type UsersDataType = {
 // 	id: string
@@ -33,6 +34,8 @@ export type UserType = {
 
 export type InitialStateUsersPageType = typeof initialState
 
+type isFollowingInProgressType =  Array<number>
+
 const initialState = {
 	users: [] as Array<UserType>,
 	pageSize: 5,
@@ -40,8 +43,8 @@ const initialState = {
 	currentPage: 1,
 	isFetching: false,
 	// isFollowingInProgress: false
-	// isFollowingInProgress: [] as Array<UserType>,
-	isFollowingInProgress: [0]
+	isFollowingInProgress: [] as isFollowingInProgressType, // внутрь массива [] будем добавлять id того юзера, которого будем follow/unfollow
+	isFetchingButtonFollowUnfollow: false
 }
 
 
@@ -87,9 +90,10 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 		}
 		case "TOGGLE-IS-FOLLOWING-IN-PROGRESS": {
 			return {
-				...state, isFollowingInProgress: action.isFetching
-				? [...state.isFollowingInProgress, action.userId]
-					: state.isFollowingInProgress.filter(id => id !== action.userId)
+				...state, isFollowingInProgress: action.isFetchingButtonFollowUnfollow
+				? [...state.isFollowingInProgress, action.userId] // добавляем в массив id юзера по которому нажали кнопку follow/unfollow
+				: state.isFollowingInProgress.filter(id => id !== action.userId), // удаляем из массива id юзера по которому нажали кнопку follow/unfollow
+				isFetchingButtonFollowUnfollow: action.isFetchingButtonFollowUnfollow // отслеживаю состояние изменения disabled кнопки follow/unfollow
 			}
 		}
 
@@ -165,10 +169,10 @@ export const setIsFetching = (isFetching: boolean) => {
 	} as const
 }
 
-export const setIsFollowingInProgress = (isFetching: boolean, userId: number ) => {
+export const setIsFollowingInProgress = (isFetchingButtonFollowUnfollow: boolean, userId: number ) => {
 	return {
 		type: "TOGGLE-IS-FOLLOWING-IN-PROGRESS",
-		isFetching,
+		isFetchingButtonFollowUnfollow,
 		userId
 	} as const
 }

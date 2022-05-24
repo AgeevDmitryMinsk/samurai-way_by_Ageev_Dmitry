@@ -22,7 +22,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 		//for (let i = 1; i <= 5; i++) { //!!! будут лагать, если написать i <= props.totalUsersCount вместо i <= pagesCount т.к. соотношение запросов 19007:191
 		pageArray.push(i)
 	}
-	console.log('usersF', props.isFollowingInProgress)
+	console.log('usersF', props.isFollowingInProgress, props.isFetchingButtonFollowUnfollow)
 	return (
 		<>{pageArray.map(el => el > 3800 ? (<span key={el}
 												  className={props.currentPage === el ? styles.selectedPage : ''}
@@ -35,7 +35,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 		)}
 			<div>
 				{props.users.map(el => {
-					console.log(el.id, el.followed)
+					//console.log(el.id, el.followed)
 					return (
 						<div key={el.id} className={styles.container}>
 							<div className={styles.item}>
@@ -100,7 +100,6 @@ export const UsersF = (props: UsersPropsTypeF) => {
 															}
 															props.setIsFollowingInProgress(false, el.id)
 														})
-
 												}}>Follow
 										</button>
 									</div>}
