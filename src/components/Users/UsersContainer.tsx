@@ -89,7 +89,7 @@ type mapDispatchToPropsType = {
 	setCurrentPage: (currentPage: number) => void
 	setUsersTotalCount: (totalCount: number) => void
 	setIsFetching: (isFetching: boolean) => void
-	setIsFollowingInProgress: (isFollowingInProgress: boolean)=> void
+	setIsFollowingInProgress: (isFetching: boolean, userId: number)=> void
 }
 
 

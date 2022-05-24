@@ -46,10 +46,9 @@ export const UsersF = (props: UsersPropsTypeF) => {
 
 								</div>
 								{el.followed ? <div>
-										<button
-											 // className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
-											 	style={{background: props.isFollowingInProgress ? "gray": "fuchsia" }}
-												disabled={props.isFollowingInProgress}
+										<button disabled={props.isFollowingInProgress.some(id => id === el.id)}
+												style={{background: props.isFollowingInProgress.some(id => id === el.id) ? "gray" : "fuchsia"}}
+											// className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
 												onClick={() => {
 													// axios
 													// 	.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
@@ -59,7 +58,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 													// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
 													// 			}
 													// 		})
-													props.setIsFollowingInProgress(true)
+													props.setIsFollowingInProgress(true, el.id)
 													api.getUnfollow(el.id)
 														// .then((response: AxiosResponse<FollowResponseType>) => {
 														.then((data) => {
@@ -67,7 +66,7 @@ export const UsersF = (props: UsersPropsTypeF) => {
 																// props.follow(el.id)
 																props.unFollow(el.id)
 															}
-															props.setIsFollowingInProgress(false)
+															props.setIsFollowingInProgress(false, el.id)
 														})
 
 													// }} style={{background: props.isFollowingInProgress ? "gray" : "aqua"}}>Unfollow
@@ -77,32 +76,32 @@ export const UsersF = (props: UsersPropsTypeF) => {
 										</button>
 									</div>
 									: <div>
-										<button
+										<button disabled={props.isFollowingInProgress.some(id => id === el.id)}
+												style={{background: props.isFollowingInProgress.some(id => id === el.id) ? "gray" : "aqua"}}
 											// className={props.isFollowingInProgress ? styles.buttonDisabled : styles.button}
-											 style={{background: props.isFollowingInProgress ? "gray": "aqua" }}
-											disabled={props.isFollowingInProgress} onClick={() => {
-											// axios
-											// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-											// 		{},
-											// 		{
-											// 			withCredentials: true,
-											// 			headers: {
-											// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
-											// 			}
-											// 		})
-											props.setIsFollowingInProgress(true)
-											api.getFollow(el.id)
-												// .then((response: AxiosResponse<FollowResponseType>) => {
-												.then((data) => {
-													// if (response.data.resultCode === 0) {
-													if (data.resultCode === 0) {
-														// props.unFollow(el.id)
-														props.follow(el.id)
-													}
-													props.setIsFollowingInProgress(false)
-												})
+												onClick={() => {
+													// axios
+													// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+													// 		{},
+													// 		{
+													// 			withCredentials: true,
+													// 			headers: {
+													// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+													// 			}
+													// 		})
+													props.setIsFollowingInProgress(true, el.id)
+													api.getFollow(el.id)
+														// .then((response: AxiosResponse<FollowResponseType>) => {
+														.then((data) => {
+															// if (response.data.resultCode === 0) {
+															if (data.resultCode === 0) {
+																// props.unFollow(el.id)
+																props.follow(el.id)
+															}
+															props.setIsFollowingInProgress(false, el.id)
+														})
 
-										}}>Follow
+												}}>Follow
 										</button>
 									</div>}
 							</div>

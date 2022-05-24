@@ -39,7 +39,9 @@ const initialState = {
 	totalUsersCount: 10,
 	currentPage: 1,
 	isFetching: false,
-	isFollowingInProgress: false
+	// isFollowingInProgress: false
+	// isFollowingInProgress: [] as Array<UserType>,
+	isFollowingInProgress: [0]
 }
 
 
@@ -85,7 +87,9 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 		}
 		case "TOGGLE-IS-FOLLOWING-IN-PROGRESS": {
 			return {
-				...state, isFollowingInProgress: action.isFollowingInProgress
+				...state, isFollowingInProgress: action.isFetching
+				? [...state.isFollowingInProgress, action.userId]
+					: state.isFollowingInProgress.filter(id => id !== action.userId)
 			}
 		}
 
@@ -161,9 +165,10 @@ export const setIsFetching = (isFetching: boolean) => {
 	} as const
 }
 
-export const setIsFollowingInProgress = (isFollowingInProgress: boolean) => {
+export const setIsFollowingInProgress = (isFetching: boolean, userId: number ) => {
 	return {
 		type: "TOGGLE-IS-FOLLOWING-IN-PROGRESS",
-		isFollowingInProgress
+		isFetching,
+		userId
 	} as const
 }
