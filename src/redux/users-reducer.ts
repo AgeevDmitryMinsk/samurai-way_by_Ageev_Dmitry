@@ -62,6 +62,7 @@ export const usersReducer = (state: InitialStateUsersPageType = initialState, ac
 			}
 		}
 		case "SET-CURRENT-PAGE": {
+			debugger
 			return {
 				...state, currentPage: action.currentPage
 			}
@@ -178,6 +179,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 				// this.props.setIsFetching(false)
 				dispatch(setIsFetching(false))
 				dispatch(setUsers(data.items))
+				dispatch(setCurrentPage(currentPage))
 				dispatch(setUsersTotalCount(data.totalCount))
 
 			})

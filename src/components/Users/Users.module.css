@@ -1,6 +1,7 @@
 .container {
     display: flex;
 }
+
 .item {
     display: flex;
     flex-direction: column;
@@ -26,6 +27,7 @@
     margin-right: 10px;
     border: none;
 }
+
 .description {
     display: flex;
     flex-direction: row;
@@ -39,13 +41,15 @@
 
 .selectedPage {
     font-weight: bold;
-    color: fuchsia;
+    color: white;
+    text-decoration: underline;
 }
 
 .button {
     /*background: cyan;*/
     background: fuchsia;
 }
+
 .buttonDisabled {
     background: grey;
 }
