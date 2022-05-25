@@ -1,14 +1,17 @@
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-	follow, followThunkCreator, getUsersThunkCreator,
+	follow,
+	followThunkCreator,
+	getUsersThunkCreator,
 	InitialStateUsersPageType,
 	setCurrentPage,
-	setIsFetching, setIsFollowingInProgress,
+	setIsFetching,
+	setIsFollowingInProgress,
 	setUsers,
 	setUsersTotalCount,
-	unFollow, unFollowThunkCreator,
-	UserType,
+	unFollow,
+	unFollowThunkCreator,
 } from "../../redux/users-reducer";
 
 import React from "react";
@@ -18,7 +21,7 @@ import {Preloader} from "../common/Preloader";
 
 
 // class UsersApiComponent extends React.Component<UsersPropsType> {
-class UsersApiComponent extends React.Component<any> { // ??? какой тип сделать здесь
+class UsersApiComponent extends React.Component<UsersPropsType> { // ??? какой тип сделать здесь
 
 	componentDidMount() {
 		this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
@@ -51,16 +54,19 @@ class UsersApiComponent extends React.Component<any> { // ??? какой тип 
 						  currentPage={this.props.currentPage}
 						  onChangeCurrentPage={this.onChangeCurrentPage}
 						  users={this.props.users}
-						  unFollow={this.props.unFollow}
-						  follow={this.props.follow}
-						  setUsers={this.props.setUsers}
-						  setUsersTotalCount={this.props.setUsersTotalCount}
-						  setCurrentPage={this.props.setCurrentPage}
-						  setIsFetching={this.props.setIsFetching}
+						  // unFollow={this.props.unFollow}
+						  // follow={this.props.follow}
+						  //setUsers={this.props.setUsers}
+						  //setUsersTotalCount={this.props.setUsersTotalCount}
+						  // setCurrentPage={this.props.setCurrentPage}
+						  //setIsFetching={this.props.setIsFetching}
 						  isFetching={this.props.isFetching}
 						  isFollowingInProgress={this.props.isFollowingInProgress}
-						  setIsFollowingInProgress={this.props.setIsFollowingInProgress}
-						  isFetchingButtonFollowUnfollow = {this.props.isFetchingButtonFollowUnfollow}
+						  // setIsFollowingInProgress={this.props.setIsFollowingInProgress}
+						  isFetchingButtonFollowUnfollow={this.props.isFetchingButtonFollowUnfollow}
+						  followThunkCreator={this.props.followThunkCreator}
+						  unFollowThunkCreator={this.props.unFollowThunkCreator}
+						  getUsersThunkCreator={this.props.getUsersThunkCreator}
 
 				/>}
 			</>)
@@ -71,13 +77,16 @@ class UsersApiComponent extends React.Component<any> { // ??? какой тип 
 type mapStateToPropsType = InitialStateUsersPageType
 
 type mapDispatchToPropsType = {
-	follow: (userId: number) => void
-	unFollow: (userId: number) => void
-	setUsers: (users: Array<UserType>) => void
-	setCurrentPage: (currentPage: number) => void
-	setUsersTotalCount: (totalCount: number) => void
-	setIsFetching: (isFetching: boolean) => void
-	setIsFollowingInProgress: (isFetchingButtonFollowUnfollow: boolean, userId: number)=> void
+	//follow: (userId: number) => void
+	// unFollow: (userId: number) => void
+	//setUsers: (users: Array<UserType>) => void
+	// setCurrentPage: (currentPage: number) => void
+	//setUsersTotalCount: (totalCount: number) => void
+	//setIsFetching: (isFetching: boolean) => void
+	// setIsFollowingInProgress: (isFetchingButtonFollowUnfollow: boolean, userId: number) => void
+	followThunkCreator: (id: number) => void
+	unFollowThunkCreator: (id: number) => void
+	getUsersThunkCreator: (currentPage: number, pageSize:number) => void
 }
 
 

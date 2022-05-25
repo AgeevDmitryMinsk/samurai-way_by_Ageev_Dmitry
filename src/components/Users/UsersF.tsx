@@ -3,15 +3,13 @@ import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import Dima_photo from "../../photos/Dima.png";
 import {NavLink} from 'react-router-dom';
-import {api} from "../../api/api";
-import {followThunkCreator, unFollowThunkCreator} from "../../redux/users-reducer";
 
 
 type UsersPropsTypeF = UsersPropsType & {
 	onChangeCurrentPage: (el: number) => void
 }
 // export const UsersF = (props: UsersPropsTypeF) => {
-export const UsersF = (props: any) => { // ??? какой тип сделать здесь
+export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип сделать здесь
 	let {
 		totalUsersCount,
 		pageSize,
