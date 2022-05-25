@@ -2,9 +2,8 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {getProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {api} from "../../api/api";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -12,18 +11,22 @@ class ProfileApiContainer extends React.Component<PropsType> {
 
 		let userId = this.props.match.params.userId
 		console.log(this.props.match.params.userId)
-		if (!userId) { userId = `2`}
+		if (!userId) {
+			userId = `2`
+		}
+		this.props.getProfileThunkCreator(userId)
 
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-			//.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-		api.getProfile(userId)
-			// .then((response: AxiosResponse<UsersProfileResponseType>) => {
-			.then((data) => {
-				console.log(data)
-				//this.props.setUserProfile(response.data)
-				this.props.setUserProfile(data)
-			})
+		//.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+
+		// api.getProfile(userId)
+		// 	// .then((response: AxiosResponse<UsersProfileResponseType>) => {
+		// 	.then((data) => {
+		// 		console.log(data)
+		// 		//this.props.setUserProfile(response.data)
+		// 		this.props.setUserProfile(data)
+		// 	})
 	}
 
 	render() {
@@ -60,13 +63,14 @@ export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
 
 type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
 
-type PathParamsType = {	userId: string}
+type PathParamsType = { userId: string }
 type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
 }
 
 type mapDispatchToPropsType = {
 	setUserProfile: (profile: UsersProfileResponseType) => void
+	getProfileThunkCreator: (userId: string) => void
 }
 
 function mapStateToProps(state: AppRootStateType) {
@@ -78,4 +82,8 @@ function mapStateToProps(state: AppRootStateType) {
 let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 
 // export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileApiContainer)
-export const ProfileContainer = connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+export const ProfileContainer = connect(mapStateToProps,
+	{
+		setUserProfile,
+		getProfileThunkCreator
+	})(WithUrlDataContainerComponent)

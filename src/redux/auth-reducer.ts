@@ -1,5 +1,7 @@
 import {ActionsTypes} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {api} from "../api/api";
 
 
 //export type InitialAuthStatePageType = typeof initialState
@@ -86,4 +88,30 @@ export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 		type: "SET-AUTH-USER-PROFILE",
 		profile
 	} as const
+}
+
+//Thunk creator
+
+export const getAuthMeThunkCreator = ()=>{
+	return (dispatch: Dispatch<ActionsTypes>) => {
+		dispatch(setIsFetchingAuth(true))
+		api.getAuthMe()
+			.then((data) => {
+				if (data.resultCode === 0) {
+					// let {id, login, email} = response.data.data
+					dispatch(setAuthUserData(data.data))
+					dispatch(setIsFetchingAuth(false))
+				} else {dispatch(setIsFetchingAuth(false))}
+				// console.log(response.data.data.id)
+				// axios
+				// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + data.data.id)
+				api.getMyProfileInAuthMe(data)
+					// .then((response: AxiosResponse<UsersProfileResponseType>) => {
+					.then((data) => {
+						//console.log(response.data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+						dispatch(setAuthUserProfile(data))
+					})
+			})
+
+	}
 }
