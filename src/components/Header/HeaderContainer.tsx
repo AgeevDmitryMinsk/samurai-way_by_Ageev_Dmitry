@@ -1,17 +1,9 @@
 import React from 'react';
 import {Header} from "./Header";
-import {
-	AuthDataType,
-	getAuthMeThunkCreator,
-	InitialAuthStatePageType,
-	setAuthUserData,
-	setAuthUserProfile,
-	setIsFetchingAuth
-} from "../../redux/auth-reducer";
+import {getAuthMeThunkCreator, InitialAuthStatePageType} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
-import {UsersProfileResponseType} from "../Profile/ProfileContainer";
 
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
@@ -69,9 +61,9 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 type mapStateToPropsType = InitialAuthStatePageType
 
 type mapDispatchToPropsType = {
-	setAuthUserData: (data: AuthDataType) => void
-	setIsFetchingAuth: (isFetchingAuth: boolean) => void
-	setAuthUserProfile: (profile: UsersProfileResponseType) => void
+	// setAuthUserData: (data: AuthDataType) => void
+	// setIsFetchingAuth: (isFetchingAuth: boolean) => void
+	// setAuthUserProfile: (profile: UsersProfileResponseType) => void
 	getAuthMeThunkCreator: ()=>void
 }
 
@@ -87,8 +79,9 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 
 }
 export const HeaderContainer = connect(mapStateToProps,
-	{setAuthUserData,
-		setIsFetchingAuth,
-		setAuthUserProfile,
+	{
+		// setAuthUserData, //перенес логику вызова из HeaderContainer в Thunk getAuthMeThunkCreator
+		// setIsFetchingAuth, // аналогично
+		// setAuthUserProfile,
 		getAuthMeThunkCreator
 	})(HeaderApiContainer);

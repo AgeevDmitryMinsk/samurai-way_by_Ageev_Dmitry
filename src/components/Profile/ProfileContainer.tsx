@@ -69,7 +69,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-	setUserProfile: (profile: UsersProfileResponseType) => void
+	// setUserProfile: (profile: UsersProfileResponseType) => void
 	getProfileThunkCreator: (userId: string) => void
 }
 
@@ -84,6 +84,6 @@ let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 // export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileApiContainer)
 export const ProfileContainer = connect(mapStateToProps,
 	{
-		setUserProfile,
+		// setUserProfile,  убрал setUserProfile в Thunk getProfileThunkCreator
 		getProfileThunkCreator
 	})(WithUrlDataContainerComponent)

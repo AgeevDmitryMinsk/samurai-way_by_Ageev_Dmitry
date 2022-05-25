@@ -23,7 +23,7 @@ export const Header = (props: HeaderType) => {
 			<div className={s.login_block}>
 				{props.isAuth
 					? <>
-						{props.data['login']}
+						{props.data.login}
 						<img src={props.profile.photos?.large || ``} alt="myPhoto"/>
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}
 					</>

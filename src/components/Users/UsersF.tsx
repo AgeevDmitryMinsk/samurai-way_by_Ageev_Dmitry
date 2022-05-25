@@ -22,10 +22,10 @@ export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип с�
 		//for (let i = 1; i <= 5; i++) { //!!! будут лагать, если написать i <= props.totalUsersCount вместо i <= pagesCount т.к. соотношение запросов 19007:191
 		pageArray.push(i)
 	}
-	console.log('usersF', props.isFollowingInProgress, props.isFetchingButtonFollowUnfollow)
+	console.log('usersF', props.isFollowingInProgress, props.isFetchingButtonFollowUnfollow, props.currentPage)
 	return (
 		<>{pageArray.map(el => el > 3800 ? (<span key={el}
-												  className={props.currentPage === el ? styles.selectedPage : ''}
+												  className={props.currentPage === el ? styles.selectedPage: ''}
 												  onClick={() => props.onChangeCurrentPage(el)}
 												  style={{padding: 10, cursor: "pointer"}}>
 				{el}

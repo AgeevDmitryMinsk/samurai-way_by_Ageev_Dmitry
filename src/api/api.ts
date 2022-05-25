@@ -25,20 +25,17 @@ export const api = {
 	getUsers(currentPage: number, pageSize: number) {
 		return instance
 			// .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-			.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`,
-				{withCredentials: true}
-			).then(response=> {
+			.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+			.then(response=> {
 				return response.data})
 	},
 	getAuthMe() {
 		return instance
-			.get<AuthResponseType>(`auth/me`,
-				{withCredentials: true}
-			).then(response=> {
+			.get<AuthResponseType>(`auth/me`)
+			.then(response=> {
 				return response.data})
 	},
 	getMyProfileInAuthMe(data:AuthResponseType) {
-		//debugger
 		return instance
 			.get(`profile/` + data.data.id)
 			.then(response => response.data)

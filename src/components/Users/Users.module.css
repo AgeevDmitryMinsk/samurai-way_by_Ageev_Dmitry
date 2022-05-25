@@ -39,6 +39,7 @@
 
 .selectedPage {
     font-weight: bold;
+    color: fuchsia;
 }
 
 .button {

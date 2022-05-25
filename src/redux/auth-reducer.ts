@@ -36,7 +36,7 @@ const initialState = {
 	isFetchingAuth: false,
 	profile: {} as UsersProfileResponseType
 }
-export const authReducer = (state  = initialState, action: ActionsTypes): InitialAuthStatePageType => {
+export const authReducer = (state = initialState, action: ActionsTypes): InitialAuthStatePageType => {
 	switch (action.type) {
 		case "SET_USER_DATA": {
 			return {
@@ -45,7 +45,7 @@ export const authReducer = (state  = initialState, action: ActionsTypes): Initia
 				isAuth: true
 			}
 		}
-		case "TOGGLE-AUTH-IS-FETCHING":{
+		case "TOGGLE-AUTH-IS-FETCHING": {
 			return {
 				...state,
 				isFetchingAuth: action.isFetchingAuth
@@ -92,16 +92,19 @@ export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 
 //Thunk creator
 
-export const getAuthMeThunkCreator = ()=>{
+export const getAuthMeThunkCreator = () => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		dispatch(setIsFetchingAuth(true))
 		api.getAuthMe()
 			.then((data) => {
 				if (data.resultCode === 0) {
-					// let {id, login, email} = response.data.data
-					dispatch(setAuthUserData(data.data))
+					 let {id, login, email } = data.data
+					//dispatch(setAuthUserData(data.data))
+					dispatch(setAuthUserData({id, login, email}))
 					dispatch(setIsFetchingAuth(false))
-				} else {dispatch(setIsFetchingAuth(false))}
+				} else {
+					dispatch(setIsFetchingAuth(false))
+				}
 				// console.log(response.data.data.id)
 				// axios
 				// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + data.data.id)
