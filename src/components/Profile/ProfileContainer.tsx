@@ -2,8 +2,8 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {getProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {getProfileThunkCreator} from "../../redux/profile-reducer";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -11,10 +11,10 @@ class ProfileApiContainer extends React.Component<PropsType> {
 
 		let userId = this.props.match.params.userId
 		console.log(this.props.match.params.userId)
-		if (!userId) {
+		if (userId === undefined) {
 			userId = `2`
 		}
-		this.props.getProfileThunkCreator(userId)
+		this.props.getProfileThunkCreator(userId )
 
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
@@ -30,9 +30,15 @@ class ProfileApiContainer extends React.Component<PropsType> {
 	}
 
 	render() {
+		console.log(this.props.isAuth) // залогинен ? true/false
+		//для версии v5 react-router-dom <Redirect to=""/>
+		if (!this.props.isAuth ) return <Redirect to={"/login"}/> // if (this.props.isAuth === false) return <Redirect to={"/login"}/>
+		// if (this.props.isAuth === false) return <Navigate to={"/login"}/> - <Navigate to=""/> для версии v6 react-router-dom
 
 		return (
-			<Profile profile={this.props.profile}/>
+			<Profile profile={this.props.profile}
+				//isAuth={this.props.isAuth}
+			/>
 		);
 	}
 }
@@ -61,11 +67,12 @@ export type UsersProfileResponseType = {
 
 export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
 
-type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
+export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
 
 type PathParamsType = { userId: string }
-type mapStateToPropsType = {
+export type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
+	isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -73,9 +80,10 @@ type mapDispatchToPropsType = {
 	getProfileThunkCreator: (userId: string) => void
 }
 
-function mapStateToProps(state: AppRootStateType) {
+function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		profile: state.ProfilePage.profile
+		profile: state.ProfilePage.profile,
+		isAuth: state.auth.isAuth
 	}
 }
 

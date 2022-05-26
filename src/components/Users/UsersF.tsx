@@ -2,7 +2,7 @@ import React from 'react';
 import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import Dima_photo from "../../photos/Dima.png";
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 
 
 type UsersPropsTypeF = UsersPropsType & {
@@ -23,6 +23,9 @@ export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип с�
 		pageArray.push(i)
 	}
 	console.log('usersF', props.isFollowingInProgress, props.isFetchingButtonFollowUnfollow, props.currentPage)
+	console.log("props.isAuth = ", props.isAuth)
+	if (props.isAuth === false) return <Redirect to={"/login"}/>
+
 	return (
 		<>{pageArray.map(el => el > 3800 ? (<span key={el}
 												  className={props.currentPage === el ? styles.selectedPage: ''}
@@ -34,7 +37,7 @@ export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип с�
 				: null
 		)}
 			<div>
-				{props.users.map((el:any) => {
+				{props.users.map((el) => {
 					//console.log(el.id, el.followed)
 					return (
 						<div key={el.id} className={styles.container}>

@@ -14,8 +14,8 @@ type HeaderType ={
 }
 export const Header = (props: HeaderType) => {
 
-	console.log(props.data)// {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
-	console.log(props.profile.photos?.large)
+	//console.log(props.data)// {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
+	//console.log(props.profile.photos?.large)
 	return (
 		<header className={s.header}>
 			<img src={header_logo} alt="photo_logo"/>

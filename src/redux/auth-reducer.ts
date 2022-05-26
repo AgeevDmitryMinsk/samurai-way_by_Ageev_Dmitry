@@ -97,23 +97,27 @@ export const getAuthMeThunkCreator = () => {
 		dispatch(setIsFetchingAuth(true))
 		api.getAuthMe()
 			.then((data) => {
-				if (data.resultCode === 0) {
-					 let {id, login, email } = data.data
+				if (data.resultCode === 0) { // если "resultCode":1, то  message: "You are not authorized"
+					// если  resultCode === 0, то пользователь залогинен, т.е. у него есть в куках: id, login, email
+					//console.log(data.resultCode) //0
+					let {id, login, email} = data.data
+					//console.log(id, login, email) //22100 'AgeevDmitryMinsk' 'ageev.dmitry@outlook.com'
 					//dispatch(setAuthUserData(data.data))
 					dispatch(setAuthUserData({id, login, email}))
 					dispatch(setIsFetchingAuth(false))
+					api.getMyProfileInAuthMe(data)
+						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
+						.then((data) => {
+							//console.log(response.data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+							dispatch(setAuthUserProfile(data))
+						})
 				} else {
 					dispatch(setIsFetchingAuth(false))
 				}
 				// console.log(response.data.data.id)
 				// axios
 				// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + data.data.id)
-				api.getMyProfileInAuthMe(data)
-					// .then((response: AxiosResponse<UsersProfileResponseType>) => {
-					.then((data) => {
-						//console.log(response.data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
-						dispatch(setAuthUserProfile(data))
-					})
+
 			})
 
 	}

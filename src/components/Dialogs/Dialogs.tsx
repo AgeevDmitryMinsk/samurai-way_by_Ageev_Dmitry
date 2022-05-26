@@ -12,6 +12,7 @@ import {Message} from "./Message/Message";
 // } from "../../redux/store";
 // import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 //import {ReduxStoreType} from "../../redux/redux-store";
 // type DialogsPropsType = {
 // 	//DialogsData: DialogItemType[]
@@ -65,7 +66,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 		}
 	}
 
-	//console.log(props.DialogsData)
+	console.log("props.isAuth = ", props.isAuth) // true если withCredentials: true, и залогинен на https://social-network.samuraijs.com/api/1.0/
+	if (props.isAuth === false) return <Redirect to={"/login"}/>
+	//console.log(props.dialogs)
 	return (
 
 		<div className={s.dialogs}>

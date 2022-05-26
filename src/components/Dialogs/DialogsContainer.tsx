@@ -63,7 +63,7 @@ import {Dialogs} from "./Dialogs";
 import {AppRootStateType} from "../../redux/redux-store";
 import {addMessage, InitialStateType, newMessageOnChange} from "../../redux/messages-reducer";
 
-type mapStateToPropsType =  InitialStateType
+type mapStateToPropsType =  InitialStateType & {isAuth:boolean}
 type mapDispatchToPropsType = {
 	newMessageOnChange: (newMessage: string) => void
 	addMessage: () => void
@@ -76,7 +76,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		dialogs: state.DialogsPage.dialogs,
 		messages: state.DialogsPage.messages,
-		newMessageText: state.DialogsPage.newMessageText
+		newMessageText: state.DialogsPage.newMessageText,
+		isAuth: state.auth.isAuth
 	}
 }
 

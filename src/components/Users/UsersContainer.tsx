@@ -67,6 +67,7 @@ class UsersApiComponent extends React.Component<UsersPropsType> { // ??? как�
 						  followThunkCreator={this.props.followThunkCreator}
 						  unFollowThunkCreator={this.props.unFollowThunkCreator}
 						  getUsersThunkCreator={this.props.getUsersThunkCreator}
+						  isAuth={this.props.isAuth}
 
 				/>}
 			</>)
@@ -74,7 +75,7 @@ class UsersApiComponent extends React.Component<UsersPropsType> { // ??? как�
 }
 
 
-type mapStateToPropsType = InitialStateUsersPageType
+type mapStateToPropsType = InitialStateUsersPageType & {isAuth: boolean}
 
 type mapDispatchToPropsType = {
 	//follow: (userId: number) => void
@@ -100,7 +101,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		currentPage: state.usersPage.currentPage,
 		isFetching: state.usersPage.isFetching,
 		isFollowingInProgress: state.usersPage.isFollowingInProgress,
-		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow
+		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow,
+		isAuth: state.auth.isAuth
 	}
 
 }

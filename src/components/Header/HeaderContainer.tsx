@@ -4,6 +4,7 @@ import {getAuthMeThunkCreator, InitialAuthStatePageType} from "../../redux/auth-
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
+import {UsersProfileResponseType} from "../Profile/ProfileContainer";
 
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
@@ -39,9 +40,9 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 	}
 
 	render() {
-		console.log(this.props.data)//{} //{id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
-		console.log(this.props.profile) // {} // {aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
-		console.log(this.props.isFetchingAuth) //false / true
+		//console.log(this.props.data)//{} //{id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
+		//console.log(this.props.profile) // {} // {aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+		//console.log('this.props.isFetchingAuth = ', this.props.isFetchingAuth) //false / true
 		return (
 
 			<>{this.props.isFetchingAuth
@@ -58,7 +59,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 	}
 }
 
-type mapStateToPropsType = InitialAuthStatePageType
+type mapStateToPropsType = InitialAuthStatePageType & {profile: UsersProfileResponseType}
 
 type mapDispatchToPropsType = {
 	// setAuthUserData: (data: AuthDataType) => void
