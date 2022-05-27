@@ -18,6 +18,7 @@ import React from "react";
 import {UsersF} from "./UsersF";
 import {Preloader} from "../common/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 //import {api} from "../../api/api";
 
 
@@ -55,22 +56,22 @@ class UsersApiComponent extends React.Component<UsersPropsType> { // ??? как�
 						  currentPage={this.props.currentPage}
 						  onChangeCurrentPage={this.onChangeCurrentPage}
 						  users={this.props.users}
-						  // unFollow={this.props.unFollow}
-						  // follow={this.props.follow}
-						  //setUsers={this.props.setUsers}
-						  //setUsersTotalCount={this.props.setUsersTotalCount}
-						  // setCurrentPage={this.props.setCurrentPage}
-						  //setIsFetching={this.props.setIsFetching}
+					// unFollow={this.props.unFollow}
+					// follow={this.props.follow}
+					//setUsers={this.props.setUsers}
+					//setUsersTotalCount={this.props.setUsersTotalCount}
+					// setCurrentPage={this.props.setCurrentPage}
+					//setIsFetching={this.props.setIsFetching}
 						  isFetching={this.props.isFetching}
 						  isFollowingInProgress={this.props.isFollowingInProgress}
-						  // setIsFollowingInProgress={this.props.setIsFollowingInProgress}
+					// setIsFollowingInProgress={this.props.setIsFollowingInProgress}
 						  isFetchingButtonFollowUnfollow={this.props.isFetchingButtonFollowUnfollow}
 						  followThunkCreator={this.props.followThunkCreator}
 						  unFollowThunkCreator={this.props.unFollowThunkCreator}
 						  getUsersThunkCreator={this.props.getUsersThunkCreator}
-						  // isAuth={this.props.isAuth}
-						  //isAuth: state.auth.isAuth - не нужно пробрасывать в UsersF
-						  // при использовании withAuthRedirect
+					// isAuth={this.props.isAuth}
+					//isAuth: state.auth.isAuth - не нужно пробрасывать в UsersF
+					// при использовании withAuthRedirect
 
 				/>}
 			</>)
@@ -90,7 +91,7 @@ type mapDispatchToPropsType = {
 	// setIsFollowingInProgress: (isFetchingButtonFollowUnfollow: boolean, userId: number) => void
 	followThunkCreator: (id: number) => void
 	unFollowThunkCreator: (id: number) => void
-	getUsersThunkCreator: (currentPage: number, pageSize:number) => void
+	getUsersThunkCreator: (currentPage: number, pageSize: number) => void
 }
 
 
@@ -133,7 +134,32 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 // 	}
 // }
 
-export const UsersContainer = withAuthRedirect(connect(mapStateToProps,
+// export const UsersContainer = withAuthRedirect(connect(mapStateToProps,
+// 	// {
+// 	// 	follow: followAC,
+// 	// 	unFollow: unFollowAC,
+// 	// 	setUsers: setUsersAC,
+// 	// 	setCurrentPage: setCurrentPageAC,
+// 	// 	setUsersTotalCount: setUsersTotalCountAC,
+// 	// 	setIsFetching: setIsFetchingAC
+// 	// }
+// 	{
+// 		follow,
+// 		unFollow,
+// 		setUsers,
+// 		setCurrentPage,
+// 		setUsersTotalCount,
+// 		setIsFetching,
+// 		setIsFollowingInProgress,
+// 		getUsersThunkCreator,
+// 		followThunkCreator,
+// 		unFollowThunkCreator
+// 	}
+// )(UsersApiComponent))
+//withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
+//export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)
+
+export const UsersContainer = compose<React.ComponentType>(withAuthRedirect, connect(mapStateToProps,
 	// {
 	// 	follow: followAC,
 	// 	unFollow: unFollowAC,
@@ -153,8 +179,4 @@ export const UsersContainer = withAuthRedirect(connect(mapStateToProps,
 		getUsersThunkCreator,
 		followThunkCreator,
 		unFollowThunkCreator
-	}
-)(UsersApiComponent))
-//withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
-//export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)
-
+	}))(UsersApiComponent)

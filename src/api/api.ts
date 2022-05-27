@@ -30,7 +30,7 @@ export const api = {
 				return response.data})
 	},
 	getAuthMe() {
-		debugger
+		//debugger
 		return instance
 			.get<AuthResponseType>(`auth/me`)
 			.then(response=> {

@@ -5,6 +5,7 @@ import {AppRootStateType} from "../../redux/redux-store";
 import {getProfileThunkCreator} from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -91,9 +92,13 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 
 // export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileApiContainer)
-export const ProfileContainer = withAuthRedirect(connect(mapStateToProps,
-	{
-		// setUserProfile,  убрал setUserProfile в Thunk getProfileThunkCreator
-		getProfileThunkCreator
-	})(WithUrlDataContainerComponent))
+// export const ProfileContainer = withAuthRedirect(connect(mapStateToProps,
+// 	{
+// 		// setUserProfile,  убрал setUserProfile в Thunk getProfileThunkCreator
+// 		getProfileThunkCreator
+// 	})(WithUrlDataContainerComponent))
 //withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
+
+export const ProfileContainer = compose<React.ComponentType>( withAuthRedirect, connect(mapStateToProps,
+	{getProfileThunkCreator}))(WithUrlDataContainerComponent)
+
