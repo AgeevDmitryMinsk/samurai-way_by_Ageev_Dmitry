@@ -23,8 +23,11 @@ export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип с�
 		pageArray.push(i)
 	}
 	console.log('usersF', props.isFollowingInProgress, props.isFetchingButtonFollowUnfollow, props.currentPage)
-	console.log("props.isAuth = ", props.isAuth)
-	if (props.isAuth === false) return <Redirect to={"/login"}/>
+	// console.log("props.isAuth = ", props.isAuth)
+	// if (props.isAuth === false) return <Redirect to={"/login"}/>
+	//isAuth: state.auth.isAuth - не нужно пробрасывать в UsersF
+	// при использовании withAuthRedirect
+
 
 	return (
 		<>{pageArray.map(el => el > 3800 ? (<span key={el}

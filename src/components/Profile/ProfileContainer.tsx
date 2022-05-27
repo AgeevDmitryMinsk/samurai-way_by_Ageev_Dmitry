@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {getProfileThunkCreator} from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -19,7 +20,6 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
 		//.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-
 		// api.getProfile(userId)
 		// 	// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 		// 	.then((data) => {
@@ -30,13 +30,13 @@ class ProfileApiContainer extends React.Component<PropsType> {
 	}
 
 	render() {
-		console.log(this.props.isAuth) // залогинен ? true/false
+		//console.log(this.props.isAuth) // залогинен ? true/false
 		//для версии v5 react-router-dom <Redirect to=""/>
-		if (!this.props.isAuth ) return <Redirect to={"/login"}/> // if (this.props.isAuth === false) return <Redirect to={"/login"}/>
+		//if (!this.props.isAuth ) return <Redirect to={"/login"}/> // if (this.props.isAuth === false) return <Redirect to={"/login"}/>
 		// if (this.props.isAuth === false) return <Navigate to={"/login"}/> - <Navigate to=""/> для версии v6 react-router-dom
 
 		return (
-			<Profile profile={this.props.profile}
+			<Profile {...this.props} profile={this.props.profile}
 				//isAuth={this.props.isAuth}
 			/>
 		);
@@ -72,7 +72,7 @@ export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsTyp
 type PathParamsType = { userId: string }
 export type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
-	isAuth: boolean
+	//isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -83,15 +83,17 @@ type mapDispatchToPropsType = {
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		profile: state.ProfilePage.profile,
-		isAuth: state.auth.isAuth
+		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
+									  // при использовании withAuthRedirect
 	}
 }
 
 let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 
 // export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileApiContainer)
-export const ProfileContainer = connect(mapStateToProps,
+export const ProfileContainer = withAuthRedirect(connect(mapStateToProps,
 	{
 		// setUserProfile,  убрал setUserProfile в Thunk getProfileThunkCreator
 		getProfileThunkCreator
-	})(WithUrlDataContainerComponent)
+	})(WithUrlDataContainerComponent))
+//withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован

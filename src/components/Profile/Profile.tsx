@@ -1,11 +1,11 @@
 import React from 'react'
-//import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import { UsersProfileResponseType} from "./ProfileContainer";
 //import {MyPosts} from "./MyPosts/MyPosts";
 //import {ActionsTypes,	//PostDataType,	ProfilePageType} from "../../redux/store";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {mapStateToPropsType, UsersProfileResponseType} from "./ProfileContainer";
-import {Redirect} from "react-router-dom";
+//import s from './Profile.module.css';
+//import {Redirect} from "react-router-dom";
 //import {ReduxStoreType} from "../../redux/redux-store";
 // type ProfilePropsType = {
 // 	//PostData: ProfilePageType

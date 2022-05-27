@@ -17,6 +17,7 @@ import {
 import React from "react";
 import {UsersF} from "./UsersF";
 import {Preloader} from "../common/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 //import {api} from "../../api/api";
 
 
@@ -67,7 +68,9 @@ class UsersApiComponent extends React.Component<UsersPropsType> { // ??? как�
 						  followThunkCreator={this.props.followThunkCreator}
 						  unFollowThunkCreator={this.props.unFollowThunkCreator}
 						  getUsersThunkCreator={this.props.getUsersThunkCreator}
-						  isAuth={this.props.isAuth}
+						  // isAuth={this.props.isAuth}
+						  //isAuth: state.auth.isAuth - не нужно пробрасывать в UsersF
+						  // при использовании withAuthRedirect
 
 				/>}
 			</>)
@@ -75,7 +78,7 @@ class UsersApiComponent extends React.Component<UsersPropsType> { // ??? как�
 }
 
 
-type mapStateToPropsType = InitialStateUsersPageType & {isAuth: boolean}
+type mapStateToPropsType = InitialStateUsersPageType //& {isAuth: boolean}
 
 type mapDispatchToPropsType = {
 	//follow: (userId: number) => void
@@ -102,7 +105,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		isFetching: state.usersPage.isFetching,
 		isFollowingInProgress: state.usersPage.isFollowingInProgress,
 		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow,
-		isAuth: state.auth.isAuth
+		//isAuth: state.auth.isAuth
 	}
 
 }
@@ -130,7 +133,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 // 	}
 // }
 
-export const UsersContainer = connect(mapStateToProps,
+export const UsersContainer = withAuthRedirect(connect(mapStateToProps,
 	// {
 	// 	follow: followAC,
 	// 	unFollow: unFollowAC,
@@ -151,5 +154,7 @@ export const UsersContainer = connect(mapStateToProps,
 		followThunkCreator,
 		unFollowThunkCreator
 	}
-)(UsersApiComponent)
+)(UsersApiComponent))
+//withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
 //export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)
+

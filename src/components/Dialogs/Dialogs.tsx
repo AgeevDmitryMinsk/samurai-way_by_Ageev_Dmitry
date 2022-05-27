@@ -66,8 +66,10 @@ export const Dialogs = (props: DialogsPropsType) => {
 		}
 	}
 
-	console.log("props.isAuth = ", props.isAuth) // true если withCredentials: true, и залогинен на https://social-network.samuraijs.com/api/1.0/
-	if (props.isAuth === false) return <Redirect to={"/login"}/>
+	//console.log("props.isAuth = ", props.isAuth) // true если withCredentials: true, и залогинен на https://social-network.samuraijs.com/api/1.0/
+	//if (props.isAuth === false) return <Redirect to={"/login"}/>
+	//isAuth: state.auth.isAuth - не нужно пробрасывать в Dialogs
+	// при использовании withAuthRedirect
 	//console.log(props.dialogs)
 	return (
 
