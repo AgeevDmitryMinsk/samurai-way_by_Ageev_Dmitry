@@ -3,7 +3,7 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {getProfileThunkCreator} from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import { RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -16,7 +16,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		if (userId === undefined) {
 			userId = `2`
 		}
-		this.props.getProfileThunkCreator(userId )
+		this.props.getProfileThunkCreator(userId)
 
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
@@ -85,11 +85,11 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		profile: state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
-									  // при использовании withAuthRedirect
+		// при использовании withAuthRedirect
 	}
 }
 
-let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
+//let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 
 // export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileApiContainer)
 // export const ProfileContainer = withAuthRedirect(connect(mapStateToProps,
@@ -99,6 +99,8 @@ let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 // 	})(WithUrlDataContainerComponent))
 //withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
 
-export const ProfileContainer = compose<React.ComponentType>( withAuthRedirect, connect(mapStateToProps,
-	{getProfileThunkCreator}))(WithUrlDataContainerComponent)
+export const ProfileContainer = compose<React.ComponentType>(withAuthRedirect,
+	withRouter, connect(mapStateToProps,
+		{getProfileThunkCreator},
+	))(ProfileApiContainer)
 
