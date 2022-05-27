@@ -1,5 +1,5 @@
 import {ActionsTypes} from "./messages-reducer";
-import {api} from "../api/api";
+import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 
@@ -172,7 +172,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 		dispatch(setIsFetching(true))
 
 
-		api.getUsers(currentPage, pageSize)
+		usersAPI.getUsers(currentPage, pageSize)
 			//.then((response: AxiosResponse<UsersResponseType>) => {
 			.then((data) => {
 				// this.props.setIsFetching(false)
@@ -197,7 +197,7 @@ export const followThunkCreator = (userId:number) => {
 		// 		})
 		console.log('followThunkCreator')
 		dispatch(setIsFollowingInProgress(true, userId))
-		api.getFollow(userId)
+		usersAPI.getFollow(userId)
 			// .then((response: AxiosResponse<FollowResponseType>) => {
 			.then((data) => {
 				// if (response.data.resultCode === 0) {
@@ -213,7 +213,7 @@ export const unFollowThunkCreator = (userId:number) => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		console.log('unFollowThunkCreator')
 		dispatch(setIsFollowingInProgress(true, userId))
-		api.getUnfollow(userId)
+		usersAPI.getUnfollow(userId)
 			// .then((response: AxiosResponse<FollowResponseType>) => {
 			.then((data) => {
 				if (data.resultCode === 0) {

@@ -1,7 +1,7 @@
 import {ActionsTypes} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
-import {api} from "../api/api";
+import {authAPI} from "../api/api";
 
 
 //export type InitialAuthStatePageType = typeof initialState
@@ -95,7 +95,7 @@ export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 export const getAuthMeThunkCreator = () => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		dispatch(setIsFetchingAuth(true))
-		api.getAuthMe()
+		authAPI.getAuthMe()
 			.then((data) => {
 				if (data.resultCode === 0) { // если "resultCode":1, то  message: "You are not authorized"
 					// если  resultCode === 0, то пользователь залогинен, т.е. у него есть в куках: id, login, email
@@ -105,7 +105,7 @@ export const getAuthMeThunkCreator = () => {
 					//dispatch(setAuthUserData(data.data))
 					dispatch(setAuthUserData({id, login, email}))
 					dispatch(setIsFetchingAuth(false))
-					api.getMyProfileInAuthMe(data)
+					authAPI.getMyProfileInAuthMe(data)
 						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 						.then((data) => {
 							//console.log(response.data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}

@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import {ActionsTypes} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
-import {api} from "../api/api";
+import {profileAPI} from "../api/api";
 
 export type PostDataType = {
 	id: string
@@ -105,7 +105,7 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 
 export const getProfileThunkCreator = (userId: string) => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
-		api.getProfile(userId)
+		profileAPI.getProfile(userId)
 			// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 			.then((data) => {
 				console.log(data)
