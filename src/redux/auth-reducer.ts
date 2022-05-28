@@ -4,14 +4,15 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 
 
+
 //export type InitialAuthStatePageType = typeof initialState
 
 export type InitialAuthStatePageType = {
 	data: AuthDataType,
 	isAuth: boolean,
 	isFetchingAuth: boolean,
-	profile: UsersProfileResponseType
-
+	profile: UsersProfileResponseType,
+	myStatus: string
 }
 
 export type AuthResponseType = {
@@ -34,7 +35,8 @@ const initialState = {
 	data: {} as AuthDataType,
 	isAuth: false,
 	isFetchingAuth: false,
-	profile: {} as UsersProfileResponseType
+	profile: {} as UsersProfileResponseType,
+	myStatus: '---'
 }
 export const authReducer = (state = initialState, action: ActionsTypes): InitialAuthStatePageType => {
 	switch (action.type) {
@@ -56,7 +58,11 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 			return {
 				...state, profile: action.profile
 			}
-
+		}
+		case "SET-MY-STATUS-FOR-HEADER":{
+			return {
+				...state, myStatus: action.myStatus
+			}
 		}
 
 
@@ -69,6 +75,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 export type setUserDataType = ReturnType<typeof setAuthUserData>
 export type setIsFetchingAuthType = ReturnType<typeof setIsFetchingAuth>
 export type setAuthUserProfileType = ReturnType<typeof setAuthUserProfile>
+export type setMyStatusForHeaderType = ReturnType<typeof setMyStatusForHeader>
 
 //ActionCreator setAuthUserData:
 export const setAuthUserData = (data: AuthDataType) => {
@@ -91,6 +98,13 @@ export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 	} as const
 }
 
+export const setMyStatusForHeader = (myStatus : string) => {
+	return {
+		type: "SET-MY-STATUS-FOR-HEADER",
+		myStatus
+	} as const
+}
+
 //Thunk creator
 
 export const getAuthMeThunkCreator = () => {
@@ -109,9 +123,15 @@ export const getAuthMeThunkCreator = () => {
 					authAPI.getMyProfileInAuthMe(data)
 						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 						.then((data) => {
-							//console.log(response.data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+							console.log(data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
 							dispatch(setAuthUserProfile(data))
 						})
+					authAPI.getMyStatus(data)
+						.then((data)=>{
+							console.log(120, data)
+							dispatch(setMyStatusForHeader(data))
+						})
+
 				} else {
 					dispatch(setIsFetchingAuth(false))
 				}

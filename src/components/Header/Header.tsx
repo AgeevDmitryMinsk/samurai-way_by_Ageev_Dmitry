@@ -11,6 +11,7 @@ type HeaderType ={
 	data: AuthDataType
 	isAuth: boolean
 	profile: UsersProfileResponseType
+	myStatus: string
 }
 export const Header = (props: HeaderType) => {
 
@@ -26,6 +27,8 @@ export const Header = (props: HeaderType) => {
 						{props.data.login}
 						<img src={props.profile.photos?.large || ``} alt="myPhoto"/>
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}
+						<>Мой статус:</>
+						<div>{props.myStatus}</div>
 					</>
 					: <NavLink to={`/login/`}>
 					LOGIN

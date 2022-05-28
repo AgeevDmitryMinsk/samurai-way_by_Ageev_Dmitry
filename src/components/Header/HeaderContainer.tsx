@@ -6,10 +6,12 @@ import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
 import {UsersProfileResponseType} from "../Profile/ProfileContainer";
 
+
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
 	componentDidMount() {
 		this.props.getAuthMeThunkCreator()
+
 		// this.props.setIsFetchingAuth(true)
 		// // axios
 		// // 	.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
@@ -51,6 +53,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 				: <Header data={this.props.data}
 						  isAuth={this.props.isAuth}
 						  profile={this.props.profile}
+						  myStatus={this.props.myStatus}
 				/>
 			}
 			</>
@@ -75,7 +78,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 		data: state.auth.data,
 		isAuth: state.auth.isAuth,
 		isFetchingAuth: state.auth.isFetchingAuth,
-		profile: state.auth.profile
+		profile: state.auth.profile,
+		myStatus: state.auth.myStatus
 	}
 
 }

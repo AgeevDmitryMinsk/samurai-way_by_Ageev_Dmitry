@@ -17,7 +17,7 @@ import {
 	setUsersTotalCountActionType,
 	UnFollowActionType
 } from "./users-reducer";
-import {setAuthUserProfileType, setIsFetchingAuthType, setUserDataType} from "./auth-reducer";
+import {setAuthUserProfileType, setIsFetchingAuthType, setMyStatusForHeaderType, setUserDataType} from "./auth-reducer";
 // export type DialogsPageType = {
 // 	messages: MessageType[]
 // 	dialogs: DialogItemType[]
@@ -41,6 +41,7 @@ export type ActionsTypes =
 	| setAuthUserProfileType
 	| setIsFollowingInProgressType
 	| SetUserStatusActionType
+	| setMyStatusForHeaderType
 export type MessageType = {
 	message: string
 	id: string

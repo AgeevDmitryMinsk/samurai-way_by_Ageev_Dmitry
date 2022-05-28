@@ -47,7 +47,8 @@ export const profileAPI = {
 	// 			return response.data})
 	// },
 	getProfileStatus(userId: number) {
-		return instance.get<any, AxiosResponse<string>>(`profile/status/${userId}`).then(response => response.data)
+		return instance.get<any, AxiosResponse<string>>(`profile/status/${userId}`)
+			.then(response => response.data)
 	},
 
 	updateProfileStatus(status: string) {
@@ -62,21 +63,36 @@ export const profileAPI = {
 
 export const authAPI = {
 	getAuthMe() {
+
 		return instance
 			.get<AuthResponseType>(`auth/me`)
 			.then(response => {
+				//debugger
 				return response.data
 			})
 	},
 	getMyProfileInAuthMe(data: AuthResponseType) {
+
 		return instance
 			.get(`profile/` + data.data.id)
 			.then(response => {
+				//debugger
 					console.log(response)
 					return response.data
 				}
 			)
 	},
+	getMyStatus (data: AuthResponseType) {
+		return instance
+			.get(`profile/status/${+data.data.id}`)
+			.then(response => {
+					//debugger
+					console.log(response)
+					return response.data
+				})
+			// .then(instance.get(`profile/status/${data.data.userId}`)
+			// 	.then(response => response.data))
+	}
 }
 
 //const baseUrl = "https://social-network.samuraijs.com/api/1.0/"

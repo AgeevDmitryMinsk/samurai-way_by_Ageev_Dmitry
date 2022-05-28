@@ -37,7 +37,7 @@ const initialState: InitialStateProfilePageType = {
 	] as PostDataType[],
 	newPostText: "",
 	profile: null,
-	status: ""// null
+	status: ''// null
 }
 
 
@@ -65,7 +65,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 		}
 
 		case "SET-USER-STATUS": {
-			debugger
+			//debugger
 			return {...state, status: action.status}
 		}
 
@@ -117,7 +117,7 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 
 export const setUserStatus = (status: string//ProfileStatusType
  ) => {
-	debugger
+	//debugger
 	return {
 		type: "SET-USER-STATUS",
 		status
@@ -143,7 +143,7 @@ export const getUserStatusThunkCreator = (userId: string) => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		profileAPI.getProfileStatus(+userId)
 			.then((data)=> {
-				debugger
+				//debugger
 				console.log(data)
 				dispatch(setUserStatus(data))
 			})

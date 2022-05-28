@@ -22,7 +22,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		}
 		this.props.getProfileThunkCreator(userId)
 		this.props.getUserStatusThunkCreator(userId)
-		this.props.updateProfileStatusThunkCreator(this.props.status)
+		//this.props.updateProfileStatusThunkCreator(this.props.status)
 		//debugger
 
 		// axios
@@ -36,6 +36,29 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		// 		this.props.setUserProfile(data)
 		// 	})
 	}
+
+	// componentDidMount() {
+	// 	const {match, history, getProfileThunkCreator, getUserStatusThunkCreator} = this.props
+	// 	let userId = match.params.userId
+	// 	if (!userId) {
+	// 		history.push('/login')
+	// 	}
+	// 	getProfileThunkCreator(userId)
+	// 	getUserStatusThunkCreator(userId)
+	// }
+	//
+	// componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{}>, snapshot?: any) {
+	// 	if (this.props.match.params.userId !== prevProps.match.params.userId) {
+	// 		const {match, history, getProfileThunkCreator, getUserStatusThunkCreator} = this.props
+	// 		let userId = match.params.userId
+	// 		if (!userId) {
+	// 			history.push('/login')
+	// 		}
+	// 		getProfileThunkCreator(userId)
+	// 		getUserStatusThunkCreator(userId)
+	// 	}
+	// }
+
 
 	render() {
 		//console.log(this.props.isAuth) // залогинен ? true/false
