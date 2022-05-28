@@ -2,6 +2,7 @@ import React from 'react'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UsersProfileResponseType} from "./ProfileContainer";
+import {AuthDataType} from "../../redux/auth-reducer";
 //import {MyPosts} from "./MyPosts/MyPosts";
 //import {ActionsTypes,	//PostDataType,	ProfilePageType} from "../../redux/store";
 //import s from './Profile.module.css';
@@ -18,7 +19,8 @@ import {UsersProfileResponseType} from "./ProfileContainer";
 type ProfileType = {
 	profile: UsersProfileResponseType | null
 	status: string//ProfileStatusType // | null
-	updateStatus:(status: string) => void
+	updateStatus: (status: string) => void
+	data: AuthDataType,
 }
 export const Profile = (props: ProfileType) => {
 
@@ -26,7 +28,10 @@ export const Profile = (props: ProfileType) => {
 		<div>
 			Main content
 
-			<ProfileInfo profile = {props.profile} status={props.status} updateStatus={props.updateStatus}/>
+			<ProfileInfo profile={props.profile}
+						 status={props.status}
+						 data={props.data}
+						 updateStatus={props.updateStatus}/>
 			<MyPostsContainer/>
 			<>
 				{/*//PostData={props.PostData}*/}
@@ -36,7 +41,6 @@ export const Profile = (props: ProfileType) => {
 				{/*	 //dispatch = {props.dispatch}*/}
 				{/*//store = {props.store}*/}
 			</>
-
 
 
 		</div>

@@ -3,20 +3,22 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import {UsersProfileResponseType} from "../ProfileContainer";
 import {ProfileStatus} from "./ProfileStatus";
+import {AuthDataType} from "../../../redux/auth-reducer";
 
 
 type ProfileInfoType = {
 	profile: UsersProfileResponseType | null
 	status: string//ProfileStatusType  // | null
-	updateStatus:(status: string) => void
+	updateStatus: (status: string) => void
+	//isAuth: boolean
+	data: AuthDataType
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
 	if (!props.profile) {
 		return <h1>LOADING PROFILE....</h1>
 		// return <Preloader/>
-	}
-	else return (
+	} else return (
 		<div className={s.content}>
 			{/*<div>*/}
 			{/*	<img src={content_logo} alt={'content_logo'}/>*/}
@@ -24,7 +26,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
 			<div className={s.descriptionBlock}>
 				<img src={props.profile?.photos.small || ''} alt={'profile_photos_small'}
 					 style={{height: 50, width: 50}}/>
-				<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+				<ProfileStatus status={props.status} updateStatus={props.updateStatus} data={props.data} profile={props.profile}/>
 				<h3>Меня зовут: {props.profile.fullName} </h3>
 				<h3>Обо мне: {props.profile.aboutMe} </h3>
 				<h3>Ищу работу: {props.profile.lookingForAJob ? "ДА" : "Нет"}  </h3>

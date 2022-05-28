@@ -7,9 +7,10 @@ import {
 	getUserStatusThunkCreator,
 	updateProfileStatusThunkCreator
 } from "../../redux/profile-reducer";
-import { RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {AuthDataType} from "../../redux/auth-reducer";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -62,6 +63,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 
 	render() {
 		//console.log(this.props.isAuth) // залогинен ? true/false
+
 		//для версии v5 react-router-dom <Redirect to=""/>
 		//if (!this.props.isAuth ) return <Redirect to={"/login"}/> // if (this.props.isAuth === false) return <Redirect to={"/login"}/>
 		// if (this.props.isAuth === false) return <Navigate to={"/login"}/> - <Navigate to=""/> для версии v6 react-router-dom
@@ -71,6 +73,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 					 updateStatus={this.props.updateProfileStatusThunkCreator}
 					 status={this.props.status}
 				//isAuth={this.props.isAuth}
+					 data={this.props.data}
 			/>
 		);
 	}
@@ -102,13 +105,11 @@ export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
 
 export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
 
-export type ProfileStatusType = {status: string}
-
 type PathParamsType = { userId: string }
 export type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
 	status: string// ProfileStatusType // | null
-	//isAuth: boolean
+	data: AuthDataType
 }
 
 type mapDispatchToPropsType = {
@@ -124,7 +125,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		profile: state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
 		// при использовании withAuthRedirect
-		status: state.ProfilePage.status
+		status: state.ProfilePage.status,
+		data: state.auth.data,
 	}
 }
 
@@ -141,6 +143,6 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 export const ProfileContainer = compose<React.ComponentType>(
 	//withAuthRedirect,
 	withRouter, connect(mapStateToProps,
-		{getProfileThunkCreator, getUserStatusThunkCreator, updateProfileStatusThunkCreator },
+		{getProfileThunkCreator, getUserStatusThunkCreator, updateProfileStatusThunkCreator},
 	))(ProfileApiContainer)
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import header_logo from '../../photos/1633774787_19-kartinkin-net-p-monro-pop-art-krasivo-20.jpg'
 import s from './Header.module.css'
@@ -14,6 +14,11 @@ type HeaderType ={
 	myStatus: string
 }
 export const Header = (props: HeaderType) => {
+	const [textForMyStatus, setTextForMyStatus] = useState<string>(props.myStatus)
+
+	useEffect(()=>{  // для переотрисовки, если обновились пропсы !!!!
+		setTextForMyStatus(props.myStatus)
+	},[props.myStatus])
 
 	//console.log(props.data)// {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
 	//console.log(props.profile.photos?.large)
