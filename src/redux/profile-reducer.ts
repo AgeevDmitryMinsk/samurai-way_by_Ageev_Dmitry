@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {ActionsTypes} from "./messages-reducer";
-import {ProfileStatusType, UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
@@ -15,7 +15,7 @@ export type InitialStateProfilePageType = {
 	profile: UsersProfileResponseType | null
 	posts: PostDataType[]
 	newPostText: string
-	status: ProfileStatusType | null
+	status: string//ProfileStatusType //| null
 }
 
 
@@ -31,7 +31,7 @@ const initialState: InitialStateProfilePageType = {
 	] as PostDataType[],
 	newPostText: "",
 	profile: null,
-	status: null
+	status: ""// null
 }
 
 
@@ -108,7 +108,8 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 	} as const
 }
 
-export const setUserStatus = (status: ProfileStatusType) => {
+export const setUserStatus = (status: string//ProfileStatusType
+ ) => {
 	//debugger
 	return {
 		type: "SET-USER-STATUS",

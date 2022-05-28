@@ -1,19 +1,17 @@
 import React, {useState} from 'react';
-import {ProfileStatusType} from "../ProfileContainer";
 
 type ProfileStatusProps = {
-	status: ProfileStatusType | null
+	status: string //as ProfileStatusType // | null
 }
 
 export const ProfileStatus = (props: ProfileStatusProps) => {
 	const [editmode, setEditMode] = useState<boolean>(false)
-	const [textForStatus, setTextForStatus] = useState<any>(props.status)
+	const [textForStatus, setTextForStatus] = useState<string>(props.status)
 
 	function onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
 		if (e.currentTarget.value) {
 			setTextForStatus(e.currentTarget.value )
 		}
-
 	}
 
 	console.log(textForStatus)
@@ -41,7 +39,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 		<div>
 			{!editmode && <div onClick={onClickHandle}>{textForStatus}</div>}
 			{editmode && <div>{<input value={textForStatus}
-									  //autoFocus={true}
+									  autoFocus={true} // добавляет курсор в конец строки input
 									  onChange={onChangeHandle}
 									  onKeyPress={onEnterKeyPress}
 									  onBlur={onBlurHandle}

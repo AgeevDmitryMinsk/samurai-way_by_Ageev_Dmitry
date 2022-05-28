@@ -1,13 +1,13 @@
 import React from 'react';
 //import content_logo from "../../../photos/beach.png";
 import s from './ProfileInfo.module.css'
-import {ProfileStatusType, UsersProfileResponseType} from "../ProfileContainer";
+import {UsersProfileResponseType} from "../ProfileContainer";
 import {ProfileStatus} from "./ProfileStatus";
 
 
 type ProfileInfoType = {
 	profile: UsersProfileResponseType | null
-	status: ProfileStatusType | null
+	status: string//ProfileStatusType  // | null
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {

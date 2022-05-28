@@ -77,7 +77,7 @@ export type ProfileStatusType = {status: string}
 type PathParamsType = { userId: string }
 export type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
-	status: ProfileStatusType | null
+	status: string// ProfileStatusType // | null
 	//isAuth: boolean
 }
 
