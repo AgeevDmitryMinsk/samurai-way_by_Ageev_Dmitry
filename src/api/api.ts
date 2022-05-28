@@ -6,7 +6,7 @@ import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 const instance = axios.create({
 	withCredentials: true,
 	baseURL: "https://social-network.samuraijs.com/api/1.0/",
-	headers: {"API-KEY": "ea4bd029-6219-425e-8f84-95f6a13dad97"	}
+	headers: {"API-KEY": "ea4bd029-6219-425e-8f84-95f6a13dad97"}
 
 })
 
@@ -15,16 +15,17 @@ export const usersAPI = {
 		return instance
 			// .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
 			.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
-			.then(response=> {
-				return response.data})
+			.then(response => {
+				return response.data
+			})
 	},
-	getUnfollow(id:number) {
-		return  instance
+	getUnfollow(id: number) {
+		return instance
 			.delete<FollowResponseType>(`follow/${id}`)
 			.then(response => response.data)
 	},
 
-	getFollow (id:number) {
+	getFollow(id: number) {
 		return instance
 			.post<FollowResponseType>(`follow/${id}`)
 			.then(response => response.data)
@@ -32,24 +33,40 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-	getProfile(userId:string) {
+	getProfile(userId: string) {
 		return instance
 			.get<UsersProfileResponseType>(`profile/` + userId)
 			.then(response => response.data)
 	},
+	getProfileStatus(userId: string) {
+		return instance
+			.get(`/profile/status/${userId}`)
+			.then(response => response.data)
+	},
+	updateProfileStatus(status: string) {
+		return instance
+			.put('/profile/status', {status: status})
+			.then(response => response.data)
+
+	}
 }
 
 export const authAPI = {
 	getAuthMe() {
 		return instance
 			.get<AuthResponseType>(`auth/me`)
-			.then(response=> {
-				return response.data})
+			.then(response => {
+				return response.data
+			})
 	},
-	getMyProfileInAuthMe(data:AuthResponseType) {
+	getMyProfileInAuthMe(data: AuthResponseType) {
 		return instance
 			.get(`profile/` + data.data.id)
-			.then(response => response.data)
+			.then(response => {
+					console.log(response)
+					return response.data
+				}
+			)
 	},
 }
 
@@ -66,43 +83,42 @@ export const authAPI = {
 
 //перенес методы из объекта api в объект usersAPI, profileAPI, usersAPI
 // export const api = {
-	// getUsers(currentPage: number, pageSize: number) {
-	// 	return instance
-	// 		// .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-	// 		.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
-	// 		.then(response=> {
-	// 			return response.data})
-	// }, перенес в объект usersAPI.getUsers
-	// getAuthMe() {
-	// 	//debugger
-	// 	return instance
-	// 		.get<AuthResponseType>(`auth/me`)
-	// 		.then(response=> {
-	// 			return response.data})
-	// },
-	// getMyProfileInAuthMe(data:AuthResponseType) {
-	// 	return instance
-	// 		.get(`profile/` + data.data.id)
-	// 		.then(response => response.data)
-	// },
-	// getProfile(userId:string) {
-	// 	return instance
-	// 		.get<UsersProfileResponseType>(`profile/` + userId)
-	// 		.then(response => response.data)
-	// },
-	// getUnfollow(id:number) {
-	// 	return  instance
-	// 		.delete<FollowResponseType>(`follow/${id}`)
-	// 		.then(response => response.data)
-	// },
+// getUsers(currentPage: number, pageSize: number) {
+// 	return instance
+// 		// .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+// 		.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+// 		.then(response=> {
+// 			return response.data})
+// }, перенес в объект usersAPI.getUsers
+// getAuthMe() {
+// 	//debugger
+// 	return instance
+// 		.get<AuthResponseType>(`auth/me`)
+// 		.then(response=> {
+// 			return response.data})
+// },
+// getMyProfileInAuthMe(data:AuthResponseType) {
+// 	return instance
+// 		.get(`profile/` + data.data.id)
+// 		.then(response => response.data)
+// },
+// getProfile(userId:string) {
+// 	return instance
+// 		.get<UsersProfileResponseType>(`profile/` + userId)
+// 		.then(response => response.data)
+// },
+// getUnfollow(id:number) {
+// 	return  instance
+// 		.delete<FollowResponseType>(`follow/${id}`)
+// 		.then(response => response.data)
+// },
 
-	// getFollow (id:number) {
-	// 	return instance
-	// 		.post<FollowResponseType>(`follow/${id}`)
-	// 		.then(response => response.data)
-	// }
+// getFollow (id:number) {
+// 	return instance
+// 		.post<FollowResponseType>(`follow/${id}`)
+// 		.then(response => response.data)
 // }
-
+// }
 
 
 // export const getUsers = (currentPage: number, pageSize: number) => {

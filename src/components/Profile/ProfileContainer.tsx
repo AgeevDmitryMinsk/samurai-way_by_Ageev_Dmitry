@@ -2,7 +2,7 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {getProfileThunkCreator} from "../../redux/profile-reducer";
+import {getProfileThunkCreator, getUserStatusThunkCreator} from "../../redux/profile-reducer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -17,6 +17,8 @@ class ProfileApiContainer extends React.Component<PropsType> {
 			userId = `2`
 		}
 		this.props.getProfileThunkCreator(userId)
+		this.props.getUserStatusThunkCreator(userId)
+		//debugger
 
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
@@ -70,15 +72,20 @@ export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
 
 export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
 
+export type ProfileStatusType = {status: string}
+
 type PathParamsType = { userId: string }
 export type mapStateToPropsType = {
 	profile: UsersProfileResponseType | null
+	status: ProfileStatusType | null
 	//isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
 	// setUserProfile: (profile: UsersProfileResponseType) => void
 	getProfileThunkCreator: (userId: string) => void
+	getUserStatusThunkCreator: (userId: string) => void
+
 }
 
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
@@ -86,6 +93,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		profile: state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
 		// при использовании withAuthRedirect
+		status: state.ProfilePage.status
 	}
 }
 
@@ -101,6 +109,6 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 
 export const ProfileContainer = compose<React.ComponentType>(withAuthRedirect,
 	withRouter, connect(mapStateToProps,
-		{getProfileThunkCreator},
+		{getProfileThunkCreator, getUserStatusThunkCreator },
 	))(ProfileApiContainer)
 

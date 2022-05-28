@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {ActionsTypes} from "./messages-reducer";
-import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {ProfileStatusType, UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
@@ -15,6 +15,7 @@ export type InitialStateProfilePageType = {
 	profile: UsersProfileResponseType | null
 	posts: PostDataType[]
 	newPostText: string
+	status: ProfileStatusType | null
 }
 
 
@@ -29,7 +30,8 @@ const initialState: InitialStateProfilePageType = {
 		{id: '3', message: "Where are you from?", likesCount: 9}
 	] as PostDataType[],
 	newPostText: "",
-	profile: null
+	profile: null,
+	status: null
 }
 
 
@@ -56,6 +58,10 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 			return {...state, profile: action.profile}
 		}
 
+		case "SET-USER-STATUS": {
+			return {...state, status: action.status}
+		}
+
 		default:
 			return state
 	}
@@ -73,6 +79,7 @@ export type ChangeNewTextActionType = ReturnType<typeof changeTextareaTitle>
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
+export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
 // export const addPostAC = (
 export const addPost = () => {
@@ -101,6 +108,14 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 	} as const
 }
 
+export const setUserStatus = (status: ProfileStatusType) => {
+	//debugger
+	return {
+		type: "SET-USER-STATUS",
+		status
+	} as const
+}
+
 //Thunk creator
 
 export const getProfileThunkCreator = (userId: string) => {
@@ -111,6 +126,16 @@ export const getProfileThunkCreator = (userId: string) => {
 				console.log(data)
 				//this.props.setUserProfile(response.data)
 				dispatch(setUserProfile(data))
+			})
+	}
+}
+
+export const getUserStatusThunkCreator = (userId: string) => {
+	return (dispatch: Dispatch<ActionsTypes>) => {
+		profileAPI.getProfileStatus(userId)
+			.then((data)=> {
+				console.log(data)
+				dispatch(setUserStatus(data))
 			})
 	}
 }

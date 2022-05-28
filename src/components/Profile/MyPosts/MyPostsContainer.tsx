@@ -106,7 +106,8 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		posts: state.ProfilePage.posts,
 		newPostText: state.ProfilePage.newPostText,
-		profile: state.ProfilePage.profile
+		profile: state.ProfilePage.profile,
+		status: state.ProfilePage.status
 	}
 }
 

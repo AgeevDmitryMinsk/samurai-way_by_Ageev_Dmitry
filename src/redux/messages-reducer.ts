@@ -3,7 +3,12 @@ import Dima_photo from "../photos/Dima.png"
 import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
-import {AddPostActionType, ChangeNewTextActionType, SetUserProfileActionType} from "./profile-reducer";
+import {
+	AddPostActionType,
+	ChangeNewTextActionType,
+	SetUserProfileActionType,
+	SetUserStatusActionType
+} from "./profile-reducer";
 import {
 	FollowActionType,
 	SetCurrentPageActionType,
@@ -35,7 +40,7 @@ export type ActionsTypes =
 	| setIsFetchingAuthType
 	| setAuthUserProfileType
 	| setIsFollowingInProgressType
-
+	| SetUserStatusActionType
 export type MessageType = {
 	message: string
 	id: string

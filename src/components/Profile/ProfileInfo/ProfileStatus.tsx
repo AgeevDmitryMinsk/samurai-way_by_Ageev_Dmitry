@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
+import {ProfileStatusType} from "../ProfileContainer";
 
-// type ProfileStatusProps = {
-// 	statusText: string
-// }
+type ProfileStatusProps = {
+	status: ProfileStatusType | null
+}
 
-export const ProfileStatus = () => {
+export const ProfileStatus = (props: ProfileStatusProps) => {
 	const [editmode, setEditMode] = useState<boolean>(false)
-	const [textForStatus, setTextForStatus] = useState<string>('test')
+	const [textForStatus, setTextForStatus] = useState<any>(props.status)
 
 	function onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
-		setTextForStatus(e.currentTarget.value)
+		if (e.currentTarget.value) {
+			setTextForStatus(e.currentTarget.value )
+		}
+
 	}
 
 	console.log(textForStatus)
