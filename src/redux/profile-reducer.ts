@@ -22,6 +22,7 @@ export type ProfileStatusResponseType = {
 	resultCode: number
 	messages: Array<string>
 	data: {}
+	fieldsErrors: Array<string>
 }
 
 const initialState: InitialStateProfilePageType = {
@@ -64,6 +65,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 		}
 
 		case "SET-USER-STATUS": {
+			debugger
 			return {...state, status: action.status}
 		}
 
@@ -115,7 +117,7 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 
 export const setUserStatus = (status: string//ProfileStatusType
  ) => {
-	//debugger
+	debugger
 	return {
 		type: "SET-USER-STATUS",
 		status
@@ -137,9 +139,11 @@ export const getProfileThunkCreator = (userId: string) => {
 }
 
 export const getUserStatusThunkCreator = (userId: string) => {
+
 	return (dispatch: Dispatch<ActionsTypes>) => {
-		profileAPI.getProfileStatus(userId)
+		profileAPI.getProfileStatus(+userId)
 			.then((data)=> {
+				debugger
 				console.log(data)
 				dispatch(setUserStatus(data))
 			})
@@ -152,6 +156,8 @@ export const updateProfileStatusThunkCreator = (status: string) => {
 			.then((data)=>{
 				console.log(data)
 				if (data.resultCode === 0 ) {
+					console.log(data)
+					console.log(status)
 					dispatch(setUserStatus(status))
 				}
 			})

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 type ProfileStatusProps = {
 	status: string //as ProfileStatusType // | null
@@ -8,6 +8,11 @@ type ProfileStatusProps = {
 export const ProfileStatus = (props: ProfileStatusProps) => {
 	const [editmode, setEditMode] = useState<boolean>(false)
 	const [textForStatus, setTextForStatus] = useState<string>(props.status)
+	useEffect(()=>{
+		setTextForStatus(props.status)
+	},[props.status])
+
+	//debugger
 
 	function onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
 		if (e.currentTarget.value) {
