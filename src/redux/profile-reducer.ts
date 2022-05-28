@@ -18,6 +18,11 @@ export type InitialStateProfilePageType = {
 	status: string//ProfileStatusType //| null
 }
 
+export type ProfileStatusResponseType = {
+	resultCode: number
+	messages: Array<string>
+	data: {}
+}
 
 const initialState: InitialStateProfilePageType = {
 	posts: [
@@ -137,6 +142,18 @@ export const getUserStatusThunkCreator = (userId: string) => {
 			.then((data)=> {
 				console.log(data)
 				dispatch(setUserStatus(data))
+			})
+	}
+}
+
+export const updateProfileStatusThunkCreator = (status: string) => {
+	return (dispatch: Dispatch<ActionsTypes>) => {
+		profileAPI.updateProfileStatus(status)
+			.then((data)=>{
+				console.log(data)
+				if (data.resultCode === 0 ) {
+					dispatch(setUserStatus(status))
+				}
 			})
 	}
 }

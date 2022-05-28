@@ -2,6 +2,7 @@ import axios from "axios";
 import {UsersResponseType} from "../redux/users-reducer";
 import {AuthResponseType, FollowResponseType} from "../redux/auth-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {ProfileStatusResponseType} from "../redux/profile-reducer";
 
 const instance = axios.create({
 	withCredentials: true,
@@ -45,7 +46,7 @@ export const profileAPI = {
 	},
 	updateProfileStatus(status: string) {
 		return instance
-			.put('/profile/status', {status: status})
+			.put<ProfileStatusResponseType>('/profile/status', {status: status})
 			.then(response => response.data)
 
 	}

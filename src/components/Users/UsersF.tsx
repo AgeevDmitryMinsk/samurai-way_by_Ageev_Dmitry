@@ -30,7 +30,7 @@ export const UsersF = (props: UsersPropsTypeF) => { // ??? какой тип с�
 
 
 	return (
-		<>{pageArray.map(el => el > 3800 ? (<span key={el}
+		<>{pageArray.map(el => el > 100 ? (<span key={el}
 												  className={props.currentPage === el ? styles.selectedPage: ''}
 												  onClick={() => props.onChangeCurrentPage(el)}
 												  style={{padding: 10, cursor: "pointer"}}>

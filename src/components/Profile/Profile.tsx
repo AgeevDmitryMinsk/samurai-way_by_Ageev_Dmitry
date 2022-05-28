@@ -18,6 +18,7 @@ import {UsersProfileResponseType} from "./ProfileContainer";
 type ProfileType = {
 	profile: UsersProfileResponseType | null
 	status: string//ProfileStatusType // | null
+	updateStatus:(status: string) => void
 }
 export const Profile = (props: ProfileType) => {
 
@@ -25,7 +26,7 @@ export const Profile = (props: ProfileType) => {
 		<div>
 			Main content
 
-			<ProfileInfo profile = {props.profile} status={props.status}/>
+			<ProfileInfo profile = {props.profile} status={props.status} updateStatus={props.updateStatus}/>
 			<MyPostsContainer/>
 			<>
 				{/*//PostData={props.PostData}*/}

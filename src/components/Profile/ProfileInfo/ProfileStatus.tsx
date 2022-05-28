@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 type ProfileStatusProps = {
 	status: string //as ProfileStatusType // | null
+	updateStatus:(status: string) => void
 }
 
 export const ProfileStatus = (props: ProfileStatusProps) => {
@@ -32,16 +33,17 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	function onBlurHandle() {
 		setEditMode(false)
 		console.log(`onBlurHandle`)
+		props.updateStatus(textForStatus)
 	}
 
 
 	return (
 		<div>
-			{!editmode && <h3 onClick={onClickHandle}>Мой статус: {textForStatus}</h3>}
+			{!editmode && <div onClick={onClickHandle} style={{color:"purple", cursor:"pointer"}}>Мой статус: {textForStatus}</div>}
 			{editmode && <div>{<input value={textForStatus}
 									  autoFocus={true} // добавляет курсор в конец строки input
 									  onChange={onChangeHandle}
-									  onKeyPress={onEnterKeyPress}
+									 // onKeyPress={onEnterKeyPress}
 									  onBlur={onBlurHandle}
 			/>} </div>}
 		</div>

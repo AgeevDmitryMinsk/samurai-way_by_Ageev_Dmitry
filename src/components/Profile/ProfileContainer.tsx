@@ -2,7 +2,11 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {getProfileThunkCreator, getUserStatusThunkCreator} from "../../redux/profile-reducer";
+import {
+	getProfileThunkCreator,
+	getUserStatusThunkCreator,
+	updateProfileStatusThunkCreator
+} from "../../redux/profile-reducer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -18,6 +22,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		}
 		this.props.getProfileThunkCreator(userId)
 		this.props.getUserStatusThunkCreator(userId)
+		this.props.updateProfileStatusThunkCreator(this.props.status)
 		//debugger
 
 		// axios
@@ -39,7 +44,9 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		// if (this.props.isAuth === false) return <Navigate to={"/login"}/> - <Navigate to=""/> для версии v6 react-router-dom
 
 		return (
-			<Profile {...this.props} profile={this.props.profile}
+			<Profile profile={this.props.profile}
+					 updateStatus={this.props.updateProfileStatusThunkCreator}
+					 status={this.props.status}
 				//isAuth={this.props.isAuth}
 			/>
 		);
@@ -85,6 +92,7 @@ type mapDispatchToPropsType = {
 	// setUserProfile: (profile: UsersProfileResponseType) => void
 	getProfileThunkCreator: (userId: string) => void
 	getUserStatusThunkCreator: (userId: string) => void
+	updateProfileStatusThunkCreator: (status: string) => void
 
 }
 
@@ -107,8 +115,9 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 // 	})(WithUrlDataContainerComponent))
 //withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
 
-export const ProfileContainer = compose<React.ComponentType>(withAuthRedirect,
+export const ProfileContainer = compose<React.ComponentType>(
+	//withAuthRedirect,
 	withRouter, connect(mapStateToProps,
-		{getProfileThunkCreator, getUserStatusThunkCreator },
+		{getProfileThunkCreator, getUserStatusThunkCreator, updateProfileStatusThunkCreator },
 	))(ProfileApiContainer)
 

@@ -8,6 +8,7 @@ import {ProfileStatus} from "./ProfileStatus";
 type ProfileInfoType = {
 	profile: UsersProfileResponseType | null
 	status: string//ProfileStatusType  // | null
+	updateStatus:(status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
@@ -23,7 +24,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
 			<div className={s.descriptionBlock}>
 				<img src={props.profile?.photos.small || ''} alt={'profile_photos_small'}
 					 style={{height: 50, width: 50}}/>
-				<ProfileStatus status={props.status}/>
+				<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
 				<h3>Меня зовут: {props.profile.fullName} </h3>
 				<h3>Обо мне: {props.profile.aboutMe} </h3>
 				<h3>Ищу работу: {props.profile.lookingForAJob ? "ДА" : "Нет"}  </h3>
