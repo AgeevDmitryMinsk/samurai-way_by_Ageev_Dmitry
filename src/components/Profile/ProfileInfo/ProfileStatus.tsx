@@ -37,7 +37,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 
 	return (
 		<div>
-			{!editmode && <div onClick={onClickHandle}>{textForStatus}</div>}
+			{!editmode && <h3 onClick={onClickHandle}>Мой статус: {textForStatus}</h3>}
 			{editmode && <div>{<input value={textForStatus}
 									  autoFocus={true} // добавляет курсор в конец строки input
 									  onChange={onChangeHandle}
