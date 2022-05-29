@@ -1,4 +1,4 @@
-import React, {ChangeEvent,} from 'react'
+import React from 'react'
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 // import {
@@ -9,6 +9,8 @@ import {Post} from './Post/Post'
 // } from "../../../redux/store";
 //import {followAC, unFollowAC} from "../../../redux/profile-reducer";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import {reduxForm} from "redux-form";
+import {MyPostForm} from "./MyPostForm/MyPostForm";
 
 
 // type MyPostPropsType = {
@@ -53,23 +55,29 @@ export function MyPosts(props: MyPostsPropsType) {
 		//setTitle(``)
 	}
 
-	function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
-		//debugger
-		console.log(e.currentTarget.value)
-		//setTitle(e.currentTarget.value)
-		props.changeTextareaTitle(e.currentTarget.value)
-		// props.dispatch(unFollowAC(props.newText))
-		//let newText2 = e.currentTarget.value
-		//props.dispatch(unFollowAC(newText2))
-		//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
-	}
+	// function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
+	// 	//debugger
+	// 	console.log(e.currentTarget.value)
+	// 	//setTitle(e.currentTarget.value)
+	// 	props.changeTextareaTitle(e.currentTarget.value)
+	// 	// props.dispatch(unFollowAC(props.newText))
+	// 	//let newText2 = e.currentTarget.value
+	// 	//props.dispatch(unFollowAC(newText2))
+	// 	//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
+	// }
 
 	// ]
 
-	function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-		if (e.key === "Enter") {
-			addPostHandler()
-		}
+	// function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+	// 	if (e.key === "Enter") {
+	// 		addPostHandler()
+	// 	}
+	// }
+
+	const onSubmitHandle = (formData: any) => {
+		console.log(`formData from MyPostReduxForm =` , formData)
+		props.changeTextareaTitle(formData.myTextAreaPost)
+		addPostHandler()
 	}
 
 	return (
@@ -80,15 +88,17 @@ export function MyPosts(props: MyPostsPropsType) {
 			<div>
 				{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
 				{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
-				<textarea onChange={newTextOnChangeHandler}
-						  onKeyPress={onKeyPressHandler}
-						  value={props.newPostText}
-						  style={{width: 250}}/>
-				{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
-				<div>
-					<button onClick={addPostHandler}>Add post</button>
-				</div>
+				<MyPostReduxForm onSubmit={onSubmitHandle} />
+				{/*<textarea onChange={newTextOnChangeHandler} - перенес в MyPostReduxForm*/}
+				{/*		  onKeyPress={onKeyPressHandler}*/}
+				{/*		  value={props.newPostText}*/}
+				{/*		  style={{width: 250}}/>*/}
+				{/*/!*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*!/*/}
+
+				{/*<div>*/}
+				{/*	<button onClick={addPostHandler}>Add post</button>*/}
+				{/*</div>*/}
 
 			</div>
 			<div className={s.posts}>
@@ -109,3 +119,5 @@ export function MyPosts(props: MyPostsPropsType) {
 		</>
 	)
 }
+
+const MyPostReduxForm = reduxForm({form: 'myPost'})(MyPostForm)
