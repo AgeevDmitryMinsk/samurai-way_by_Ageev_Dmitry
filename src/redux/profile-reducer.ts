@@ -124,24 +124,24 @@ export const setUserStatus = (status: string//ProfileStatusType
 	} as const
 }
 
-//Thunk creator
+//Thunk creators:
 
-export const getProfileThunkCreator = (userId: string) => {
+export const getProfileThunkCreator = (userId: number) => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		profileAPI.getProfile(userId)
 			// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 			.then((data) => {
-				console.log(data)
+				//console.log(data)//{aboutMe: 'я круто чувак 1001%', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'не ищу, а дурачусь', fullName: 'samurai dimych', …}
 				//this.props.setUserProfile(response.data)
 				dispatch(setUserProfile(data))
 			})
 	}
 }
 
-export const getUserStatusThunkCreator = (userId: string) => {
+export const getUserStatusThunkCreator = (userId: number) => {
 
 	return (dispatch: Dispatch<ActionsTypes>) => {
-		profileAPI.getProfileStatus(+userId)
+		profileAPI.getProfileStatus(userId)
 			.then((data)=> {
 				//debugger
 				//console.log(data) //статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
@@ -157,7 +157,7 @@ export const updateProfileStatusThunkCreator = (status: string) => {
 				console.log(data)
 				if (data.resultCode === 0 ) {
 					console.log(data)
-					console.log(status)
+					console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
 					dispatch(setUserStatus(status))
 				}
 			})

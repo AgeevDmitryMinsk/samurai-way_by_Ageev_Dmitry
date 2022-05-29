@@ -34,29 +34,25 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-	getProfile(userId: string) {
+	getProfile(userId: number) {
 		return instance
-			.get<UsersProfileResponseType>(`profile/` + userId)
+			.get<UsersProfileResponseType>(`profile/${userId}`)
 			.then(response => response.data)
 	},
-	// getProfileStatus(userId: string) {
-	// 	return instance
-	// 		.get<string>(`/profile/status/${userId}`)
-	// 		.then(response => {
-	// 			console.log(`getProfileStatus`, response.data)
-	// 			return response.data})
-	// },
 	getProfileStatus(userId: number) {
-		return instance.get<any, AxiosResponse<string>>(`profile/status/${userId}`)
+		return instance
+			.get<any, AxiosResponse<string>>(`profile/status/${userId}`)
 			.then(response => response.data)
 	},
 
-	updateProfileStatus(status: string) {
+	updateProfileStatus(status: string) { // обновить имеем право только свой статус! поэтому нет userId в параметрах
 		return instance
+			// при put-запросе после url необх передать data или body через запятую:
 			.put<ProfileStatusResponseType>('/profile/status', {status: status})
 			.then(response => {
 				console.log(`updateProfileStatus`, response.data)
-				return response.data})
+				return response.data
+			})
 
 	}
 }
@@ -74,24 +70,22 @@ export const authAPI = {
 	getMyProfileInAuthMe(data: AuthResponseType) {
 
 		return instance
-			.get(`profile/` + data.data.id)
+			.get(`profile/` + data.data.id) // лучше выносить из ${}, тогда идет типизация с помощью TS
 			.then(response => {
-				//debugger
+					//debugger
 					//console.log(response)
 					return response.data
 				}
 			)
 	},
-	getMyStatus (data: AuthResponseType) {
+	getMyStatus(data: AuthResponseType) {
 		return instance
-			.get(`profile/status/${+data.data.id}`)
+			.get<any, AxiosResponse<string>>(`profile/status/` + data.data.id) // лучше выносить из ${}, тогда идет типизация с помощью TS
 			.then(response => {
-					//debugger
+				//debugger
 				//	console.log(response)//{data: 'Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)', status: 200, statusText: '', headers: {…}, config: {…}, …}
-					return response.data
-				})
-			// .then(instance.get(`profile/status/${data.data.userId}`)
-			// 	.then(response => response.data))
+				return response.data
+			})
 	}
 }
 

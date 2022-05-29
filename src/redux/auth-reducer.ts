@@ -4,7 +4,6 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 
 
-
 //export type InitialAuthStatePageType = typeof initialState
 
 export type InitialAuthStatePageType = {
@@ -59,7 +58,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 				...state, profile: action.profile
 			}
 		}
-		case "SET-MY-STATUS-FOR-HEADER":{
+		case "SET-MY-STATUS-FOR-HEADER": {
 			return {
 				...state, myStatus: action.myStatus
 			}
@@ -98,7 +97,7 @@ export const setAuthUserProfile = (profile: UsersProfileResponseType) => {
 	} as const
 }
 
-export const setMyStatusForHeader = (myStatus : string) => {
+export const setMyStatusForHeader = (myStatus: string) => {
 	return {
 		type: "SET-MY-STATUS-FOR-HEADER",
 		myStatus
@@ -112,6 +111,7 @@ export const getAuthMeThunkCreator = () => {
 		dispatch(setIsFetchingAuth(true))
 		authAPI.getAuthMe()
 			.then((data) => {
+				//console.log(data)//{data: {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}, messages: Array(0), fieldsErrors: Array(0), resultCode: 0}
 				if (data.resultCode === 0) { // если "resultCode":1, то  message: "You are not authorized"
 					// если  resultCode === 0, то пользователь залогинен, т.е. у него есть в куках: id, login, email
 					//console.log(data.resultCode) //0
@@ -123,12 +123,12 @@ export const getAuthMeThunkCreator = () => {
 					authAPI.getMyProfileInAuthMe(data)
 						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 						.then((data) => {
-						//	console.log(data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+							//console.log(data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
 							dispatch(setAuthUserProfile(data))
 						})
 					authAPI.getMyStatus(data)
-						.then((data)=>{
-							//console.log(120, data)
+						.then((data) => {
+							//console.log(120, data) // 'Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!'
 							dispatch(setMyStatusForHeader(data))
 						})
 

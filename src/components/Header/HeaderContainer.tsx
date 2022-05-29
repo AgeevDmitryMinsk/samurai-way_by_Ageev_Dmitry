@@ -43,7 +43,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 		// // console.log(myId)
 	}
 
-	componentDidUpdate(prevProps: Readonly<AuthPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+	componentDidUpdate(prevProps: Readonly<AuthPropsType>, prevState: Readonly<{}>, snapshot?: any) { // PureComponent
 		// console.log(`this.props.status =`, this.props.status)
 		// console.log(`prevProps.status=` , prevProps.status)
 		// console.log(`this.props.myStatus =`, this.props.myStatus)

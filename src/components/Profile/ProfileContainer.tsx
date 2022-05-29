@@ -23,8 +23,11 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		}
 		this.props.getProfileThunkCreator(userId)
 		this.props.getUserStatusThunkCreator(userId)
-		//this.props.updateProfileStatusThunkCreator(this.props.status)
-		//debugger
+
+		// здесь НЕЛЬЗЯ вызывать updateProfileStatusThunkCreator, только в ProfileStatus.tsc через пропсы:
+		// иначе status будет '' из initialState в profile-reducer.ts
+		//this.props.updateProfileStatusThunkCreator(this.props.status) //
+
 
 		// axios
 		// 	.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
@@ -70,7 +73,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 
 		return (
 			<Profile profile={this.props.profile}
-					 updateStatus={this.props.updateProfileStatusThunkCreator}
+					 updateProfileStatusThunkCreator={this.props.updateProfileStatusThunkCreator}
 					 status={this.props.status}
 				//isAuth={this.props.isAuth}
 					 data={this.props.data}
