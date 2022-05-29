@@ -12,13 +12,14 @@ type HeaderType ={
 	isAuth: boolean
 	profile: UsersProfileResponseType
 	myStatus: string
+	status: string
 }
 export const Header = (props: HeaderType) => {
 	const [textForMyStatus, setTextForMyStatus] = useState<string>(props.myStatus)
 
 	useEffect(()=>{  // для переотрисовки, если обновились пропсы !!!!
-		setTextForMyStatus(props.myStatus)
-	},[props.myStatus])
+		setTextForMyStatus(textForMyStatus)
+	},[textForMyStatus])
 
 	//console.log(props.data)// {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
 	//console.log(props.profile.photos?.large)
@@ -34,6 +35,8 @@ export const Header = (props: HeaderType) => {
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}
 						<>Мой статус:</>
 						<div>{props.myStatus}</div>
+						<>Cтатус2:</>
+						<div>{props.status}</div>
 					</>
 					: <NavLink to={`/login/`}>
 					LOGIN

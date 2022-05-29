@@ -5,13 +5,15 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
 import {UsersProfileResponseType} from "../Profile/ProfileContainer";
+import {updateProfileStatusThunkCreator} from "../../redux/profile-reducer";
 
 
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
 	componentDidMount() {
+		console.log(`this.props.status =`, this.props.status)
+		console.log(`this.props.myStatus =`, this.props.myStatus)
 		this.props.getAuthMeThunkCreator()
-
 		// this.props.setIsFetchingAuth(true)
 		// // axios
 		// // 	.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
@@ -41,6 +43,17 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 		// // console.log(myId)
 	}
 
+	componentDidUpdate(prevProps: Readonly<AuthPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+		console.log(`this.props.status =`, this.props.status)
+		console.log(`prevProps.status=` , prevProps.status)
+		console.log(`this.props.myStatus =`, this.props.myStatus)
+		console.log(`prevProps.myStatus = `, prevProps.myStatus)
+		//this.props.updateProfileStatusThunkCreator(this.props.status)
+		// if (this.props.status !== prevProps.status)  this.componentDidMount()
+		if (this.props.status !== prevProps.status)  this.props.getAuthMeThunkCreator()
+
+	}
+
 	render() {
 		//console.log(this.props.data)//{} //{id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
 		//console.log(this.props.profile) // {} // {aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
@@ -54,6 +67,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 						  isAuth={this.props.isAuth}
 						  profile={this.props.profile}
 						  myStatus={this.props.myStatus}
+						  status={this.props.status}
 				/>
 			}
 			</>
@@ -62,13 +76,15 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 	}
 }
 
-type mapStateToPropsType = InitialAuthStatePageType & {profile: UsersProfileResponseType}
+type mapStateToPropsType = InitialAuthStatePageType	& {profile: UsersProfileResponseType}
+	& {status: string}
 
 type mapDispatchToPropsType = {
 	// setAuthUserData: (data: AuthDataType) => void
 	// setIsFetchingAuth: (isFetchingAuth: boolean) => void
 	// setAuthUserProfile: (profile: UsersProfileResponseType) => void
 	getAuthMeThunkCreator: ()=>void
+	updateProfileStatusThunkCreator: (status: string)=> void
 }
 
 export type AuthPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -79,7 +95,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 		isAuth: state.auth.isAuth,
 		isFetchingAuth: state.auth.isFetchingAuth,
 		profile: state.auth.profile,
-		myStatus: state.auth.myStatus
+		myStatus: state.auth.myStatus,
+		status: state.ProfilePage.status,
 	}
 
 }
@@ -88,5 +105,6 @@ export const HeaderContainer = connect(mapStateToProps,
 		// setAuthUserData, //перенес логику вызова из HeaderContainer в Thunk getAuthMeThunkCreator
 		// setIsFetchingAuth, // аналогично
 		// setAuthUserProfile,
-		getAuthMeThunkCreator
+		getAuthMeThunkCreator,
+		updateProfileStatusThunkCreator
 	})(HeaderApiContainer);
