@@ -16,7 +16,7 @@ type ProfileInfoType = {
 
 const ProfileInfo = (props: ProfileInfoType) => {
 	if (!props.profile) {
-		return <h1>LOADING PROFILE....</h1>
+		return <h1>PROFILE LOADING PROFILE....</h1>
 		// return <Preloader/>
 	} else return (
 		<div className={s.content}>

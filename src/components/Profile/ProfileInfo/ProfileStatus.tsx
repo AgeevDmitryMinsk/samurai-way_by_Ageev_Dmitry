@@ -15,6 +15,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	const [textForStatus, setTextForStatus] = useState<string>(props.status)
 
 	useEffect(() => {  // для переотрисовки, если обновились пропсы !!!!
+		console.log("useEffect")
 		setTextForStatus(props.status)
 	}, [props.status])
 
