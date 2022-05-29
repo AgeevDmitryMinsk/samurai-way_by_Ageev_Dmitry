@@ -13,6 +13,7 @@ type HeaderType ={
 	profile: UsersProfileResponseType
 	myStatus: string
 	status: string
+	userProfile: UsersProfileResponseType | null
 }
 export const Header = (props: HeaderType) => {
 	const [textForMyStatus, setTextForMyStatus] = useState<string>(props.myStatus)
@@ -35,7 +36,7 @@ export const Header = (props: HeaderType) => {
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}
 						<>Мой статус:</>
 						<div>{props.myStatus}</div>
-						<>Cтатус2:</>
+						<>Cтатус для: {props.userProfile?.fullName}</>
 						<div>{props.status}</div>
 					</>
 					: <NavLink to={`/login/`}>

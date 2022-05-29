@@ -68,6 +68,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 						  profile={this.props.profile}
 						  myStatus={this.props.myStatus}
 						  status={this.props.status}
+						  userProfile={this.props.userProfile}
 				/>
 			}
 			</>
@@ -77,7 +78,8 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 }
 
 type mapStateToPropsType = InitialAuthStatePageType	& {profile: UsersProfileResponseType}
-	& {status: string}
+	& {status: string} &
+	{userProfile: UsersProfileResponseType | null}
 
 type mapDispatchToPropsType = {
 	// setAuthUserData: (data: AuthDataType) => void
@@ -97,6 +99,7 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 		profile: state.auth.profile,
 		myStatus: state.auth.myStatus,
 		status: state.ProfilePage.status,
+		userProfile: state.ProfilePage.profile
 	}
 
 }
