@@ -1,16 +1,21 @@
 import React from 'react';
+import {Field, InjectedFormProps} from "redux-form";
 
-export const LoginForm = () => {
+
+export const LoginForm = (props: InjectedFormProps) => {
+
+	const {handleSubmit,form,clearSubmit,dirty,touch} = props // можно сделать деструктуризацию
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<div>
-				<input placeholder={"Login"}/>
+				{/*<input placeholder={"Login"}/> - БЫЛО input, ЗАМЕНИЛИ НА Field */}
+				<Field placeholder={"Login"} name={'login'} component={'input'}/>
 			</div>
 			<div>
-				<input placeholder={"Password"}/>
+				<Field placeholder={"Password"}  name={'password'} component={'input'}/>
 			</div>
 			<div>
-				<input type={"checkbox"}/> remember me
+				<Field type={"checkbox"} name={'rememberMe'} component={'input'}/> remember me
 			</div>
 			<div>
 				<button>Log In</button>
@@ -19,4 +24,6 @@ export const LoginForm = () => {
 		</form>
 	);
 };
+
+
 
