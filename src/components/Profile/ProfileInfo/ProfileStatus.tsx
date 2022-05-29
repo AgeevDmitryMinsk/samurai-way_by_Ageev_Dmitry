@@ -19,26 +19,27 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	},[props.status])
 
 	//console.log(`props.isAuth =`,  props.isAuth)// говорит о том залогинился ли ты на сайте?
-	console.log(`props.data.id =`, props.data.id)
-	console.log(`props.profile?.userId =`, props.profile?.userId)
+	//console.log(`props.data.id =`, props.data.id) // props.data.id = 22100
+	//console.log(`props.profile?.userId =`, props.profile?.userId) // props.profile?.userId = 22100 если в Users выбрал себя, или
+																  //props.profile?.userId = 2 если в Users выбрал Димыча
 
 	function onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
 
-			setTextForStatus(e.currentTarget.value )
+			setTextForStatus(e.currentTarget.value ) // Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
 
 	}
 
-	console.log(textForStatus)
+	//console.log(textForStatus) // статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
 
 	function onClickHandle() {
-		if (+props.data.id == props.profile?.userId) {
-			console.log(`before`, editmode) // false
+		if (+props.data.id === props.profile?.userId) {
+	//		console.log(`before`, editmode) // false
 			setEditMode(true)
-			console.log(`after`, editmode) // и здесь false, т.к. useState асинхронный !
+	//		console.log(`after`, editmode) // и здесь false, т.к. useState асинхронный !
 		} else {alert(`нельзя редактировать не свой статус!`)}
 
 	}
-	console.log(`out`, editmode) // и здесь true, т.к. useState асинхронный !
+	//console.log(`out`, editmode) // и здесь true, т.к. useState асинхронный !
 
 	function onEnterKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === "Enter") {

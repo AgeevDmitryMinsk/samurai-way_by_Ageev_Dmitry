@@ -77,7 +77,7 @@ export const authAPI = {
 			.get(`profile/` + data.data.id)
 			.then(response => {
 				//debugger
-					console.log(response)
+					//console.log(response)
 					return response.data
 				}
 			)
@@ -87,7 +87,7 @@ export const authAPI = {
 			.get(`profile/status/${+data.data.id}`)
 			.then(response => {
 					//debugger
-					console.log(response)
+				//	console.log(response)//{data: 'Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)', status: 200, statusText: '', headers: {…}, config: {…}, …}
 					return response.data
 				})
 			// .then(instance.get(`profile/status/${data.data.userId}`)

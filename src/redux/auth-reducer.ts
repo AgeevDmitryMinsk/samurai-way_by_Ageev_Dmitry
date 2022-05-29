@@ -123,12 +123,12 @@ export const getAuthMeThunkCreator = () => {
 					authAPI.getMyProfileInAuthMe(data)
 						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
 						.then((data) => {
-							console.log(data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
+						//	console.log(data)//{aboutMe: 'Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'JS, React, Angular', fullName: 'AgeevDmitryMinsk', …}
 							dispatch(setAuthUserProfile(data))
 						})
 					authAPI.getMyStatus(data)
 						.then((data)=>{
-							console.log(120, data)
+							//console.log(120, data)
 							dispatch(setMyStatusForHeader(data))
 						})
 

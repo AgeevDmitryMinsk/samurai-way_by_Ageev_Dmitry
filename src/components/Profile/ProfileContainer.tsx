@@ -8,7 +8,6 @@ import {
 	updateProfileStatusThunkCreator
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {AuthDataType} from "../../redux/auth-reducer";
 
@@ -17,7 +16,8 @@ class ProfileApiContainer extends React.Component<PropsType> {
 	componentDidMount() {
 
 		let userId = this.props.match.params.userId
-		console.log(this.props.match.params.userId)
+		//console.log(this.props.match.params.userId) // 2 если http://localhost:3000/profile/2
+		    										  // 22100 если http://localhost:3000/profile/22100
 		if (userId === undefined) {
 			userId = `2`
 		}

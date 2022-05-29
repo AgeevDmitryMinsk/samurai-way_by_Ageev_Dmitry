@@ -11,8 +11,8 @@ import {updateProfileStatusThunkCreator} from "../../redux/profile-reducer";
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
 	componentDidMount() {
-		console.log(`this.props.status =`, this.props.status)
-		console.log(`this.props.myStatus =`, this.props.myStatus)
+		// console.log(`this.props.status =`, this.props.status)
+		// console.log(`this.props.myStatus =`, this.props.myStatus)
 		this.props.getAuthMeThunkCreator()
 		// this.props.setIsFetchingAuth(true)
 		// // axios
@@ -44,11 +44,11 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 	}
 
 	componentDidUpdate(prevProps: Readonly<AuthPropsType>, prevState: Readonly<{}>, snapshot?: any) {
-		console.log(`this.props.status =`, this.props.status)
-		console.log(`prevProps.status=` , prevProps.status)
-		console.log(`this.props.myStatus =`, this.props.myStatus)
-		console.log(`prevProps.myStatus = `, prevProps.myStatus)
-		//this.props.updateProfileStatusThunkCreator(this.props.status)
+		// console.log(`this.props.status =`, this.props.status)
+		// console.log(`prevProps.status=` , prevProps.status)
+		// console.log(`this.props.myStatus =`, this.props.myStatus)
+		// console.log(`prevProps.myStatus = `, prevProps.myStatus)
+
 		// if (this.props.status !== prevProps.status)  this.componentDidMount()
 		if (this.props.status !== prevProps.status)  this.props.getAuthMeThunkCreator()
 

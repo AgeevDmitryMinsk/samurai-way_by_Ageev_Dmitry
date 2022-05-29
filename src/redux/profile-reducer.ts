@@ -144,7 +144,7 @@ export const getUserStatusThunkCreator = (userId: string) => {
 		profileAPI.getProfileStatus(+userId)
 			.then((data)=> {
 				//debugger
-				console.log(data)
+				//console.log(data) //статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
 				dispatch(setUserStatus(data))
 			})
 	}
