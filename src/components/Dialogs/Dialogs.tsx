@@ -77,6 +77,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 		console.log(`formData from DialogsReduxForm =` , formData)
 		props.newMessageOnChange(formData.newMessage)
 		addMessageHandler()
+		//props.addMessage(formData)
 
 	}
 	return (

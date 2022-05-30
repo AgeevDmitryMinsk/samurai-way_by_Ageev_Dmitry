@@ -86,24 +86,28 @@ export function MyPosts(props: MyPostsPropsType) {
 				My posts:
 			</div>
 			<div>
-				{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
-				{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
+				<>{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
+					{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}</>
 
 				<MyPostReduxForm onSubmit={onSubmitHandle} />
-				{/*<textarea onChange={newTextOnChangeHandler} - перенес в MyPostReduxForm*/}
-				{/*		  onKeyPress={onKeyPressHandler}*/}
-				{/*		  value={props.newPostText}*/}
-				{/*		  style={{width: 250}}/>*/}
-				{/*/!*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*!/*/}
+				<>
+					{/*<textarea onChange={newTextOnChangeHandler} - перенес в MyPostReduxForm*/}
+					{/*		  onKeyPress={onKeyPressHandler}*/}
+					{/*		  value={props.newPostText}*/}
+					{/*		  style={{width: 250}}/>*/}
+					{/*/!*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*!/*/}
 
-				{/*<div>*/}
-				{/*	<button onClick={addPostHandler}>Add post</button>*/}
-				{/*</div>*/}
+					{/*<div>*/}
+					{/*	<button onClick={addPostHandler}>Add post</button>*/}
+					{/*</div>*/}
+				</>
+				
 
 			</div>
 			<div className={s.posts}>
-				{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
-				{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}
+
+				<>{/*{[<Post message={"It's my first post"} likesCount={10} id={'1'} key={1}/>,*/}
+					{/*	<Post message={'Hi, how are you?'} likesCount={11} id={'2'} key={2}/>]}*/}</>
 
 				{props.posts.map(el => <Post message={el.message}
 											 likesCount={el.likesCount}
@@ -111,9 +115,9 @@ export function MyPosts(props: MyPostsPropsType) {
 											 key={el.id}
 				/>)}
 
-				{/*<Post message={PostData[0].message}*/}
-				{/*	  likesCount={PostData[0].likesCount}*/}
-				{/*	  id={PostData[0].id} />*/}
+				<>{/*<Post message={PostData[0].message}*/}
+					{/*	  likesCount={PostData[0].likesCount}*/}
+					{/*	  id={PostData[0].id} />*/}</>
 
 			</div>
 		</>

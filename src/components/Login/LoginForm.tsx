@@ -3,10 +3,10 @@ import {Field, InjectedFormProps} from "redux-form";
 
 
 export const LoginForm = (props: InjectedFormProps) => {
-
-	const {handleSubmit,form,clearSubmit,dirty,touch} = props // можно сделать деструктуризацию
+//debugger
+	//const {handleSubmit,form,clearSubmit,dirty,touch} = props // можно сделать деструктуризацию
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={props.handleSubmit}>
 			<div>
 				{/*<input placeholder={"Login"}/> - БЫЛО input, ЗАМЕНИЛИ НА Field */}
 				<Field placeholder={"Login"} name={'login'} component={'input'}/>
