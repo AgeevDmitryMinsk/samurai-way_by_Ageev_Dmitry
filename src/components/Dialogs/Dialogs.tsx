@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -12,7 +12,8 @@ import {Message} from "./Message/Message";
 // } from "../../redux/store";
 // import {addMessageAC, changeNewMessageTextAC} from "../../redux/messages-reducer";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
+import {reduxForm} from "redux-form";
+import {DialogsForm} from "./DialogsForm/DialogsForm";
 //import {ReduxStoreType} from "../../redux/redux-store";
 // type DialogsPropsType = {
 // 	//DialogsData: DialogItemType[]
@@ -45,13 +46,13 @@ export const Dialogs = (props: DialogsPropsType) => {
 	// 	{id:3, message: 'Good Afternoon 3'},
 	//
 	// ]
-	function newMessageOnChangeHandler(e: ChangeEvent<HTMLInputElement>) {
-		//console.log(e.currentTarget.value)
-		let newMessage = e.currentTarget.value
-		//props.store.dispatch(changeNewMessageTextAC(newMessage))
-		props.newMessageOnChange(newMessage)
-		//console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
-	}
+	// function newMessageOnChangeHandler(e: ChangeEvent<HTMLInputElement>) {
+	// 	//console.log(e.currentTarget.value)
+	// 	let newMessage = e.currentTarget.value
+	// 	//props.store.dispatch(changeNewMessageTextAC(newMessage))
+	// 	props.newMessageOnChange(newMessage)
+	// 	//console.log('props.MessagesData.newMessageText заносим в state = ', props.MessagesData.newMessageText)
+	// }
 
 	function addMessageHandler() {
 		//props.addMessage(props.DialogsPage.newMessageText)
@@ -60,17 +61,24 @@ export const Dialogs = (props: DialogsPropsType) => {
 		//console.log(`props.MessagesData.newMessageText из state до обнуления = `, props.MessagesData.messages.at(-1)?.message)
 	}
 
-	function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === `Enter`) {
-			addMessageHandler()
-		}
-	}
+	// function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
+	// 	if (e.key === `Enter`) {
+	// 		addMessageHandler()
+	// 	}
+	// }
 
 	//console.log("props.isAuth = ", props.isAuth) // true если withCredentials: true, и залогинен на https://social-network.samuraijs.com/api/1.0/
 	//if (props.isAuth === false) return <Redirect to={"/login"}/>
 	//isAuth: state.auth.isAuth - не нужно пробрасывать в Dialogs
 	// при использовании withAuthRedirect
 	//console.log(props.dialogs)
+
+	const onSubmitHandleDialogs = (formData: any) => {
+		console.log(`formData from DialogsReduxForm =` , formData)
+		props.newMessageOnChange(formData.newMessage)
+		addMessageHandler()
+
+	}
 	return (
 
 		<div className={s.dialogs}>
@@ -100,13 +108,19 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<input onChange={newMessageOnChangeHandler}
-					   onKeyPress={ onKeyPressInputHandle}
-					   value={props.newMessageText} />
-				<button onClick={addMessageHandler}>send message</button>
+				<DialogsReduxForm onSubmit={onSubmitHandleDialogs}/>
+				<>
+					{/*<input onChange={newMessageOnChangeHandler}*/}
+					{/*	   onKeyPress={ onKeyPressInputHandle}*/}
+					{/*	   value={props.newMessageText} />*/}
+					{/*<button onClick={addMessageHandler}>send message</button>*/}
+				</>
+
+
 			</div>
 
 		</div>
 	)
 }
 
+const DialogsReduxForm = reduxForm({form:'dialogs'})(DialogsForm)
