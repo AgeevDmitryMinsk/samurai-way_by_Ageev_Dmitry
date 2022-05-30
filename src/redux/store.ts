@@ -3,10 +3,12 @@ import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 //import {v1} from "uuid";
-import {AddPostActionType, ChangeNewTextActionType,
+import {
+	AddPostActionType, ChangeNewTextActionType,
 //	profileReducer
 } from "./profile-reducer";
-import {addMessageType, changeNewMessageTextType,
+import {
+	addMessageType,
 //	messagesReducer
 } from "./messages-reducer";
 //import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
@@ -60,7 +62,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
 	messages: MessageType[]
 	dialogs: DialogItemType[]
-	newMessageText: string
+	//newMessageText: string
 }
 
 // export let state: RootStateType = {
@@ -154,7 +156,7 @@ export const store: StoreType = {
 				{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
 				{id: '4', name: 'Vera3', photo: Vera_photo},
 			],
-			newMessageText: ""
+			//newMessageText: ""
 		}
 	},
 	_onChange() {
@@ -221,14 +223,11 @@ export const store: StoreType = {
 }
 
 
-
-
 //export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
-type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
-
-
-
-
+type ActionsTypes = AddPostActionType
+	| ChangeNewTextActionType
+	//| changeNewMessageTextType
+	| addMessageType
 
 
 // @ts-ignore

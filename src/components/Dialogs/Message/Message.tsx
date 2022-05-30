@@ -5,6 +5,7 @@ import {MessageType} from "../../../redux/messages-reducer";
 
 
 export const Message = (props: MessageType) => {
+	//debugger
 	return (
 		<div className={s.message}>{props.message}</div>
 	)
