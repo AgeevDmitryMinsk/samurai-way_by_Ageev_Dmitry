@@ -68,7 +68,7 @@ import React from "react";
 
 type mapStateToPropsType = InitialStateType //& {isAuth:boolean}
 type mapDispatchToPropsType = {
-	newMessageOnChange: (newMessage: string) => void
+	//newMessageOnChange: (newMessage: string) => void
 	addMessage: (newMessage2: string) => void
 }
 

@@ -65,7 +65,7 @@ const initialState = {
 		{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
 		{id: '4', name: 'Vera3', photo: Vera_photo},
 	] as DialogItemType[],
-	//newMessageText: ""
+	//newMessageText: "" - не нужно при использовании reduxForm
 }
 
 
@@ -84,6 +84,7 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
 //export type addMessageType = ReturnType<typeof addMessageAC>
 export type addMessageType = ReturnType<typeof addMessage>
 
+// не нужно при использовании reduxForm:
 // export const newMessageOnChange = (newMessage: string) => {
 // 	return {
 // 		type: "UPDATE-NEW-MESSAGE-TEXT",
