@@ -2,7 +2,8 @@ import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
 
 export const MyPostForm = (props: InjectedFormProps) => {
-	const {handleSubmit} = props
+	const {handleSubmit } = props
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<Field component={'textarea'}

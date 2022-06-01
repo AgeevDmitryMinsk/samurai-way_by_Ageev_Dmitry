@@ -48,20 +48,9 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 				// id: v1(), message: state.newPostText, likesCount: 0
 				id: v1(), message: action.newPostMessage, likesCount: 0
 			}
-			// this._state.ProfilePage.posts.push(newPost)
-			//state.posts.push(newPost)
-			// this._state.ProfilePage.newPostText = ``
-			//state.newPostText = ``
-			//onChange()
-			// return {...state, posts: [...state.posts, newPost], newPostText: ''}
 			return {...state, posts: [...state.posts, newPost] }
 		}
-		// case "UPDATE-NEW-POST-TEXT": {
-		// 	console.log(`UPDATE-NEW-POST-TEXT`)
-		// 	state.newPostText = action.newText
-		// 	console.log(state)
-		// 	return {...state, newPostText: action.newText}
-		// }
+
 		case "SET-USER-PROFILE": {
 			return {...state, profile: action.profile}
 		}
@@ -76,15 +65,8 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 	}
 }
 
-// export type AddPostActionType = ReturnType<typeof addPostAC>
-export type AddPostActionType = ReturnType<typeof addPost>
 
-// type ChangeNewTextActionType = {
-// 	type: "CHANGE-NEW-TEXT"
-// 	newText: string
-// }
-// export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
-//export type ChangeNewTextActionType = ReturnType<typeof changeTextareaTitle>
+export type AddPostActionType = ReturnType<typeof addPost>
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
@@ -99,15 +81,6 @@ export const addPost = (newPostMessage:string) => {
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
-
-// export const changeTextareaTitle = (newText: string) => {
-// // export const changeNewTextAC = (newText: string) => {
-// 	return {
-// 		type: "UPDATE-NEW-POST-TEXT",
-// 		newText: newText
-// 		//newText
-// 	} as const
-// }
 
 // ACTION CREATOR:
 export const setUserProfile = (profile: UsersProfileResponseType) => {

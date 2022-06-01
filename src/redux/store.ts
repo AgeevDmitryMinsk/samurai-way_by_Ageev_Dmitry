@@ -187,6 +187,7 @@ export const store: StoreType = {
 	// },
 
 	dispatch(action) {
+		console.log(action)
 		//this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
 		//this._state.DialogsPage = messagesReducer(this._state.DialogsPage, action)
 		//this._onChange()

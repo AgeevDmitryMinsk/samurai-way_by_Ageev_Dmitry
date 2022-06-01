@@ -78,10 +78,7 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
 			return state
 	}
 }
-//export type changeNewMessageTextType = ReturnType<typeof newMessageOnChangeAC>
-//export type changeNewMessageTextType = ReturnType<typeof newMessageOnChange>
 
-//export type addMessageType = ReturnType<typeof addMessageAC>
 export type addMessageType = ReturnType<typeof addMessage>
 
 // не нужно при использовании reduxForm:
