@@ -2,16 +2,8 @@ import Dima_photo from "../photos/Dima.png"
 import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
-//import {v1} from "uuid";
-import {AddPostActionType, ChangeNewTextActionType,
-//	profileReducer
-} from "./profile-reducer";
-import {addMessageType, changeNewMessageTextType,
-//	messagesReducer
-} from "./messages-reducer";
-//import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
-//import {rerenderEntireTree} from "../rerenderEntireTree";
-
+import {AddPostActionType} from "./profile-reducer";
+import {AddMessageType} from "./messages-reducer";
 
 type MessageType = {
 	message: string
@@ -22,28 +14,11 @@ type DialogItemType = {
 	name: string
 	photo: string
 }
-// export const DialogsData: DialogItemType[] = [
-// 	{id: 1, name: 'Dima3', photo: Dima_photo},
-// 	{id: 2, name: 'Natasha3', photo: Natasha_photo},
-// 	{id: 3, name: 'Ksenia3', photo: Ksenia_photo},
-// 	{id: 4, name: 'Vera3', photo: Vera_photo},
-// ]
-// export const MessagesData: MessageType[] = [
-// 	{id: '1', message: 'HI !!!3'},
-// 	{id: '2', message: 'Hello 3'},
-// 	{id: '3', message: 'Good Afternoon 3'},
-//
-// ]
 type PostDataType = {
 	id: string
 	message: string
 	likesCount: number
 }
-// export let PostData: PostDataType[] = [
-// 	{id: '1', message: "It's my 3nd post", likesCount: 5},
-// 	{id: '2', message: "Hi, how are you now?", likesCount: 7},
-// 	{id: '3', message: "Where are you from?", likesCount: 9},
-// ]
 
 export type RootStateType = {
 	ProfilePage: ProfilePageType
@@ -184,6 +159,7 @@ export const store: StoreType = {
 	// },
 
 	dispatch(action) {
+		console.log(action)
 		//this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
 		//this._state.DialogsPage = messagesReducer(this._state.DialogsPage, action)
 		//this._onChange()
@@ -224,7 +200,7 @@ export const store: StoreType = {
 
 
 //export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
-type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
+type ActionsTypes = AddPostActionType | AddMessageType
 
 
 

@@ -1,22 +1,35 @@
+import {Field, Form, Formik } from 'formik';
 import React from 'react';
+
 
 export const LoginForm = () => {
 	return (
-		<form>
-			<div>
-				<input placeholder={"Login"}/>
-			</div>
-			<div>
-				<input placeholder={"Password"}/>
-			</div>
-			<div>
-				<input type={"checkbox"}/> remember me
-			</div>
-			<div>
-				<button>Log In</button>
-			</div>
+		<>
+			<Formik initialValues={{Login:'', Password:'', rememberMe:''}}
+					onSubmit={(values) => {
+						console.log(values)
+					}}>
 
-		</form>
+				<Form>
+					<div>
+						<Field name={'Login'} type={'input'} placeholder={"Login"}/>
+					</div>
+					<div>
+						<Field name={'Password'} type={'input'} placeholder={"Password"}/>
+					</div>
+					<div>
+						<Field type={"checkbox"} name={'rememberMe'}/> remember me
+					</div>
+					<div>
+						<button type="submit">Log In</button>
+					</div>
+
+				</Form>
+
+			</Formik>
+
+		</>
+
 	);
 };
 

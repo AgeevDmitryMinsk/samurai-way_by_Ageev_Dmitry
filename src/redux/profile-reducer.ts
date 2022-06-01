@@ -44,21 +44,8 @@ const initialState: InitialStateProfilePageType = {
 export const profileReducer = (state = initialState, action: ActionsTypes): InitialStateProfilePageType => {
 	switch (action.type) {
 		case "ADD-POST": {
-			const newPost: PostDataType = {
-				id: v1(), message: state.newPostText, likesCount: 0
-			}
-			// this._state.ProfilePage.posts.push(newPost)
-			//state.posts.push(newPost)
-			// this._state.ProfilePage.newPostText = ``
-			//state.newPostText = ``
-			//onChange()
-			return {...state, posts: [...state.posts, newPost], newPostText: ''}
-		}
-		case "UPDATE-NEW-POST-TEXT": {
-			console.log(`UPDATE-NEW-POST-TEXT`)
-			state.newPostText = action.newText
-			console.log(state)
-			return {...state, newPostText: action.newText}
+			const newPost: PostDataType = {id: v1(), message: action.newPostMessage, likesCount: 0}
+			return {...state, posts: [...state.posts, newPost]}
 		}
 		case "SET-USER-PROFILE": {
 			return {...state, profile: action.profile}
@@ -74,38 +61,21 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 	}
 }
 
-// export type AddPostActionType = ReturnType<typeof addPostAC>
 export type AddPostActionType = ReturnType<typeof addPost>
-
-// type ChangeNewTextActionType = {
-// 	type: "CHANGE-NEW-TEXT"
-// 	newText: string
-// }
-// export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
-export type ChangeNewTextActionType = ReturnType<typeof changeTextareaTitle>
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
 // export const addPostAC = (
-export const addPost = () => {
+export const addPost = (newPostMessage: string) => {
 	return {
 		type: "ADD-POST",
 		//newPostMessage: newPostMessage
-		//newPostMessage
+		newPostMessage
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
-
-export const changeTextareaTitle = (newText: string) => {
-// export const changeNewTextAC = (newText: string) => {
-	return {
-		type: "UPDATE-NEW-POST-TEXT",
-		newText: newText
-		//newText
-	} as const
-}
 
 // ACTION CREATOR:
 export const setUserProfile = (profile: UsersProfileResponseType) => {
@@ -116,7 +86,7 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 }
 
 export const setUserStatus = (status: string//ProfileStatusType
- ) => {
+) => {
 	//debugger
 	return {
 		type: "SET-USER-STATUS",
@@ -142,7 +112,7 @@ export const getUserStatusThunkCreator = (userId: number) => {
 
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		profileAPI.getProfileStatus(userId)
-			.then((data)=> {
+			.then((data) => {
 				//debugger
 				//console.log(data) //статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
 				dispatch(setUserStatus(data))
@@ -153,9 +123,9 @@ export const getUserStatusThunkCreator = (userId: number) => {
 export const updateProfileStatusThunkCreator = (status: string) => {
 	return (dispatch: Dispatch<ActionsTypes>) => {
 		profileAPI.updateProfileStatus(status)
-			.then((data)=>{
+			.then((data) => {
 				console.log(data)
-				if (data.resultCode === 0 ) {
+				if (data.resultCode === 0) {
 					console.log(data)
 					console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
 					dispatch(setUserStatus(status))
