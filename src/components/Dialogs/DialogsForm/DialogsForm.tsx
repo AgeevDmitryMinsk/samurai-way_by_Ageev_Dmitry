@@ -1,8 +1,8 @@
 import React from 'react';
-import { Field } from 'react-final-form'
+import {AnyObject, Field} from 'react-final-form'
 
 type DialogsFormType = {
-	handleSubmit: any
+	handleSubmit:  (event?: (Partial<Pick<React.SyntheticEvent<Element, Event>, "preventDefault" | "stopPropagation">> | undefined)) => (Promise<AnyObject | undefined> | undefined)
 }
 
 export const DialogsForm = (props: DialogsFormType) => {

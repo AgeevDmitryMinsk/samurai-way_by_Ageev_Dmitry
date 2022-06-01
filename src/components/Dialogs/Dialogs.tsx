@@ -104,7 +104,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 			</div>
 			Please, enter new message:
 			<div>
-				<Form  onSubmit={onSubmitHandleDialogs} render={({handleSubmit})=> (<DialogsForm handleSubmit={handleSubmit}/>) }/>
+				<Form  onSubmit={onSubmitHandleDialogs} render={({handleSubmit})=>
+					(<DialogsForm handleSubmit={handleSubmit}/>) }/>
 
 
 
