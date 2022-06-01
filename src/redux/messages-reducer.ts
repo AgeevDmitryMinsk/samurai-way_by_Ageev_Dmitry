@@ -27,7 +27,7 @@ import {setAuthUserProfileType, setIsFetchingAuthType, setMyStatusForHeaderType,
 export type ActionsTypes =
 	AddPostActionType
 	| ChangeNewTextActionType
-	| changeNewMessageTextType
+	// | changeNewMessageTextType
 	| addMessageType
 	| FollowActionType
 	| UnFollowActionType
@@ -65,48 +65,47 @@ const initialState = {
 		{id: '3', name: 'Ksenia3', photo: Ksenia_photo},
 		{id: '4', name: 'Vera3', photo: Vera_photo},
 	] as DialogItemType[],
-	newMessageText: ""
+	//newMessageText: ""
 }
 
 
 export const messagesReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 	switch (action.type) {
-		case "UPDATE-NEW-MESSAGE-TEXT": {
-			//state.newMessageText = action.newMessage
-			return {...state, newMessageText: action.newMessage}
-		}
+		// case "UPDATE-NEW-MESSAGE-TEXT": {
+		// 	//state.newMessageText = action.newMessage
+		// 	return {...state, newMessageText: action.newMessage}
+		// }
 		case "ADD-MESSAGE": {
 			const newMessage: MessageType = {
-				id: v1(), message: state.newMessageText
+				 id: v1(), message: action.newMessageAdd
 			}
 			//state.messages.push(newMessage)
 			// let stateCopy = {...state}
 			// stateCopy.newMessageText = ``
-			return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+			// return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+			return {...state, messages: [...state.messages, newMessage] }
 		}
 		default:
 			return state
 	}
 }
 //export type changeNewMessageTextType = ReturnType<typeof newMessageOnChangeAC>
-export type changeNewMessageTextType = ReturnType<typeof newMessageOnChange>
+// export type changeNewMessageTextType = ReturnType<typeof newMessageOnChange>
 
 //export type addMessageType = ReturnType<typeof addMessageAC>
 export type addMessageType = ReturnType<typeof addMessage>
 
-export const newMessageOnChange = (newMessage: string) => {
-	return {
-		type: "UPDATE-NEW-MESSAGE-TEXT",
-		newMessage
-	} as const
-}
+//export const newMessageOnChange = (newMessage: string) => {
+// 	return {
+// 		type: "UPDATE-NEW-MESSAGE-TEXT",
+// 		newMessage
+// 	} as const
+// }
 
 //export const addMessageAC = (
-export const addMessage = (
-//	newMessageAdd: string
-) => {
+export const addMessage = (	newMessageAdd: string) => {
 	return {
 		type: "ADD-MESSAGE",
-		//newMessageAdd
+		newMessageAdd
 	} as const
 }

@@ -61,15 +61,15 @@
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
 import {AppRootStateType} from "../../redux/redux-store";
-import {addMessage, InitialStateType, newMessageOnChange} from "../../redux/messages-reducer";
+import {addMessage, InitialStateType } from "../../redux/messages-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import React from "react";
 
 type mapStateToPropsType = InitialStateType //& {isAuth:boolean}
 type mapDispatchToPropsType = {
-	newMessageOnChange: (newMessage: string) => void
-	addMessage: () => void
+	//newMessageOnChange: (newMessage: string) => void
+	addMessage: (newMessage: string) => void
 }
 
 
@@ -79,7 +79,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
 		dialogs: state.DialogsPage.dialogs,
 		messages: state.DialogsPage.messages,
-		newMessageText: state.DialogsPage.newMessageText,
+		//newMessageText: state.DialogsPage.newMessageText,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в Dialogs
 		// при использовании withAuthRedirect
 	}
@@ -111,6 +111,5 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 // )
 export const DialogsContainer = compose<React.ComponentType>(withAuthRedirect,connect(mapStateToProps,
 	{
-		newMessageOnChange,
 		addMessage		}
 ))(Dialogs)

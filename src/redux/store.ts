@@ -6,7 +6,7 @@ import Ksenia_photo from "../photos/Ksenia.png"
 import {AddPostActionType, ChangeNewTextActionType,
 //	profileReducer
 } from "./profile-reducer";
-import {addMessageType, changeNewMessageTextType,
+import {addMessageType,
 //	messagesReducer
 } from "./messages-reducer";
 //import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
@@ -201,8 +201,7 @@ export const store: StoreType = {
 		// } else if (action.type === "UPDATE-NEW-POST-TEXT") {
 		// 	//console.log(this)
 		// 	this._state.ProfilePage.newPostText = action.newText
-		// 	this._onChange()
-		// } else
+		// 	this._onChange()		// } else
 		// 	if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
 		// 	console.log("UPDATE-NEW-MESSAGE-TEXT")
 		// 	this._state.DialogsPage.newMessageText = action.newMessage
@@ -224,7 +223,7 @@ export const store: StoreType = {
 
 
 //export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
-type ActionsTypes = AddPostActionType | ChangeNewTextActionType | changeNewMessageTextType | addMessageType
+type ActionsTypes = AddPostActionType | ChangeNewTextActionType |  addMessageType
 
 
 
