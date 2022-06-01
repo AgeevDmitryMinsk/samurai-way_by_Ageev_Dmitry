@@ -70,7 +70,7 @@ export function MyPosts(props: MyPostsPropsType) {
 
 	const onSubmitHandle = (formData: any) => {
 		debugger
-		console.log(`formData from MyPostReduxForm =` , formData.myTextAreaPost)
+		console.log(`formData from MyPostReduxForm =`, formData.myTextAreaPost)
 		props.addPost(formData.myTextAreaPost)
 		//props.changeTextareaTitle(formData.myTextAreaPost)
 		//addPostHandler()
@@ -85,7 +85,7 @@ export function MyPosts(props: MyPostsPropsType) {
 				<>{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
 					{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}</>
 
-				<MyPostReduxForm onSubmit={onSubmitHandle} />
+				<MyPostReduxForm onSubmit={onSubmitHandle}/>
 				<>
 					{/*<textarea onChange={newTextOnChangeHandler} - перенес в MyPostReduxForm*/}
 					{/*		  onKeyPress={onKeyPressHandler}*/}
@@ -97,7 +97,7 @@ export function MyPosts(props: MyPostsPropsType) {
 					{/*	<button onClick={addPostHandler}>Add post</button>*/}
 					{/*</div>*/}
 				</>
-				
+
 
 			</div>
 			<div className={s.posts}>
@@ -120,4 +120,4 @@ export function MyPosts(props: MyPostsPropsType) {
 	)
 }
 
-const MyPostReduxForm = reduxForm({form: 'myPost'})(MyPostForm)
+const MyPostReduxForm = reduxForm({form: 'myPost2022'})(MyPostForm)
