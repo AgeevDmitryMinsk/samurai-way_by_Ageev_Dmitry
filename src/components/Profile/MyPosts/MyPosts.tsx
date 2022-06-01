@@ -22,7 +22,7 @@ import {MyPostForm} from "./MyPostForm/MyPostForm";
 // }
 export function MyPosts(props: MyPostsPropsType) {
 	console.log(25, props.posts)
-	console.log(26, props.newPostText)
+	//console.log(26, props.newPostText)
 
 
 //вынесем данные из компоненты в BLL в index.tsx
@@ -31,30 +31,26 @@ export function MyPosts(props: MyPostsPropsType) {
 	// 	{id:2, 	message: "Hi, how are you now?", likesCount:7},
 	// 	{id:3, 	message: "Where are you from?", likesCount:9},
 	//
-
-
 	//let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
-
-	function addPostHandler() {
-		console.log(39)
-		props.addPost()
-		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-		//props.dispatch(followAC(props.newText))
-		// console.log(`props.newText из state = `, props.newText)
-		// console.log(`обновился список постов`, props.PostData.posts)
-		// console.log(props.newText)
-		// //props.newText = ``
-		// props.addPost(``)
-		// console.log(`createRef`, newTitleRef.current?.value)
-		// if (newTitleRef.current) {
-		// 	props.addPost(newTitleRef.current.value)
-		// }
-		//console.log(`useState`, title)
-		//props.addPost(title)
-		//setTitle(``)
-	}
-
+	// function addPostHandler() {
+	// 	console.log(39)
+	// 	// props.addPost()
+	// 	//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
+	// 	//props.dispatch(followAC(props.newText))
+	// 	// console.log(`props.newText из state = `, props.newText)
+	// 	// console.log(`обновился список постов`, props.PostData.posts)
+	// 	// console.log(props.newText)
+	// 	// //props.newText = ``
+	// 	// props.addPost(``)
+	// 	// console.log(`createRef`, newTitleRef.current?.value)
+	// 	// if (newTitleRef.current) {
+	// 	// 	props.addPost(newTitleRef.current.value)
+	// 	// }
+	// 	//console.log(`useState`, title)
+	// 	//props.addPost(title)
+	// 	//setTitle(``)
+	// }
 	// function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
 	// 	//debugger
 	// 	console.log(e.currentTarget.value)
@@ -65,9 +61,7 @@ export function MyPosts(props: MyPostsPropsType) {
 	// 	//props.dispatch(unFollowAC(newText2))
 	// 	//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
 	// }
-
 	// ]
-
 	// function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
 	// 	if (e.key === "Enter") {
 	// 		addPostHandler()
@@ -75,9 +69,11 @@ export function MyPosts(props: MyPostsPropsType) {
 	// }
 
 	const onSubmitHandle = (formData: any) => {
-		console.log(`formData from MyPostReduxForm =` , formData)
-		props.changeTextareaTitle(formData.myTextAreaPost)
-		addPostHandler()
+		debugger
+		console.log(`formData from MyPostReduxForm =` , formData.myTextAreaPost)
+		props.addPost(formData.myTextAreaPost)
+		//props.changeTextareaTitle(formData.myTextAreaPost)
+		//addPostHandler()
 	}
 
 	return (
