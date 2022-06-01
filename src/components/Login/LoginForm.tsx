@@ -1,19 +1,25 @@
 import React from 'react';
+import {AnyObject, Field} from "react-final-form";
 
-export const LoginForm = () => {
+type LoginFormProps ={
+	handleSubmit:  (event?: (Partial<Pick<React.SyntheticEvent<Element, Event>, "preventDefault" | "stopPropagation">> | undefined)) => (Promise<AnyObject | undefined> | undefined)
+}
+
+export const LoginForm = (props:LoginFormProps ) => {
+	const {handleSubmit} = props
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<div>
-				<input placeholder={"Login"}/>
+				<Field placeholder={"Login"} name={'LoginFinal'} component={"input"}/>
 			</div>
 			<div>
-				<input placeholder={"Password"}/>
+				<Field placeholder={"Password"} name={"Password"} component={"input"}/>
 			</div>
 			<div>
-				<input type={"checkbox"}/> remember me
+				<Field type={"checkbox"} name={'rememberMe'} component={"input"}/> remember me
 			</div>
 			<div>
-				<button>Log In</button>
+				<button type={"submit"}>Log In</button>
 			</div>
 
 		</form>
