@@ -30,9 +30,10 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Please, enter new message:
 			<div>
 				<Formik initialValues={{newDialogMessage: ''}}
-						onSubmit={(values) => {
+						onSubmit={(values, {resetForm}) => {
 							console.log(values.newDialogMessage)
 							props.addMessage(values.newDialogMessage)
+							resetForm()
 						}
 						}>
 

@@ -6,9 +6,11 @@ export const LoginForm = () => {
 	return (
 		<>
 			<Formik initialValues={{Login:'', Password:'', rememberMe:''}}
-					onSubmit={(values) => {
+					onSubmit={(values, {resetForm}) => {
 						console.log(values)
-					}}>
+						resetForm()
+					}
+			}>
 
 				<Form>
 					<div>

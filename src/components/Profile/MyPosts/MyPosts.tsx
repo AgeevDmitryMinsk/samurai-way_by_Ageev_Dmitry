@@ -15,9 +15,10 @@ export function MyPosts(props: MyPostsPropsType) {
 			</div>
 			<div>
 				<Formik initialValues={{myPostText: ''}}
-						onSubmit={(values) => {
+						onSubmit={(values, {resetForm}) => {
 							console.log(values)
 							props.addPost(values.myPostText)
+							resetForm()
 						}}>
 
 					<Form>
