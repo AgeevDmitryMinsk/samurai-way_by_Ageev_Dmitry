@@ -3,7 +3,7 @@ import Natasha_photo from "../photos/Natasha.png"
 import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 //import {v1} from "uuid";
-import {AddPostActionType, ChangeNewTextActionType,
+import {AddPostActionType,
 //	profileReducer
 } from "./profile-reducer";
 import {addMessageType,
@@ -223,7 +223,7 @@ export const store: StoreType = {
 
 
 //export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
-type ActionsTypes = AddPostActionType | ChangeNewTextActionType |  addMessageType
+type ActionsTypes = AddPostActionType |  addMessageType
 
 
 

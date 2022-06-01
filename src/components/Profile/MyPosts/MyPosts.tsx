@@ -9,6 +9,7 @@ import {Post} from './Post/Post'
 // } from "../../../redux/store";
 //import {followAC, unFollowAC} from "../../../redux/profile-reducer";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import { Form, Field } from 'react-final-form'
 
 
 // type MyPostPropsType = {
@@ -20,7 +21,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 // }
 export function MyPosts(props: MyPostsPropsType) {
 	console.log(25, props.posts)
-	console.log(26, props.newPostText)
+	//console.log(26, props.newPostText)
 
 
 //вынесем данные из компоненты в BLL в index.tsx
@@ -34,42 +35,49 @@ export function MyPosts(props: MyPostsPropsType) {
 	//let newTitleRef = React.createRef<HTMLTextAreaElement>() //1й способ с помощью createRef
 	//const [title, setTitle] = useState<string>(``) //2й способ с помощью useState
 
-	function addPostHandler() {
-		console.log(39)
-		props.addPost()
-		//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
-		//props.dispatch(followAC(props.newText))
-		// console.log(`props.newText из state = `, props.newText)
-		// console.log(`обновился список постов`, props.PostData.posts)
-		// console.log(props.newText)
-		// //props.newText = ``
-		// props.addPost(``)
-		// console.log(`createRef`, newTitleRef.current?.value)
-		// if (newTitleRef.current) {
-		// 	props.addPost(newTitleRef.current.value)
-		// }
-		//console.log(`useState`, title)
-		//props.addPost(title)
-		//setTitle(``)
-	}
+	// function addPostHandler() {
+	// 	console.log(39)
+	// 	props.addPost()
+	// 	//props.dispatch({type:"ADD-POST", newPostMessage: props.newText})
+	// 	//props.dispatch(followAC(props.newText))
+	// 	// console.log(`props.newText из state = `, props.newText)
+	// 	// console.log(`обновился список постов`, props.PostData.posts)
+	// 	// console.log(props.newText)
+	// 	// //props.newText = ``
+	// 	// props.addPost(``)
+	// 	// console.log(`createRef`, newTitleRef.current?.value)
+	// 	// if (newTitleRef.current) {
+	// 	// 	props.addPost(newTitleRef.current.value)
+	// 	// }
+	// 	//console.log(`useState`, title)
+	// 	//props.addPost(title)
+	// 	//setTitle(``)
+	// }
 
-	function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
-		//debugger
-		console.log(e.currentTarget.value)
-		//setTitle(e.currentTarget.value)
-		props.changeTextareaTitle(e.currentTarget.value)
-		// props.dispatch(unFollowAC(props.newText))
-		//let newText2 = e.currentTarget.value
-		//props.dispatch(unFollowAC(newText2))
-		//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
-	}
+	// function newTextOnChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
+	// 	//debugger
+	// 	console.log(e.currentTarget.value)
+	// 	//setTitle(e.currentTarget.value)
+	// 	props.changeTextareaTitle(e.currentTarget.value)
+	// 	// props.dispatch(unFollowAC(props.newText))
+	// 	//let newText2 = e.currentTarget.value
+	// 	//props.dispatch(unFollowAC(newText2))
+	// 	//console.log('props.PostData.newPostText заносим в state = ', props.PostData.newPostText)
+	// }
 
 	// ]
 
-	function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-		if (e.key === "Enter") {
-			addPostHandler()
-		}
+	// function onKeyPressHandler(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+	// 	if (e.key === "Enter") {
+	// 		addPostHandler()
+	// 	}
+	// }
+
+
+	function onHandleSubmit(formData: {inputPost:string}) {
+		//debugger
+		console.log(formData)
+		props.addPost(formData.inputPost)
 	}
 
 	return (
@@ -78,17 +86,18 @@ export function MyPosts(props: MyPostsPropsType) {
 				My posts:
 			</div>
 			<div>
-				{/*<textarea ref={newTitleRef} onChange={newTextOnChangeHandler} style={{width: 250}}/>*/}
-				{/*<textarea onChange={newTextOnChangeHandler} value={props.ProfilePage.newPostText} style={{width: 250}}/>*/}
-				<textarea onChange={newTextOnChangeHandler}
-						  onKeyPress={onKeyPressHandler}
-						  value={props.newPostText}
-						  style={{width: 250}}/>
-				{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
 
-				<div>
-					<button onClick={addPostHandler}>Add post</button>
-				</div>
+				<Form onSubmit={onHandleSubmit} render={({handleSubmit}) =>
+				<form onSubmit={handleSubmit}>
+					<Field name={`inputPost`}
+						   component={`input`}
+						   placeholder={'please enter your post'}
+						   style={{width: 250}}/>
+
+					<button type="submit">Add post</button>
+				</form>
+				}/>
+
 
 			</div>
 			<div className={s.posts}>

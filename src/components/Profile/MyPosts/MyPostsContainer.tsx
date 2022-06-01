@@ -87,7 +87,7 @@ import {
 	addPost,
 	// addPostAC,
 	// changeNewTextAC,
-	changeTextareaTitle,
+	//changeTextareaTitle,
 	InitialStateProfilePageType
 } from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
@@ -96,8 +96,8 @@ import {MyPosts} from "./MyPosts";
 type mapStateToPropsType = InitialStateProfilePageType
 
 type mapDispatchToPropsType = {
-	addPost: () => void
-	changeTextareaTitle: (newText: string) => void
+	addPost: (newText: string) => void
+	//changeTextareaTitle: (newText: string) => void
 }
 
 export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -128,7 +128,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 export const MyPostsContainer = connect(mapStateToProps,
 	{
 		addPost,
-		changeTextareaTitle
+		//changeTextareaTitle
 	}
 
 	)(MyPosts)

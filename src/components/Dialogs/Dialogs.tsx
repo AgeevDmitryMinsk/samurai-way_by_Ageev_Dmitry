@@ -108,7 +108,6 @@ export const Dialogs = (props: DialogsPropsType) => {
 					(<DialogsForm handleSubmit={handleSubmit}/>) }/>
 
 
-
 				<>{/*<><input onChange={newMessageOnChangeHandler}*/}
 					{/*	   onKeyPress={ onKeyPressInputHandle}*/}
 					{/*	   value={props.newMessageText} />*/}

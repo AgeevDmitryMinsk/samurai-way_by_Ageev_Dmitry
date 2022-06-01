@@ -45,21 +45,21 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 	switch (action.type) {
 		case "ADD-POST": {
 			const newPost: PostDataType = {
-				id: v1(), message: state.newPostText, likesCount: 0
+				id: v1(), message: action.newPostMessage, likesCount: 0
 			}
 			// this._state.ProfilePage.posts.push(newPost)
 			//state.posts.push(newPost)
 			// this._state.ProfilePage.newPostText = ``
 			//state.newPostText = ``
 			//onChange()
-			return {...state, posts: [...state.posts, newPost], newPostText: ''}
+			return {...state, posts: [...state.posts, newPost]}
 		}
-		case "UPDATE-NEW-POST-TEXT": {
-			console.log(`UPDATE-NEW-POST-TEXT`)
-			state.newPostText = action.newText
-			console.log(state)
-			return {...state, newPostText: action.newText}
-		}
+		// case "UPDATE-NEW-POST-TEXT": {
+		// 	console.log(`UPDATE-NEW-POST-TEXT`)
+		// 	state.newPostText = action.newText
+		// 	console.log(state)
+		// 	return {...state, newPostText: action.newText}
+		// }
 		case "SET-USER-PROFILE": {
 			return {...state, profile: action.profile}
 		}
@@ -82,30 +82,30 @@ export type AddPostActionType = ReturnType<typeof addPost>
 // 	newText: string
 // }
 // export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
-export type ChangeNewTextActionType = ReturnType<typeof changeTextareaTitle>
+//export type ChangeNewTextActionType = ReturnType<typeof changeTextareaTitle>
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
 // export const addPostAC = (
-export const addPost = () => {
+export const addPost = (newPostMessage: string) => {
 	return {
 		type: "ADD-POST",
 		//newPostMessage: newPostMessage
-		//newPostMessage
+		newPostMessage
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
 
-export const changeTextareaTitle = (newText: string) => {
-// export const changeNewTextAC = (newText: string) => {
-	return {
-		type: "UPDATE-NEW-POST-TEXT",
-		newText: newText
-		//newText
-	} as const
-}
+// export const changeTextareaTitle = (newText: string) => {
+// // export const changeNewTextAC = (newText: string) => {
+// 	return {
+// 		type: "UPDATE-NEW-POST-TEXT",
+// 		newText: newText
+// 		//newText
+// 	} as const
+// }
 
 // ACTION CREATOR:
 export const setUserProfile = (profile: UsersProfileResponseType) => {

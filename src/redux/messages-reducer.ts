@@ -5,7 +5,7 @@ import Vera_photo from "../photos/Vera.png"
 import Ksenia_photo from "../photos/Ksenia.png"
 import {
 	AddPostActionType,
-	ChangeNewTextActionType,
+	//ChangeNewTextActionType,
 	SetUserProfileActionType,
 	SetUserStatusActionType
 } from "./profile-reducer";
@@ -26,7 +26,7 @@ import {setAuthUserProfileType, setIsFetchingAuthType, setMyStatusForHeaderType,
 
 export type ActionsTypes =
 	AddPostActionType
-	| ChangeNewTextActionType
+	//| ChangeNewTextActionType
 	// | changeNewMessageTextType
 	| addMessageType
 	| FollowActionType
