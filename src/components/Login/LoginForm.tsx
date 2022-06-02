@@ -19,6 +19,9 @@ export const LoginForm = () => {
 					onSubmit={(values, {resetForm}) => {
 						console.log(values)
 						resetForm() // сбрасываю значения полей после нажатия кнопки
+						// values.Login=`` - аналог сброса значений полей
+						// values.Password=``
+						// values.rememberMe=false
 					}}
 					validationSchema={validationSchema}
 			>
@@ -36,7 +39,8 @@ export const LoginForm = () => {
 						<div>
 							<label htmlFor={`Login`}> Login</label> <br/>
 
-							<Field className={`${s.input}` + ` `+ (touched.Login && errors.Login ? `${s.error2}` : ``)}
+							{/*добавил пробел внутри косых скобок после `${s.input} `*/}
+							<Field className={`${s.input} ` +  (touched.Login && errors.Login ? `${s.error2}` : ``)}
 
 								   name={'Login'}
 								   placeholder={"Login"}
@@ -51,7 +55,7 @@ export const LoginForm = () => {
 							<label htmlFor={`Login`}> Password</label> <br/>
 							<Field name={'Password'}
 								   placeholder={"Password"}
-								   className={`${s.input}` + ` `+ (touched.Password && errors.Password ? `${s.error2}` : ``)}
+								   className={`${s.input} ` + (touched.Password && errors.Password ? `${s.error2}` : ``)}
 								   onChange={handleChange}
 								   onBlur={handleBlur}
 								   value={values.Password}
@@ -69,10 +73,11 @@ export const LoginForm = () => {
 								   value={values.rememberMe.toString()}/> remember me
 						</div>
 						<div>
+
+							{/*при использовании Form и Field можно не писать onClick={()=>handleSubmit()} */}
 							<button type="submit"
 									disabled={!isValid || !dirty}
-								// onClick={handleSubmit}
-
+									onClick={()=>handleSubmit()}
 							>Log In
 							</button>
 
