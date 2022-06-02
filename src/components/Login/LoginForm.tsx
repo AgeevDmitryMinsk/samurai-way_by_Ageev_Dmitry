@@ -1,6 +1,10 @@
 import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
+import {InputArea} from "../common/InputArea";
+import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
 
+const maxLength25 = maxLengthCreator(25) // необх вынести за пределы функц LoginForm
+												// иначе будет зацикливание функции LoginForm
 
 export const LoginForm = (props: InjectedFormProps) => {
 	//debugger
@@ -9,13 +13,22 @@ export const LoginForm = (props: InjectedFormProps) => {
 		<form onSubmit={props.handleSubmit}>
 			<div>
 				{/*<input placeholder={"Login"}/> - БЫЛО input, ЗАМЕНИЛИ НА Field */}
-				<Field placeholder={"Login"} name={'login'} component={'input'}/>
+				{/*<Field placeholder={"Login"} name={'login'} component={'input'}/>*/}
+				{/*component={'input'} ЗАМЕНИЛИ НА component={InputArea}*/}
+				<Field placeholder={"Login"}
+					   name={'login'}
+					   component={InputArea}
+					   validate={[requiredField, maxLength25]}
+				/>
 			</div>
 			<div>
-				<Field placeholder={"Password"}  name={'password'} component={'input'}/>
+				<Field placeholder={"Password"}
+					   name={'password'}
+					   component={InputArea}
+					   validate={[requiredField, maxLength25]}/>
 			</div>
 			<div>
-				<Field type={"checkbox"} name={'rememberMe'} component={'input'}/> remember me
+				<Field type={"checkbox"} name={'rememberMe'} component={InputArea}/> remember me
 			</div>
 			<div>
 				<button>Log In</button>
