@@ -4,6 +4,7 @@ import header_logo from '../../photos/1633774787_19-kartinkin-net-p-monro-pop-ar
 import s from './Header.module.css'
 import {AuthDataType} from "../../redux/auth-reducer";
 import {UsersProfileResponseType} from "../Profile/ProfileContainer";
+import Dima_logo from '../../photos/Dima_logo.png'
 
 
 
@@ -26,13 +27,14 @@ export const Header = (props: HeaderType) => {
 	//console.log(props.profile.photos?.large)
 	return (
 		<header className={s.header}>
-			<img src={header_logo} alt="photo_logo"/>
+			<img src={Dima_logo} className={s.photo_logo} alt="photo_logo"/>
 
 			<div className={s.login_block}>
 				{props.isAuth
 					? <>
 						login: {props.data.login}
-						<img src={props.profile.photos?.large || ``} alt="myPhoto"/>
+						<img src={props.profile.photos?.large || ``}
+							 className={s.photo_logo2} alt="myPhoto"/>
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}
 						<>Мой статус:</>
 						<div>{props.myStatus}</div>

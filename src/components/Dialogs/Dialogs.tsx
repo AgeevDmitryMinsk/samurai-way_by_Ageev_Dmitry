@@ -5,6 +5,7 @@ import {Message} from "./Message/Message";
 
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, Form, Formik} from 'formik';
+import * as yup from "yup";
 
 export const Dialogs = (props: DialogsPropsType) => {
 
@@ -14,6 +15,11 @@ export const Dialogs = (props: DialogsPropsType) => {
 	//isAuth: state.auth.isAuth - не нужно пробрасывать в Dialogs
 	// при использовании withAuthRedirect
 	//console.log(props.dialogs)
+
+	const validationSchema = yup.object().shape({
+		newDialogMessage: yup.string().typeError(`должно быть строкой`).required(`поле обязательно`),
+	})
+
 	return (
 
 		<div className={s.dialogs}>
@@ -30,19 +36,44 @@ export const Dialogs = (props: DialogsPropsType) => {
 			Please, enter new message:
 			<div>
 				<Formik initialValues={{newDialogMessage: ''}}
+						validateOnBlur
+						validationSchema={validationSchema}
 						onSubmit={(values, {resetForm}) => {
 							console.log(values.newDialogMessage)
 							props.addMessage(values.newDialogMessage)
 							resetForm()
 						}
 						}>
+					{({
+						  values,
+						  errors,
+						  touched,
+						  handleChange,
+						  handleBlur,
+						  isValid,
+						  handleSubmit,
+						  dirty
+					  }) => (<Form>
+						<Field name={'newDialogMessage'}
+							   type={'input'}
+							   className={`${s.input}` + ` ` + (touched.newDialogMessage && errors.newDialogMessage ? `${s.error2}` : ``)}
+							   placeholder={"your message "}
+							   onChange={handleChange}
+							   onBlur={handleBlur}
+							   value={values.newDialogMessage}
+						/>
+						{touched.newDialogMessage && errors.newDialogMessage &&
+                            <span className={`${s.error}`}> {errors.newDialogMessage}</span>}
+						{!errors.newDialogMessage && <span>    &nbsp; </span>}
+						{!touched.newDialogMessage && <span>    &nbsp; </span>}
+						<div>
+							<button type="submit"
+									disabled={!isValid || !dirty}>
+								send message
+							</button>
+						</div>
 
-					<Form>
-						<Field name={'newDialogMessage'} type={'input'} />
-						<button type="submit">
-							send message
-						</button>
-					</Form>
+					</Form>)}
 
 				</Formik>
 			</div>

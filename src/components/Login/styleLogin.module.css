@@ -1,9 +1,3 @@
-.dialogs {
-display: grid;
-    grid-template-columns: 3fr 3fr 10fr;
-    grid-gap: 10px;
-}
-
 .form {
     display: block;
     /*font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;*/
@@ -39,26 +33,3 @@ display: grid;
     border: red 3px solid;
     border-radius: 5px;
 }
-
-
-
-/*.dialogItems{*/
-/*padding: 10px;*/
-/*}*/
-
-/*.dialog {*/
-/*    color: azure;*/
-/*    text-decoration: none;*/
-/*}*/
-
-/*.dialog.active {*/
-/*    color: darkorchid;*/
-/*}*/
-
-/*.messages {*/
-/*padding: 10px;*/
-/*}*/
-
-/*.message{*/
-
-/*}*/

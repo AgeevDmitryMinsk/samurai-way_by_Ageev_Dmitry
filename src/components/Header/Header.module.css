@@ -5,14 +5,31 @@
     /*height: 100px;*/
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
-.header img {
-    width: 70px;
-    height: 70px;
+/*.header img {*/
+/*    width: 80px;*/
+/*    height: 80px;*/
+/*    border-radius: 10px;*/
+/*    padding: 5px;*/
+/*}*/
+
+.photo_logo{
+    max-height: 150px;
+    width: 100px;
+    border-radius: 25px;
+    padding: 15px;
+    object-fit: cover;
+}
+.photo_logo2{
+    width: 75px;
+    height: 75px;
     border-radius: 10px;
     padding: 5px;
 }
+
+
 
 .login_block {
     color: white;
@@ -21,6 +38,7 @@
     /*justify-content: center;*/
     justify-content: flex-start;
     align-items: end;
+    padding: 10px;
 }
 
 .login_block a {

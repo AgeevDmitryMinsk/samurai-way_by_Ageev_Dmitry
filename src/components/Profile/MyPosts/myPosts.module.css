@@ -1,7 +1,11 @@
-.dialogs {
-display: grid;
-    grid-template-columns: 3fr 3fr 10fr;
-    grid-gap: 10px;
+.myPosts {
+    color: blue;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.posts {
+    margin: 5px;
 }
 
 .form {
@@ -13,7 +17,7 @@ display: grid;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    width: 200px;
+    width: 280px;
     border: solid 1px #eee ;
     border-radius: 24px;
 }
@@ -39,26 +43,3 @@ display: grid;
     border: red 3px solid;
     border-radius: 5px;
 }
-
-
-
-/*.dialogItems{*/
-/*padding: 10px;*/
-/*}*/
-
-/*.dialog {*/
-/*    color: azure;*/
-/*    text-decoration: none;*/
-/*}*/
-
-/*.dialog.active {*/
-/*    color: darkorchid;*/
-/*}*/
-
-/*.messages {*/
-/*padding: 10px;*/
-/*}*/
-
-/*.message{*/
-
-/*}*/
