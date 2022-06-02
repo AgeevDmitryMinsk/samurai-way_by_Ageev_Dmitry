@@ -1,26 +1,28 @@
 import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../../utils/validators/validators";
+import {TextArea} from "../../../common/TextArea";
+
+
+const maxLength10 = maxLengthCreator(10) // необх вынести за пределы функц MyPostForm
+
+// function maxLength10(){ - // ТАК maxLength10 РАБОТАТЬ НЕ БУДЕТ  !!!
+// 	maxLengthCreator(10)
+// }
 
 export const MyPostForm = (props: InjectedFormProps) => {
-	const {handleSubmit } = props
+	const {handleSubmit} = props
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<Field component={'textarea'}
+			<Field component={TextArea}
+				//component={'textarea'}
 				   name={'myTextAreaPost'}
 				   placeholder={'your post'}
-				   style={{width: 250}}
-				// onChange={newTextOnChangeHandler}
-				// 	  onKeyPress={onKeyPressHandler}
-				// 	  value={props.newPostText}
+				   validate={[requiredField, maxLength10]}
 			/>
-			{/*<textarea onChange={newTextOnChangeHandler}  /placeholder={'Please, enter the post text'} value={title}  style={{width: 250}}/>*/}
-
 			<div>
-				<button
-					// onClick={addPostHandler}
-				>Add post
-				</button>
+				<button>Add post</button>
 			</div>
 		</form>
 	);

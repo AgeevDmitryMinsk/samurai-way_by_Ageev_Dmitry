@@ -1,0 +1,16 @@
+.formControl.error input,
+.formControl.error textarea {
+    border: fuchsia 4px solid;
+    border-radius: 5px;
+}
+
+/*.formControl.error,*/
+/*.formControl.error {*/
+/*    border: fuchsia 4px solid*/
+/*}*/
+
+.formControl.error span{
+    color: firebrick;
+   padding-left: 5px;
+    font-size: small;
+}
