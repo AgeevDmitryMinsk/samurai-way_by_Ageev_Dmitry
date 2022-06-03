@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {UsersResponseType} from "../redux/users-reducer";
-import {AuthResponseType, FollowResponseType} from "../redux/auth-reducer";
+import {AuthResponseType, FollowResponseType, LoginResponseType, LogoutResponseType} from "../redux/auth-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {ProfileStatusResponseType} from "../redux/profile-reducer";
 
@@ -67,6 +67,7 @@ export const authAPI = {
 				return response.data
 			})
 	},
+
 	getMyProfileInAuthMe(data: AuthResponseType) {
 
 		return instance
@@ -78,6 +79,7 @@ export const authAPI = {
 				}
 			)
 	},
+
 	getMyStatus(data: AuthResponseType) {
 		return instance
 			.get<any, AxiosResponse<string>>(`profile/status/` + data.data.id) // лучше выносить из ${}, тогда идет типизация с помощью TS
@@ -86,7 +88,18 @@ export const authAPI = {
 				//	console.log(response)//{data: 'Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)', status: 200, statusText: '', headers: {…}, config: {…}, …}
 				return response.data
 			})
+	},
+
+	login(email: string, password: string, rememberMe: null | boolean ) {
+		return instance
+			.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe})
+	},
+
+	logout() {
+		return instance
+			.delete<LogoutResponseType>(`/auth/login`)
 	}
+
 }
 
 //const baseUrl = "https://social-network.samuraijs.com/api/1.0/"

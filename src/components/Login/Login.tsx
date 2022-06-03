@@ -3,13 +3,19 @@ import {LoginForm} from "./LoginForm";
 import {reduxForm} from "redux-form";
 
 
+type FormDataType = {
+	email: string
+	password: string
+	rememberMe: null | boolean
+}
+
 export const Login = () => {
 
 	const onSubmitHandle = (formData: any ) =>{
 		console.log(`formData from Login =` , formData) // formData = {login: '4564', password: '4654564777', rememberMe: true}
 
 		//reset or clear forms:
-		formData.login = ``
+		formData.email = ``
 		formData.password = ``
 		formData.rememberMe = null
 	}

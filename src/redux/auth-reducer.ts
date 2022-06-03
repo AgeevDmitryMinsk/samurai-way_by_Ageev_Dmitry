@@ -19,6 +19,22 @@ export type AuthResponseType = {
 	messages: Array<string>,
 	data: AuthDataType
 }
+
+export type LoginResponseType = {
+	resultCode: number
+	messages: Array<string>,
+	data: {
+		userId: number
+	}
+}
+
+export type LogoutResponseType = {
+	resultCode: number
+	messages: Array<string>,
+	data: {}
+}
+
+
 export type FollowResponseType = {
 	resultCode: number
 	messages: Array<string>
@@ -143,3 +159,15 @@ export const getAuthMeThunkCreator = () => {
 
 	}
 }
+
+export const loginThunkCreator = (email: string, password: string, rememberMe: null | boolean) => {
+	return (dispatch: Dispatch<ActionsTypes>) => {
+		authAPI.login(email, password, rememberMe)
+			.then((response)=>{
+				if (response.data.resultCode === 0) {
+					dispatch(getAuthMeThunkCreator())
+				}
+			})
+	}
+}
+
