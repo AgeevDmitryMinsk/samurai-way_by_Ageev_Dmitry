@@ -19,17 +19,21 @@ export const LoginForm = (props: InjectedFormProps) => {
 					   name={'login'}
 					   component={InputArea}
 					   validate={[requiredField, maxLength25]}
+					   dirty={props.dirty}
 				/>
 			</div>
 			<div>
 				<Field placeholder={"Password"}
 					   name={'password'}
 					   component={InputArea}
-					   validate={[requiredField, maxLength25]}/>
+					   validate={[requiredField, maxLength25]}
+					   type={'password'}
+					   dirty={props.dirty}
+				/>
 			</div>
-			<div>
-				<Field type={"checkbox"} name={'rememberMe'} component={InputArea}/> remember me
-			</div>
+			<span>
+				<Field type={"checkbox"} name={'rememberMe'} component={'input'} /> remember me
+			</span>
 			<div>
 				<button>Log In</button>
 			</div>

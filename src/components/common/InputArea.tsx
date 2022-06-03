@@ -6,12 +6,13 @@ export const InputArea = (props: any) => {
 	const isError = meta.touched && meta.error
 
 	return (
-		<div className={`${s.formControl}` + ` ` + (isError ? `${s.error}` : ``)}>
+		<div className={`${s.formControl} ` + (isError ? `${s.error}` : ``)}>
 
 			<div>
-				<input {...input} {...restPprops} style={{width: 180}}/>
+				<input {...input} {...restPprops} className={`${s.formControlInput} `}/>
 			</div>
 			{isError && <span> error: {meta.error}</span>}
+			{!isError && <span> &nbsp; </span>}
 		</div>
 	);
 };
