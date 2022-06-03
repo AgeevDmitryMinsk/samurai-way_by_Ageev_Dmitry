@@ -39,7 +39,7 @@ export const LoginForm = (props: InjectedFormProps) => {
 			</div>
 
 		</form>
-	);
+	)
 };
 
 
