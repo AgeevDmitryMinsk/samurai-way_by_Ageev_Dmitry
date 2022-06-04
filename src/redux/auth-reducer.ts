@@ -41,9 +41,9 @@ export type FollowResponseType = {
 	data: {}
 }
 export type AuthDataType = {
-	id: string
-	login: string
-	email: string
+	id: string | null
+	login: string | null
+	email: string | null
 }
 
 const initialState = {
@@ -59,7 +59,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 			//debugger
 			return {
 				...state,
-				data: action.data,
+				data: action.payload.data,
 				isAuth: true
 			}
 		}
@@ -93,10 +93,10 @@ export type setAuthUserProfileType = ReturnType<typeof setAuthUserProfile>
 export type setMyStatusForHeaderType = ReturnType<typeof setMyStatusForHeader>
 
 //ActionCreator setAuthUserData:
-export const setAuthUserData = (data: AuthDataType) => {
+export const setAuthUserData = (data: AuthDataType, isAuth: boolean) => {
 	return {
 		type: "SET_USER_DATA",
-		data
+		payload: {data, isAuth}
 	} as const
 }
 export const setIsFetchingAuth = (isFetchingAuth: boolean) => {
@@ -134,7 +134,7 @@ export const getAuthMeThunkCreator = () => {
 					let {id, login, email} = data.data
 					//console.log(id, login, email) //22100 'AgeevDmitryMinsk' 'ageev.dmitry@outlook.com'
 					//dispatch(setAuthUserData(data.data))
-					dispatch(setAuthUserData({id, login, email}))
+					dispatch(setAuthUserData({id, login, email}, true))
 					dispatch(setIsFetchingAuth(false))
 					authAPI.getMyProfileInAuthMe(data)
 						// .then((response: AxiosResponse<UsersProfileResponseType>) => {
@@ -161,13 +161,23 @@ export const getAuthMeThunkCreator = () => {
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: null | boolean) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
+	return (dispatch: (arg0: (dispatch: Dispatch<ActionsTypes>) => void) => void) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
 		authAPI.login(email, password, rememberMe)
-			.then((response)=>{
+			.then((response) => {
 				if (response.data.resultCode === 0) {
-					dispatch(getAuthMeThunkCreator())
+					dispatch(getAuthMeThunkCreator())// ?
 				}
 			})
 	}
+
 }
 
+export const loginoutThunkCreator = () => (dispatch:Dispatch<ActionsTypes> ) => {
+	authAPI.logout()
+		.then(response => {
+			if (response.data.resultCode === 0) {
+				dispatch(setAuthUserData({id: null, login: null, email: null}, false))
+			}
+		})
+
+}
