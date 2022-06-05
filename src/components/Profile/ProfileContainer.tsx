@@ -10,6 +10,7 @@ import {
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {AuthDataType} from "../../redux/auth-reducer";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -144,7 +145,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 //withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
 
 export const ProfileContainer = compose<React.ComponentType>(
-	//withAuthRedirect,
+	withAuthRedirect, //  withAuthRedirect для проверки залогирован ли пользователь
 	withRouter, connect(mapStateToProps,
 		{getProfileThunkCreator, getUserStatusThunkCreator, updateProfileStatusThunkCreator},
 	))(ProfileApiContainer)

@@ -4,6 +4,7 @@ import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../redux/auth-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 
 type FormDataType = {
@@ -14,7 +15,7 @@ type FormDataType = {
 
 const Login = (props: OwnLoginPropsType) => {
 
-	const onSubmitHandle = (formData: any) => {
+	const onSubmitHandle = (formData: any  ) => {
 		console.log(`formData from Login =` , formData) // formData = {login: '4564', password: '4654564777', rememberMe: true}
 		props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
 		console.log(`21 props.isAuth in Login.tsx:`, props.isAuth.toString())
@@ -24,7 +25,8 @@ const Login = (props: OwnLoginPropsType) => {
 		formData.rememberMe = null
 	}
 	console.log(`27 props.isAuth in Login.tsx:`, props.isAuth.toString()) // true/false  - залогинен/незалогинен
-	// if (props.isAuth)
+
+	if (props.isAuth) return <Redirect to={`/profile`}/>
 
 	return (
 		<div>
@@ -35,7 +37,6 @@ const Login = (props: OwnLoginPropsType) => {
 	);
 };
 
-// type mapStateToPropsType = typeof mapStateToProps
 
 type OwnLoginPropsType = mapDispatсhToPropsType & mapStateToPropsType
 
