@@ -14,6 +14,7 @@ type HeaderType ={
 	myStatus: string
 	status: string
 	userProfile: UsersProfileResponseType | null
+	logoutThunkCreator: ()=>void
 }
 export const Header = (props: HeaderType) => {
 	const [textForMyStatus, setTextForMyStatus] = useState<string>(props.myStatus)
@@ -31,6 +32,7 @@ export const Header = (props: HeaderType) => {
 			<div className={s.login_block}>
 				{props.isAuth
 					? <>
+						<button onClick={props.logoutThunkCreator}>Log out</button>
 						{props.data.login}
 						<img src={props.profile.photos?.large || ``} alt="myPhoto"/>
 						{/*<img src={props.profile[`photos`][`large`] || `` } alt="myPhoto"/>*/}

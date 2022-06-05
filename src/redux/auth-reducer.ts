@@ -60,7 +60,8 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 			return {
 				...state,
 				data: action.payload.data,
-				isAuth: true
+				//isAuth: true //убрал чтобы при нажатии на Logout был выход из аккаунта пользователя и сделал:
+				isAuth: action.payload.isAuth,
 			}
 		}
 		case "TOGGLE-AUTH-IS-FETCHING": {
@@ -172,7 +173,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: n
 
 }
 
-export const loginoutThunkCreator = () => (dispatch:Dispatch<ActionsTypes> ) => {
+export const logoutThunkCreator = () => (dispatch:Dispatch<ActionsTypes> ) => {
 	authAPI.logout()
 		.then(response => {
 			if (response.data.resultCode === 0) {

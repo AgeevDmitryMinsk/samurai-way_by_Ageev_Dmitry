@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from "./Header";
-import {getAuthMeThunkCreator, InitialAuthStatePageType} from "../../redux/auth-reducer";
+import {getAuthMeThunkCreator, InitialAuthStatePageType, logoutThunkCreator} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
@@ -69,6 +69,7 @@ class HeaderApiContainer extends React.Component<AuthPropsType> {
 						  myStatus={this.props.myStatus}
 						  status={this.props.status}
 						  userProfile={this.props.userProfile}
+						  logoutThunkCreator={this.props.logoutThunkCreator}
 				/>
 			}
 			</>
@@ -81,12 +82,14 @@ type mapStateToPropsType = InitialAuthStatePageType	& {profile: UsersProfileResp
 	& {status: string} &
 	{userProfile: UsersProfileResponseType | null}
 
+
 type mapDispatchToPropsType = {
 	// setAuthUserData: (data: AuthDataType) => void
 	// setIsFetchingAuth: (isFetchingAuth: boolean) => void
 	// setAuthUserProfile: (profile: UsersProfileResponseType) => void
 	getAuthMeThunkCreator: ()=>void
 	updateProfileStatusThunkCreator: (status: string)=> void
+	logoutThunkCreator: ()=>void
 }
 
 export type AuthPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -109,5 +112,6 @@ export const HeaderContainer = connect(mapStateToProps,
 		// setIsFetchingAuth, // аналогично
 		// setAuthUserProfile,
 		getAuthMeThunkCreator,
-		updateProfileStatusThunkCreator
+		updateProfileStatusThunkCreator,
+		logoutThunkCreator
 	})(HeaderApiContainer);
