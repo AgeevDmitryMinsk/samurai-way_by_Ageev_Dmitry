@@ -1,8 +1,5 @@
-import {ActionsTypes, addMessage} from "./messages-reducer";
-import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
+import {ActionsTypes} from "./messages-reducer";
 import {Dispatch} from "redux";
-import {authAPI} from "../api/api";
-import {FormAction, stopSubmit} from "redux-form";
 import {getAuthMeThunkCreator} from "./auth-reducer";
 
 
@@ -74,11 +71,14 @@ export const setSuccessfulInitialization = () => {
 //Thunk creator
 
 export const initializeAppThunkCreator = () => {
+	// return async (dispatch: Dispatch<ActionsTypes | any>) => {
 	return async (dispatch: Dispatch<ActionsTypes | any>) => {
-		debugger
+		//debugger
 		const res = await dispatch(getAuthMeThunkCreator())
-		console.log('initialAppThunk - ', res)
-		//console.log(`hello form initializeAppThunkCreator`, dispatchResult )
+
+		console.log(`hello form initializeAppThunkCreator  ===>`, res )
+		// без await будет: hello form initializeAppThunkCreator  ===> Promise {<pending>}
+		// c await будет:   hello form initializeAppThunkCreator  ===> IT-Incubator
 
 
 		dispatch(setSuccessfulInitialization())
