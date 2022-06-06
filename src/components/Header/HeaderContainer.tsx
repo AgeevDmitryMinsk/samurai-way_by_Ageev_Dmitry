@@ -11,9 +11,11 @@ import {updateProfileStatusThunkCreator} from "../../redux/profile-reducer";
 class HeaderApiContainer extends React.Component<AuthPropsType> {
 
 	componentDidMount() {
+
+		//this.props.getAuthMeThunkCreator()
+
 		// console.log(`this.props.status =`, this.props.status)
 		// console.log(`this.props.myStatus =`, this.props.myStatus)
-		this.props.getAuthMeThunkCreator()
 		// this.props.setIsFetchingAuth(true)
 		// // axios
 		// // 	.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,

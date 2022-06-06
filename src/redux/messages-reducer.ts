@@ -19,6 +19,7 @@ import {
 } from "./users-reducer";
 import {setAuthUserProfileType, setIsFetchingAuthType, setMyStatusForHeaderType, setUserDataType} from "./auth-reducer";
 import {stopSubmit} from "redux-form";
+import {setSuccessfulInitializationType} from "./app-reducer";
 // export type DialogsPageType = {
 // 	messages: MessageType[]
 // 	dialogs: DialogItemType[]
@@ -43,6 +44,7 @@ export type ActionsTypes =
 	| setIsFollowingInProgressType
 	| SetUserStatusActionType
 	| setMyStatusForHeaderType
+	| setSuccessfulInitializationType
 
 export type MessageType = {
 	message: string

@@ -1,16 +1,28 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
 import {Navbar} from './components/Navbar/Navbar'
-import {Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {LoginContainer} from "./components/Login/Login";
+import {connect, useDispatch} from "react-redux";
+import {compose} from "redux";
+import {initializeAppThunkCreator} from "./redux/app-reducer";
+import {getAuthMeThunkCreator} from "./redux/auth-reducer";
 
 
 const App: React.FC = () => {
+
+	const dispatch = useDispatch()
+
+	useEffect(()=>{
+		dispatch(initializeAppThunkCreator())
+		//dispatch(getAuthMeThunkCreator())
+		console.log(`hello form useEffect APP`)
+	},[])
 
 	return (
 		<>
@@ -31,5 +43,11 @@ const App: React.FC = () => {
 		</>
 	)
 }
-// сделал merge ветки Lesson_43_by_Dimich_legacy_code в ветку main
-export default App
+
+
+export default compose<React.ComponentType>(withRouter, connect(null,
+	{
+		initializeAppThunkCreator
+	}))(App);
+
+
