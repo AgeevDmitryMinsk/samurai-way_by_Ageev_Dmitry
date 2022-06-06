@@ -10,7 +10,11 @@ const emailValidation = (value:string)  =>
 	value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
 		'Invalid email address' : undefined
 
+
+
 export const LoginForm = (props: InjectedFormProps) => {
+
+	console.log(props.error) //undefined или Email or password is wrong from loginThunkCreator (177 строка)
 	//debugger
 	//const {handleSubmit,form,clearSubmit,dirty,touch}  = props // можно сделать деструктуризацию
 	return (
@@ -41,9 +45,13 @@ export const LoginForm = (props: InjectedFormProps) => {
 			<span>
 				<Field type={"checkbox"} name={'rememberMe'} component={'input'} /> remember me
 			</span>
+
+			<div style={{color: "firebrick"}}>{props.error}</div>
+
 			<div>
 				<button>Log In</button>
 			</div>
+
 
 		</form>
 	)

@@ -2,6 +2,7 @@ import {ActionsTypes} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {FormAction, stopSubmit} from "redux-form";
 
 
 //export type InitialAuthStatePageType = typeof initialState
@@ -162,11 +163,18 @@ export const getAuthMeThunkCreator = () => {
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: null | boolean) => {
+
+
 	return (dispatch: (arg0: (dispatch: Dispatch<ActionsTypes>) => void) => void) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
 		authAPI.login(email, password, rememberMe)
 			.then((response) => {
 				if (response.data.resultCode === 0) {
 					dispatch(getAuthMeThunkCreator())// ?
+				} else {
+					//let action = stopSubmit("login", {_error: `Email or password is wrong`})
+					 //dispatch(dispatch => stopSubmit("login", {_error: `Email or password is wrong`}))
+					//@ts-ignore
+					dispatch(stopSubmit("login", {_error: `Email or password is wrong from loginThunkCreator`}))
 				}
 			})
 	}
