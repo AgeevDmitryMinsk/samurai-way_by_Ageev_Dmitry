@@ -1,4 +1,4 @@
-import {ActionsTypes} from "./messages-reducer";
+import {ActionsTypes, addMessage} from "./messages-reducer";
 import {UsersProfileResponseType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
@@ -165,23 +165,28 @@ export const getAuthMeThunkCreator = () => {
 export const loginThunkCreator = (email: string, password: string, rememberMe: null | boolean) => {
 
 
-	return (dispatch: (arg0: (dispatch: Dispatch<ActionsTypes>) => void) => void) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
+	return (dispatch: Dispatch<ActionsTypes | any>) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
 		authAPI.login(email, password, rememberMe)
 			.then((response) => {
-				if (response.data.resultCode === 0) {
+				//debugger
+				if (response.data.resultCode === 0)
+					//	|| 	(response.data.resultCode === 1 && response.data.messages[0] ==="The RememberMe field is required."))
+				{
 					dispatch(getAuthMeThunkCreator())// ?
 				} else {
 					//let action = stopSubmit("login", {_error: `Email or password is wrong`})
-					 //dispatch(dispatch => stopSubmit("login", {_error: `Email or password is wrong`}))
-					//@ts-ignore
-					dispatch(stopSubmit("login", {_error: `Email or password is wrong from loginThunkCreator`}))
+					//dispatch(dispatch => stopSubmit("login", {_error: `Email or password is wrong`}))
+
+					let errorMessage = (response.data.messages.length > 0) ? response.data.messages[0] : `Email or password is wrong from loginThunkCreator`
+
+					dispatch(stopSubmit("login", {_error: errorMessage}))
 				}
 			})
 	}
 
 }
 
-export const logoutThunkCreator = () => (dispatch:Dispatch<ActionsTypes> ) => {
+export const logoutThunkCreator = () => (dispatch: Dispatch<ActionsTypes>) => {
 	authAPI.logout()
 		.then(response => {
 			if (response.data.resultCode === 0) {

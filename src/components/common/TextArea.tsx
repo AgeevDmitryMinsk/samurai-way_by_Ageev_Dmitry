@@ -13,6 +13,7 @@ export const TextArea = (props: any) => {
 				<textarea {...input} {...restPprops} />
 			</div>
 			{isError && <span> error: {meta.error}</span>}
+			{!isError && <span> &nbsp; </span>}
 		</div>
 	);
 };

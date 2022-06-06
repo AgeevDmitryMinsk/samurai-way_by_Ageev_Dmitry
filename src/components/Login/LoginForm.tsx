@@ -15,6 +15,9 @@ const emailValidation = (value:string)  =>
 export const LoginForm = (props: InjectedFormProps) => {
 
 	console.log(props.error) //undefined или Email or password is wrong from loginThunkCreator (177 строка)
+							 // Incorrect Email or Password from Network -> login ->  "messages":["Incorrect Email or Password"]
+							//  !!!! Incorrect anti-bot symbols from Network -> login ->  "messages":["Incorrect Email or Password"]
+
 	//debugger
 	//const {handleSubmit,form,clearSubmit,dirty,touch}  = props // можно сделать деструктуризацию
 	return (

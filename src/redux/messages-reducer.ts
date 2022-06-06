@@ -18,6 +18,7 @@ import {
 	UnFollowActionType
 } from "./users-reducer";
 import {setAuthUserProfileType, setIsFetchingAuthType, setMyStatusForHeaderType, setUserDataType} from "./auth-reducer";
+import {stopSubmit} from "redux-form";
 // export type DialogsPageType = {
 // 	messages: MessageType[]
 // 	dialogs: DialogItemType[]
@@ -42,6 +43,7 @@ export type ActionsTypes =
 	| setIsFollowingInProgressType
 	| SetUserStatusActionType
 	| setMyStatusForHeaderType
+
 export type MessageType = {
 	message: string
 	id: string
@@ -69,10 +71,10 @@ const initialState = {
 }
 
 
-export const messagesReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export const messagesReducer = (state: InitialStateType = initialState, action: addMessageType): InitialStateType => {
 	switch (action.type) {
 		case "ADD-MESSAGE": {
-			return {...state,  messages: [...state.messages, {id: v1(), message: action.newMessage2}]}
+			return {...state, messages: [...state.messages, {id: v1(), message: action.newMessage2}]}
 		}
 		default:
 			return state

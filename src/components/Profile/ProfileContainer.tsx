@@ -20,7 +20,12 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		//console.log(this.props.match.params.userId) // 2 если http://localhost:3000/profile/2
 		    										  // 22100 если http://localhost:3000/profile/22100
 		if (userId === undefined) {
-			userId = `2`
+			// userId = `22100`
+			if (this.props.data.id) {
+				userId = this.props.data.id
+				console.log(this.props.data.id)
+			}
+
 		}
 		this.props.getProfileThunkCreator(userId)
 		this.props.getUserStatusThunkCreator(userId)
@@ -129,6 +134,7 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 		profile: state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
 		// при использовании withAuthRedirect
+		//AutorizedUserId: state.auth.data.id,
 		status: state.ProfilePage.status,
 		data: state.auth.data,
 	}

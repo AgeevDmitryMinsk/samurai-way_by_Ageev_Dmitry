@@ -10,19 +10,20 @@ import {Redirect} from "react-router-dom";
 type FormDataType = {
 	email: string
 	password: string
-	rememberMe: boolean | null
+	rememberMe: boolean // | null
 }
 
 const Login = (props: OwnLoginPropsType) => {
 
-	const onSubmitHandle = (formData: any  ) => {
+	const onSubmitHandle = (formData: FormDataType  ) => {
+		//debugger
 		console.log(`formData from Login =` , formData) // formData = {login: '4564', password: '4654564777', rememberMe: true}
 		props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
 		console.log(`21 props.isAuth in Login.tsx:`, props.isAuth.toString())
 		//reset or clear forms:
 		formData.email = ``
 		formData.password = ``
-		formData.rememberMe = null
+		formData.rememberMe =  false//null
 	}
 	console.log(`27 props.isAuth in Login.tsx:`, props.isAuth.toString()) // true/false  - залогинен/незалогинен
 
@@ -47,7 +48,7 @@ type mapDispatсhToPropsType = {
 	loginThunkCreator: (email: string, password: string, rememberMe: null | boolean) => void
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, any>({form: 'login'})(LoginForm)
 
 type mapStateToPropsType = {
 	isAuth: boolean
