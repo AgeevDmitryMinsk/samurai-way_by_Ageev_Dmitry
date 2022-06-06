@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import './App.css'
 import {Navbar} from './components/Navbar/Navbar'
-import {Route, withRouter} from 'react-router-dom'
+import {Route, RouteComponentProps, withRouter} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
@@ -10,21 +10,28 @@ import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {LoginContainer} from "./components/Login/Login";
 import {connect, useDispatch} from "react-redux";
 import {compose} from "redux";
-import {initializeAppThunkCreator} from "./redux/app-reducer";
-import {getAuthMeThunkCreator} from "./redux/auth-reducer";
+import {InitialAppStatePageType, initializeAppThunkCreator} from "./redux/app-reducer";
+import {AppRootStateType} from "./redux/redux-store";
+import {Preloader} from "./components/common/Preloader";
 
 
-const App: React.FC = () => {
+const AppApiContainer: React.FC = (props: any) => {
 
 	const dispatch = useDispatch()
 
-	useEffect(()=>{
+	useEffect(() => {
+		console.log(`1st console.log`)
 		dispatch(initializeAppThunkCreator())
 		//dispatch(getAuthMeThunkCreator())
 		console.log(`hello form useEffect APP`)
-	},[])
+	}, [dispatch])
 
-	return (
+	console.log(`APP props.initialized --->`, props.initialized)
+
+	if (!props.initialized) {
+		console.log(`APP props.initialized inside IF --->`, props.initialized)
+		return <Preloader/>
+	} else return (
 		<>
 			<div className="App">Hello, samurai! Let's go!</div>
 			<div className={'app-wrapper'}>
@@ -36,7 +43,7 @@ const App: React.FC = () => {
 					<Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
 					<Route path={'/news'} component={News}/>
 					<Route path={'/users'} render={() => <UsersContainer/>}/>
-					<Route path={'/login'} render={()=> <LoginContainer/>}/>
+					<Route path={'/login'} render={() => <LoginContainer/>}/>
 				</div>
 
 			</div>
@@ -44,10 +51,27 @@ const App: React.FC = () => {
 	)
 }
 
+type mapStateToPropsType = InitialAppStatePageType
 
-export default compose<React.ComponentType>(withRouter, connect(null,
+const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
+	return {
+		initialized: state.app.initialized
+	}
+
+}
+
+type mapDispatchToPropsType = {
+	initializeAppThunkCreator: () => void
+}
+export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
+
+export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
+
+type PathParamsType = { userId: string }
+
+export const App = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
 	{
 		initializeAppThunkCreator
-	}))(App);
+	}))(AppApiContainer);
 
 

@@ -153,7 +153,7 @@ export const getAuthMeThunkCreator = () => {
 			} else {
 				dispatch(setIsFetchingAuth(false))
 			}
-			return 'IT-Incubator'
+			//return 'IT-Incubator'
 
 		} catch (e) {
 

@@ -159,7 +159,9 @@ function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 //withAuthRedirect - HOC для обработки поступающих в качестве аргумента компонент на предмет залогирован
 //export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersF)
 
-export const UsersContainer = compose<React.ComponentType>(withAuthRedirect, connect(mapStateToProps,
+export const UsersContainer = compose<React.ComponentType>(
+	withAuthRedirect,
+	connect(mapStateToProps,
 	// {
 	// 	follow: followAC,
 	// 	unFollow: unFollowAC,

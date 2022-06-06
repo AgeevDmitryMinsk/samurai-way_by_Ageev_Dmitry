@@ -5,13 +5,15 @@ import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import {appReducer} from "./app-reducer";
 
 const rootReducer = combineReducers({
 	ProfilePage: profileReducer, // за свойство ProfilePage отвечает profileReducer
 	DialogsPage: messagesReducer, // по аналогии
 	usersPage: usersReducer,
 	auth: authReducer,
-	form: formReducer // за свойство form отвечает formReducer из библиотеки redux-form 2016
+	form: formReducer, // за свойство form отвечает formReducer из библиотеки redux-form 2016
+	app: appReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

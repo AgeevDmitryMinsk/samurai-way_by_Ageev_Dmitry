@@ -72,18 +72,16 @@ export const setSuccessfulInitialization = () => {
 
 export const initializeAppThunkCreator = () => {
 	// return async (dispatch: Dispatch<ActionsTypes | any>) => {
-	return async (dispatch: Dispatch<ActionsTypes | any>) => {
-		//debugger
-		const res = await dispatch(getAuthMeThunkCreator())
+	return  (dispatch: Dispatch<ActionsTypes | any>) => {
 
-		console.log(`hello form initializeAppThunkCreator  ===>`, res )
+		let resultPromise =  dispatch(getAuthMeThunkCreator())
+		// debugger
+		console.log(`hello form initializeAppThunkCreator  ===>`, resultPromise )
 		// без await будет: hello form initializeAppThunkCreator  ===> Promise {<pending>}
 		// c await будет:   hello form initializeAppThunkCreator  ===> IT-Incubator
-
-
-		dispatch(setSuccessfulInitialization())
-
-
+		Promise.all([resultPromise]).then(()=> dispatch(setSuccessfulInitialization()))
+		// resultPromise.then(()=> {
+		// 	dispatch(setSuccessfulInitialization())
 	}
 }
 
