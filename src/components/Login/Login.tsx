@@ -27,6 +27,7 @@ const Login = (props: OwnLoginPropsType) => {
 	console.log(`27 props.isAuth in Login.tsx:`, props.isAuth.toString()) // true/false  - залогинен/незалогинен
 
 	if (props.isAuth) return <Redirect to={`/profile`}/>
+	//if (props.isAuth) return <Redirect to={'/profile/:userId?'}/>
 
 	return (
 		<div>
