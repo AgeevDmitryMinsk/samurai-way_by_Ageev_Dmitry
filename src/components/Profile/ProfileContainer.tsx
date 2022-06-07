@@ -72,6 +72,7 @@ class ProfileApiContainer extends React.Component<PropsType> {
 
 
 	render() {
+		//console.log(`RERENDER PROFILE`)
 		//console.log(this.props.isAuth) // залогинен ? true/false
 
 		//для версии v5 react-router-dom <Redirect to=""/>
@@ -142,6 +143,7 @@ type mapDispatchToPropsType = {
 // }
 
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
+	//console.log(`mapStateToProps PROFILE`)
 	return {
 		profile: getProfile(state), // было state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
