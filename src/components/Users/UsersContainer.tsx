@@ -19,6 +19,14 @@ import {UsersF} from "./UsersF";
 import {Preloader} from "../common/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+	getCurrentPage,
+	getIsFetching, getIsFetchingButtonFollowUnfollow,
+	getIsFollowingInProgress,
+	getPageSize,
+	getTotalUsersCount,
+	getUsers
+} from "../../redux/users-selectors";
 //import {api} from "../../api/api";
 
 
@@ -97,19 +105,32 @@ type mapDispatchToPropsType = {
 
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
+// function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
+// 	return {
+// 		users: state.usersPage.users,
+// 		pageSize: state.usersPage.pageSize,
+// 		totalUsersCount: state.usersPage.totalUsersCount,
+// 		currentPage: state.usersPage.currentPage,
+// 		isFetching: state.usersPage.isFetching,
+// 		isFollowingInProgress: state.usersPage.isFollowingInProgress,
+// 		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow,
+// 		//isAuth: state.auth.isAuth
+// 	}
+// }
+
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		users: state.usersPage.users,
-		pageSize: state.usersPage.pageSize,
-		totalUsersCount: state.usersPage.totalUsersCount,
-		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching,
-		isFollowingInProgress: state.usersPage.isFollowingInProgress,
-		isFetchingButtonFollowUnfollow: state.usersPage.isFetchingButtonFollowUnfollow,
+		users: getUsers(state),
+		pageSize: getPageSize(state),
+		totalUsersCount: getTotalUsersCount(state),
+		currentPage: getCurrentPage(state),
+		isFetching: getIsFetching(state),
+		isFollowingInProgress: getIsFollowingInProgress(state),
+		isFetchingButtonFollowUnfollow: getIsFetchingButtonFollowUnfollow(state),
 		//isAuth: state.auth.isAuth
 	}
-
 }
+
 
 // function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
 // 	return {

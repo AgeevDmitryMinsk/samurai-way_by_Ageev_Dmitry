@@ -64,6 +64,9 @@ export const authAPI = {
 			.get<AuthResponseType>(`auth/me`)
 			.then(response => {
 				//debugger
+				console.log(`response.data in getAuthMe:`, response.data)   //email: "ageev.dmitry@outlook.com"
+																			//id: 22100
+																			//login: "AgeevDmitryMinsk"
 				return response.data
 			})
 	},
@@ -74,7 +77,13 @@ export const authAPI = {
 			.get(`profile/` + data.data.id) // лучше выносить из ${}, тогда идет типизация с помощью TS
 			.then(response => {
 					//debugger
-					//console.log(response)
+					console.log(`response in getMyProfileInAuthMe`, response.data) //aboutMe: "Looking for Angular, React, JavaScript the remote job\nБусидо - 51/1"
+										// contacts: {facebook: null, website: null, vk: null, twitter: null, instagram: null, …}
+										// fullName: "AgeevDmitryMinsk"
+										// lookingForAJob: true
+										// lookingForAJobDescription: "JS, React, Angular"
+										// photos: {small: 'https://social-network.samuraijs.com/activecontent/images/users/22100/user-small.jpg?v=10', large: 'https://social-network.samuraijs.com/activecontent/images/users/22100/user.jpg?v=10'}
+										// userId: 22100
 					return response.data
 				}
 			)

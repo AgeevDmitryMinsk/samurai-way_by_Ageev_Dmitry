@@ -129,7 +129,7 @@ export const getAuthMeThunkCreator = () => {
 		dispatch(setIsFetchingAuth(true))
 		try {
 			const res = await authAPI.getAuthMe()
-			//console.log(data)//{data: {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}, messages: Array(0), fieldsErrors: Array(0), resultCode: 0}
+			console.log(`res in auth-reducer ~~>`, res)//{data: {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}, messages: Array(0), fieldsErrors: Array(0), resultCode: 0}
 			if (res.resultCode === 0) { // если "resultCode":1, то  message: "You are not authorized"
 				// если  resultCode === 0, то пользователь залогинен, т.е. у него есть в куках: id, login, email
 				//console.log(data.resultCode) //0

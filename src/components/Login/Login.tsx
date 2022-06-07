@@ -19,17 +19,17 @@ const Login = (props: OwnLoginPropsType) => {
 		//debugger
 		console.log(`formData from Login =` , formData) // formData = {login: '4564', password: '4654564777', rememberMe: true}
 		props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
-		console.log(`21 props.isAuth in Login.tsx:`, props.isAuth.toString())
+		console.log(`22 props.isAuth in Login.tsx:`, props.isAuth.toString())
 		//reset or clear forms:
 		formData.email = ``
 		formData.password = ``
 		formData.rememberMe =  false//null
 	}
-	console.log(`27 props.isAuth in Login.tsx:`, props.isAuth.toString()) // true/false  - залогинен/незалогинен
+	console.log(`Login.tsx (28) props.isAuth:`, props.isAuth) // true/false  - залогинен/незалогинен
 
 	if (props.isAuth) return <Redirect to={`/profile`}/>
 	//if (props.isAuth) return <Redirect to={'/profile/:userId?'}/>
-
+	console.log(`LOGIN.TSX`)
 	return (
 		<div>
 			<h1>LOGIN PAGE</h1>
@@ -40,11 +40,11 @@ const Login = (props: OwnLoginPropsType) => {
 };
 
 
-type OwnLoginPropsType = mapDispatсhToPropsType & mapStateToPropsType
+type OwnLoginPropsType = mapDispatchToPropsType & mapStateToPropsType
 
 
 
-type mapDispatсhToPropsType = {
+type mapDispatchToPropsType = {
 	loginThunkCreator: (email: string, password: string, rememberMe: null | boolean) => void
 }
 

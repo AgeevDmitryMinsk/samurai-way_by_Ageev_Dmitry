@@ -15,7 +15,7 @@ import {AppRootStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader";
 
 
-const AppApiContainer: React.FC = (props: any) => {
+const App: React.FC = (props: any) => {
 
 	const dispatch = useDispatch()
 
@@ -31,7 +31,8 @@ const AppApiContainer: React.FC = (props: any) => {
 	if (!props.initialized) {
 		console.log(`APP props.initialized inside IF --->`, props.initialized)
 		return <Preloader/>
-	} else return (
+	} else
+		return (
 		<>
 			<div className="App">Hello, samurai! Let's go!</div>
 			<div className={'app-wrapper'}>
@@ -69,9 +70,9 @@ export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsTyp
 
 type PathParamsType = { userId: string }
 
-export const App = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
+export const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
 	{
 		initializeAppThunkCreator
-	}))(AppApiContainer);
+	}))(App);
 
 
