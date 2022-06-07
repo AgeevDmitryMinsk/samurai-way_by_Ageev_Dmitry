@@ -120,7 +120,7 @@ export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		users: getUsers(state),
+		users: getUsers(state), // было state.usersPage.users,
 		pageSize: getPageSize(state),
 		totalUsersCount: getTotalUsersCount(state),
 		currentPage: getCurrentPage(state),

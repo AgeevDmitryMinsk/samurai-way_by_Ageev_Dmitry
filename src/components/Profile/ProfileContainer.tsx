@@ -11,6 +11,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {AuthDataType} from "../../redux/auth-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {getAuthData, getProfile, getStatus} from "../../redux/profile-selectors";
 
 class ProfileApiContainer extends React.Component<PropsType> {
 
@@ -129,16 +130,28 @@ type mapDispatchToPropsType = {
 
 }
 
+// function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
+// 	return {
+// 		profile: state.ProfilePage.profile,
+// 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
+// 		// при использовании withAuthRedirect
+// 		//AutorizedUserId: state.auth.data.id,
+// 		status: state.ProfilePage.status,
+// 		data: state.auth.data,
+// 	}
+// }
+
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		profile: state.ProfilePage.profile,
+		profile: getProfile(state), // было state.ProfilePage.profile,
 		//isAuth: state.auth.isAuth - не нужно пробрасывать в ProfileApiContainer
 		// при использовании withAuthRedirect
 		//AutorizedUserId: state.auth.data.id,
-		status: state.ProfilePage.status,
-		data: state.auth.data,
+		status: getStatus(state), // было state.ProfilePage.status,
+		data: getAuthData(state) // state.auth.data,
 	}
 }
+
 
 //let WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
 
