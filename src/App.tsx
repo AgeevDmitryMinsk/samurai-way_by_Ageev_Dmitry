@@ -13,6 +13,7 @@ import {compose} from "redux";
 import {InitialAppStatePageType, initializeAppThunkCreator} from "./redux/app-reducer";
 import {AppRootStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader";
+import {getInitialized} from "./redux/app-selectors";
 
 
 const App: React.FC = (props: any) => {
@@ -54,12 +55,17 @@ const App: React.FC = (props: any) => {
 
 type mapStateToPropsType = InitialAppStatePageType
 
+// const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
+// 	return {
+// 		initialized: state.app.initialized
+// 	}
+// }
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 	return {
-		initialized: state.app.initialized
+		initialized: getInitialized(state) // было state.app.initialized
 	}
-
 }
+
 
 type mapDispatchToPropsType = {
 	initializeAppThunkCreator: () => void
