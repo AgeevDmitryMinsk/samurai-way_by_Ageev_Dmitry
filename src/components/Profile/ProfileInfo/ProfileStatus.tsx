@@ -11,10 +11,10 @@ type ProfileStatusProps = {
 }
 
 export const ProfileStatus = (props: ProfileStatusProps) => {
-	const [editmode, setEditMode] = useState<boolean>(false)
-	const [textForStatus, setTextForStatus] = useState<string>(props.status)
+	const [editMode, setEditMode] = useState<boolean>(false)
+	let [textForStatus, setTextForStatus] = useState<string>(props.status)
 
-	useEffect(() => {  // для переотрисовки, если обновились пропсы !!!!
+	useEffect(() => {  // ЗДЕСЬ ВАЖНО для переотрисовки, если обновились пропсы !!!!
 		console.log("useEffect")
 		setTextForStatus(props.status)
 	}, [props.status])
@@ -27,7 +27,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	function onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
 
 		setTextForStatus(e.currentTarget.value) // Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
-
+		//Делай сегодня то, что другие не хотят — завтра будешь жить так, как другие не могут!!! ))))
 	}
 
 	//console.log(textForStatus) // статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
@@ -38,7 +38,8 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 			setEditMode(true)
 			//		console.log(`after`, editmode) // и здесь false, т.к. useState асинхронный !
 		} else {
-			alert(`нельзя редактировать не свой статус!`)
+			// alert(`нельзя редактировать не свой статус!`)
+			setTextForStatus(`нельзя редактировать не свой статус!`)
 		}
 
 	}
@@ -60,13 +61,13 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 
 	return (
 		<div>
-			{!editmode && <div onClick={onClickHandleActivateEditMode}
+			{!editMode && <div onClick={onClickHandleActivateEditMode}
                                style={{
 								   color: "purple",
 								   cursor: "pointer"
-							   }}>Мой статус:{textForStatus}
+							   }}>Мой статус:<span style={{fontWeight:"bold"}}>{textForStatus}</span>
             </div>}
-			{editmode && <div>{<input value={textForStatus}
+			{editMode && <div>{<input value={textForStatus}
 									  autoFocus={true} // добавляет курсор в конец строки input
 									  onChange={onChangeHandle}
 									  onKeyPress={onEnterKeyPressDeactivateEditMode}
