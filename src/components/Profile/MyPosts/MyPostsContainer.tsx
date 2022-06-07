@@ -6,6 +6,8 @@ import {
 	InitialStateProfilePageType
 } from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
+import {getProfile, getStatus} from "../../../redux/profile-selectors";
+import {getPosts} from "../../../redux/myPost-selectors";
 
 
 type mapStateToPropsType = InitialStateProfilePageType
@@ -18,9 +20,9 @@ export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: AppRootStateType): mapStateToPropsType {
 	return {
-		posts: state.ProfilePage.posts,
-		profile: state.ProfilePage.profile,
-		status: state.ProfilePage.status
+		posts: getPosts(state), //state.ProfilePage.posts,
+		profile: getProfile(state), // было state.ProfilePage.profile,
+		status: getStatus(state), // было state.ProfilePage.status,
 	}
 }
 

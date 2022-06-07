@@ -6,6 +6,8 @@ import {AppRootStateType} from "../../redux/redux-store";
 import s from "./Header.module.css";
 import {UsersProfileResponseType} from "../Profile/ProfileContainer";
 import {updateProfileStatusThunkCreator} from "../../redux/profile-reducer";
+import {getAuthData, getProfile, getStatus} from "../../redux/profile-selectors";
+import {getAuthProfile, getIsAuth, getIsFetchingAuth, getMyStatus} from "../../redux/header-selectors";
 
 
 class HeaderApiContainer extends React.Component<AuthPropsType> {
@@ -98,13 +100,13 @@ export type AuthPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 	return {
-		data: state.auth.data,
-		isAuth: state.auth.isAuth,
-		isFetchingAuth: state.auth.isFetchingAuth,
-		profile: state.auth.profile,
-		myStatus: state.auth.myStatus,
-		status: state.ProfilePage.status,
-		userProfile: state.ProfilePage.profile
+		data: getAuthData (state), // было state.auth.data,
+		isAuth: getIsAuth(state), //state.auth.isAuth,
+		isFetchingAuth: getIsFetchingAuth(state), // state.auth.isFetchingAuth,
+		profile: getAuthProfile(state), //state.auth.profile,
+		myStatus: getMyStatus(state),//state.auth.myStatus,
+		status: getStatus(state), // было state.ProfilePage.status,
+		userProfile: getProfile(state), // было state.ProfilePage.profile
 	}
 
 }
