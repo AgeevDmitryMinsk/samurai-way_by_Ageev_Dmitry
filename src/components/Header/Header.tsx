@@ -19,9 +19,9 @@ type HeaderType ={
 export const Header = (props: HeaderType) => {
 	const [textForMyStatus, setTextForMyStatus] = useState<string>(props.myStatus)
 
-	useEffect(()=>{  // для переотрисовки, если обновились пропсы !!!!
-		setTextForMyStatus(textForMyStatus)
-	},[textForMyStatus])
+	// useEffect(()=>{  // для переотрисовки, если обновились пропсы !!!!
+	// 	setTextForMyStatus(textForMyStatus)
+	// },[textForMyStatus])
 
 	console.log(props.data)// {id: 22100, login: 'AgeevDmitryMinsk', email: 'ageev.dmitry@outlook.com'}
 	//console.log(props.profile.photos?.large)

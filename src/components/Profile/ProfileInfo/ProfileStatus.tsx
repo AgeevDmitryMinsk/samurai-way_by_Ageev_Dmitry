@@ -11,13 +11,15 @@ type ProfileStatusProps = {
 }
 
 export const ProfileStatus = (props: ProfileStatusProps) => {
+
 	const [editMode, setEditMode] = useState<boolean>(false)
 	let [textForStatus, setTextForStatus] = useState<string>(props.status)
 
-	useEffect(() => {  // ЗДЕСЬ ВАЖНО для переотрисовки, если обновились пропсы !!!!
+	useEffect(() => {  // ЗДЕСЬ ВАЖНО для переотрисовки, если обновились пропсы [props.status] !!!!
 		console.log("useEffect")
 		setTextForStatus(props.status)
-	}, [props.status])
+	 }, [props.status])
+	//  }, []) //- так не отрендерится статус в браузере в компоненте profile
 
 	//console.log(`props.isAuth =`,  props.isAuth)// говорит о том залогинился ли ты на сайте?
 	//console.log(`props.data.id =`, props.data.id) // props.data.id = 22100

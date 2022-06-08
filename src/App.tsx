@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import './App.css'
 import {Navbar} from './components/Navbar/Navbar'
-import {Route, RouteComponentProps, withRouter} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
@@ -67,18 +67,7 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 
-type mapDispatchToPropsType = {
-	initializeAppThunkCreator: () => void
-}
-export type OwnProfilePropsType = mapDispatchToPropsType & mapStateToPropsType
-
-export type PropsType = RouteComponentProps<PathParamsType> & OwnProfilePropsType
-
-type PathParamsType = { userId: string }
-
 export const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
 	{
 		initializeAppThunkCreator
 	}))(App);
-
-
