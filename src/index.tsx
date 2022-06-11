@@ -5,7 +5,8 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 // import App from "./App";
 import React from "react";
-import {AppContainer} from "./App";
+import App from "./App";
+//import {AppContainer} from "./App";
 // import {App} from "./App";
 //import {store} from "./redux/state";
 // ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
@@ -18,7 +19,7 @@ ReactDOM.render(
 		<Provider store={store}>
 			{/*<App state={state} addPost={addPost} changeTextareaTitle={changeTextareaTitle}/>*/}
 			{/*<App store={store}/>*/}
-			<AppContainer/>
+			<App/>
 		</Provider>
 
 	</BrowserRouter>

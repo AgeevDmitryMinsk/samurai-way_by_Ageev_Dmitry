@@ -6,10 +6,15 @@ import {reduxForm} from "redux-form";
 import {MyPostForm} from "./MyPostForm/MyPostForm";
 
 
-export function MyPosts(props: MyPostsPropsType) {
-	console.log(25, props.posts)
+// @ts-ignore
+window.props = []
 
-	const onSubmitHandle = (formData: any, ) => {
+export const MyPosts = React.memo( (props: MyPostsPropsType) => {
+	// console.log(25, this.props.posts)
+	console.log(`RENDER MyPosts YO`) // 3 раза
+	console.log("MY POST PROPS",props)
+
+	const onSubmitHandle = (formData: any,) => {
 
 		console.log(`formData from MyPostReduxForm =`, formData.myTextAreaPost)
 		props.addPost(formData.myTextAreaPost)
@@ -24,7 +29,7 @@ export function MyPosts(props: MyPostsPropsType) {
 			</div>
 
 			<div>
-				<MyPostReduxForm onSubmit={onSubmitHandle} />
+				<MyPostReduxForm onSubmit={onSubmitHandle}/>
 			</div>
 
 			<div className={s.posts}>
@@ -37,6 +42,6 @@ export function MyPosts(props: MyPostsPropsType) {
 			</div>
 		</>
 	)
-}
+})
 
 const MyPostReduxForm = reduxForm({form: 'myPost2022'})(MyPostForm)

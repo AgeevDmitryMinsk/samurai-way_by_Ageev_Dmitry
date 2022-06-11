@@ -51,6 +51,10 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 			return {...state, posts: [...state.posts, newPost] }
 		}
 
+		case "REMOVE-POST":{
+			return {...state, posts: state.posts.filter(el=> el.id !== action.postID)}
+		}
+
 		case "SET-USER-PROFILE": {
 			return {...state, profile: action.profile}
 		}
@@ -68,6 +72,8 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 
 export type AddPostActionType = ReturnType<typeof addPost>
 
+export type RemovePostActionType = ReturnType<typeof removePost>
+
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
@@ -79,6 +85,13 @@ export const addPost = (newPostMessage:string) => {
 		//newPostMessage: newPostMessage
 		newPostMessage
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
+}
+
+export const removePost = (postID: string) => {
+	return{
+		type: "REMOVE-POST",
+		postID
+	} as const
 }
 
 

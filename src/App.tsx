@@ -67,7 +67,13 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 
-export const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
+
+export default compose<React.ComponentType>(withRouter, connect(mapStateToProps,
 	{
 		initializeAppThunkCreator
 	}))(App);
+// выше тоже самое, но без export const AppContainer = compose:
+// export const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps,
+// 	{
+// 		initializeAppThunkCreator
+// 	}))(App);
