@@ -9,16 +9,17 @@ import {
 } from "../../redux/profile-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 type UserIdType = {
 	userId: string
 }
 
 const ProfileContainerWithHooks: React.FC = () => {
-	const {profile, status} = useTypedSelector(state=>state.ProfilePage)
+	const profile = useTypedSelector(state=>state.ProfilePage.profile)
 	console.log(`profile from ProfileContainerWithHooks =`, profile)
 
+	const dispatch = useDispatch()
 	const {data} = useTypedSelector(state=>state.auth)
 	let { userId }= useParams<any>();
 	console.log(userId)
@@ -32,8 +33,8 @@ const ProfileContainerWithHooks: React.FC = () => {
 			}
 
 		}
-		getProfileThunkCreator(userId)
-		getUserStatusThunkCreator(userId)
+		dispatch(getProfileThunkCreator(userId))
+		dispatch(getUserStatusThunkCreator(userId))
 	}, [userId])
 
 	return (
