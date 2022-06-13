@@ -110,7 +110,7 @@ export type setIsFollowingInProgressType = ReturnType<typeof setIsFollowingInPro
 export const follow = (userId: number) => {
 	return {
 		type: "FOLLOW",
-		id: userId,
+		id: userId, // для примера оставил->  id: userId
 	} as const //  добавляем as const в случае типизации type FollowActionType = ReturnType<typeof followAC>
 }
 
@@ -165,62 +165,103 @@ export const setIsFollowingInProgress = (isFetchingButtonFollowUnfollow: boolean
 	} as const
 }
 
-//Thunk creator
+// //Thunk creator then
+// export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		// this.props.setIsFetching(true)
+// 		dispatch(setIsFetching(true))
+//
+//
+// 		usersAPI.getUsers(currentPage, pageSize)
+// 			//.then((response: AxiosResponse<UsersResponseType>) => {
+// 			.then((data) => {
+// 				// this.props.setIsFetching(false)
+// 				dispatch(setIsFetching(false))
+// 				dispatch(setUsers(data.items))
+// 				dispatch(setCurrentPage(currentPage))
+// 				dispatch(setUsersTotalCount(data.totalCount))
+//
+// 			})
+// 	}
+// }
+
+//Thunk creator async/await
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		// this.props.setIsFetching(true)
+	return async (dispatch: Dispatch<ActionsTypes>) => {
 		dispatch(setIsFetching(true))
-
-
-		usersAPI.getUsers(currentPage, pageSize)
-			//.then((response: AxiosResponse<UsersResponseType>) => {
-			.then((data) => {
-				// this.props.setIsFetching(false)
-				dispatch(setIsFetching(false))
-				dispatch(setUsers(data.items))
-				dispatch(setCurrentPage(currentPage))
-				dispatch(setUsersTotalCount(data.totalCount))
-
-			})
+		const data = await usersAPI.getUsers(currentPage, pageSize)
+		dispatch(setIsFetching(false))
+		dispatch(setUsers(data.items))
+		dispatch(setCurrentPage(currentPage))
+		dispatch(setUsersTotalCount(data.totalCount))
 	}
 }
-export const followThunkCreator = (userId:number) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		// axios
-		// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-		// 		{},
-		// 		{
-		// 			withCredentials: true,
-		// 			headers: {
-		// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
-		// 			}
-		// 		})
-		console.log('followThunkCreator')
+
+// // //Thunk creator then
+// export const followThunkCreator = (userId: number) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		// axios
+// 		// 	.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+// 		// 		{},
+// 		// 		{
+// 		// 			withCredentials: true,
+// 		// 			headers: {
+// 		// 				"API-KEY": "57f858ff-ce33-4672-b278-3f2f1b802b55"
+// 		// 			}
+// 		// 		})
+// 		console.log('followThunkCreator')
+// 		dispatch(setIsFollowingInProgress(true, userId))
+// 		usersAPI.getFollow(userId)
+// 			// .then((response: AxiosResponse<FollowResponseType>) => {
+// 			.then((data) => {
+// 				// if (response.data.resultCode === 0) {
+// 				if (data.resultCode === 0) {
+// 					// props.unFollow(el.id)
+// 					dispatch(follow(userId))
+// 				}
+// 				dispatch(setIsFollowingInProgress(false, userId))
+// 			})
+// 	}
+// }
+
+//Thunk creator async/await
+export const followThunkCreator = (userId: number) => {
+	return async (dispatch: Dispatch<ActionsTypes>) => {
 		dispatch(setIsFollowingInProgress(true, userId))
-		usersAPI.getFollow(userId)
-			// .then((response: AxiosResponse<FollowResponseType>) => {
-			.then((data) => {
-				// if (response.data.resultCode === 0) {
-				if (data.resultCode === 0) {
-					// props.unFollow(el.id)
-					dispatch(follow(userId))
-				}
-				dispatch(setIsFollowingInProgress(false, userId))
-			})
+		const data = await usersAPI.getFollow(userId)
+		if (data.resultCode === 0) {
+			dispatch(follow(userId))
+		}
+		dispatch(setIsFollowingInProgress(false, userId))
+
 	}
 }
-export const unFollowThunkCreator = (userId:number) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		console.log('unFollowThunkCreator')
+
+// export const unFollowThunkCreator = (userId: number) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		console.log('unFollowThunkCreator')
+// 		dispatch(setIsFollowingInProgress(true, userId))
+// 		usersAPI.getUnfollow(userId)
+// 			// .then((response: AxiosResponse<FollowResponseType>) => {
+// 			.then((data) => {
+// 				if (data.resultCode === 0) {
+// 					// props.follow(el.id)
+// 					dispatch(unFollow(userId))
+// 				}
+// 				dispatch(setIsFollowingInProgress(false, userId))
+// 			})
+// 	}
+// }
+
+//Thunk creator async/await
+export const unFollowThunkCreator = (userId: number) => {
+	return async (dispatch: Dispatch<ActionsTypes>) => {
 		dispatch(setIsFollowingInProgress(true, userId))
-		usersAPI.getUnfollow(userId)
-			// .then((response: AxiosResponse<FollowResponseType>) => {
-			.then((data) => {
-				if (data.resultCode === 0) {
-					// props.follow(el.id)
-					dispatch(unFollow(userId))
-				}
-				dispatch(setIsFollowingInProgress(false, userId))
-			})
+		const data = await usersAPI.getUnfollow(userId)
+		if (data.resultCode === 0) {
+			dispatch(unFollow(userId))
+		}
+		dispatch(setIsFollowingInProgress(false, userId))
+
 	}
 }

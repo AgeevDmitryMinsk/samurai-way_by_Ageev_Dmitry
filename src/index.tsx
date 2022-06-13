@@ -1,17 +1,12 @@
-//import {rerenderEntireTree} from "./rerenderEntireTree";
 import {store} from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-// import App from "./App";
 import React from "react";
-import App from "./App";
-//import {AppContainer} from "./App";
-// import {App} from "./App";
-//import {store} from "./redux/state";
-// ReactDOM.render(<App PostData={PostData} MessagesData={MessagesData} DialogsData={DialogsData}/>, document.getElementById('root'))
-//export type StateType = ReturnType<typeof store.getState>
-//let state: StateType = store.getState()
+import {AppWithHooks} from "./AppWithHooks";
+//import App from "./App";
+
+
 
 
 ReactDOM.render(
@@ -19,7 +14,8 @@ ReactDOM.render(
 		<Provider store={store}>
 			{/*<App state={state} addPost={addPost} changeTextareaTitle={changeTextareaTitle}/>*/}
 			{/*<App store={store}/>*/}
-			<App/>
+			{/*<App/>*/}
+			<AppWithHooks/>
 		</Provider>
 
 	</BrowserRouter>

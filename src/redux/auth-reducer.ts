@@ -149,7 +149,6 @@ export const getAuthMeThunkCreator = () => {
 						//console.log(120, data) // 'Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!'
 						dispatch(setMyStatusForHeader(data))
 					})
-
 			} else {
 				dispatch(setIsFetchingAuth(false))
 			}
@@ -166,33 +165,43 @@ export const getAuthMeThunkCreator = () => {
 export const loginThunkCreator = (email: string, password: string, rememberMe: null | boolean) => {
 
 
-	return (dispatch: Dispatch<ActionsTypes | any>) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
-		authAPI.login(email, password, rememberMe)
-			.then((response) => {
-				//debugger
-				if (response.data.resultCode === 0)
-					//	|| 	(response.data.resultCode === 1 && response.data.messages[0] ==="The RememberMe field is required."))
-				{
-					dispatch(getAuthMeThunkCreator())// ?
-				} else {
-					//let action = stopSubmit("login", {_error: `Email or password is wrong`})
-					//dispatch(dispatch => stopSubmit("login", {_error: `Email or password is wrong`}))
+	return async (dispatch: Dispatch<ActionsTypes | any>) => { // сложный тип т.к. здесь дисптчим не просто action, a ThunkCreator
+		try {
+			const res = await authAPI.login(email, password, rememberMe)
+				// .then((response) => {
+					console.log(173, 173, 173, res)
+					// console.log(174,174, 174, response)
+					if (res.data.resultCode === 0)
+						//	|| 	(response.data.resultCode === 1 && response.data.messages[0] ==="The RememberMe field is required."))
+					{
+						dispatch(getAuthMeThunkCreator())// ?
+					} else {
+						//let action = stopSubmit("login", {_error: `Email or password is wrong`})
+						//dispatch(dispatch => stopSubmit("login", {_error: `Email or password is wrong`}))
 
-					let errorMessage = (response.data.messages.length > 0) ? response.data.messages[0] : `Email or password is wrong from loginThunkCreator`
+						// let errorMessage = (response.data.messages.length > 0) ? response.data.messages[0] : `Email or password is wrong from loginThunkCreator`
+						let errorMessage = (res.data.messages.length > 0) ? res.data.messages[0] : `Email or password is wrong from loginThunkCreator`
 
-					dispatch(stopSubmit("login", {_error: errorMessage}))
-				}
-			})
+						dispatch(stopSubmit("login", {_error: errorMessage}))
+					}
+				// }
+
+		} catch (e) {
+			alert(e)
+		}
+
 	}
 
 }
 
-export const logoutThunkCreator = () => (dispatch: Dispatch<ActionsTypes>) => {
-	authAPI.logout()
-		.then(response => {
-			if (response.data.resultCode === 0) {
-				dispatch(setAuthUserData({id: null, login: null, email: null}, false))
-			}
-		})
-
+export const logoutThunkCreator = () => async (dispatch: Dispatch<ActionsTypes>) => {
+	const res = await authAPI.logout()
+		// .then(response => {
+	try{
+		if (res.data.resultCode === 0) {
+			dispatch(setAuthUserData({id: null, login: null, email: null}, false))
+		}
+	}catch (e) {
+		alert(e)
+	}
 }

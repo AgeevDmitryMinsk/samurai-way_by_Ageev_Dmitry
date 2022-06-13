@@ -14,18 +14,19 @@ type FormDataType = {
 }
 
 const Login = (props: OwnLoginPropsType) => {
+	const {isAuth} = props
 
 	const onSubmitHandle = (formData: FormDataType  ) => {
 		//debugger
 		console.log(`formData from Login =` , formData) // formData = {login: '4564', password: '4654564777', rememberMe: true}
 		props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
-		console.log(`22 props.isAuth in Login.tsx:`, props.isAuth.toString())
+		console.log(`22 props.isAuth in Login.tsx:`, isAuth.toString())
 		//reset or clear forms:
 		formData.email = ``
 		formData.password = ``
 		formData.rememberMe =  false//null
 	}
-	console.log(`Login.tsx (28) props.isAuth:`, props.isAuth) // true/false  - залогинен/незалогинен
+	console.log(`Login.tsx (28) props.isAuth:`, isAuth) // true/false  - залогинен/незалогинен
 
 	if (props.isAuth) return <Redirect to={`/profile`}/>
 	//if (props.isAuth) return <Redirect to={'/profile/:userId?'}/>
@@ -68,3 +69,4 @@ export const LoginContainer = connect(mapStateToProps, {loginThunkCreator,})(Log
 // 	withAuthRedirect, connect(null,
 // 		{loginThunkCreator},
 // 	))(Login)
+//password

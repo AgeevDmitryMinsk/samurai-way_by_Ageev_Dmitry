@@ -80,9 +80,10 @@ class ProfileApiContainer extends React.Component<PropsType> {
 		// if (this.props.isAuth === false) return <Navigate to={"/login"}/> - <Navigate to=""/> для версии v6 react-router-dom
 
 		return (
-			<Profile profile={this.props.profile}
-					 updateProfileStatusThunkCreator={this.props.updateProfileStatusThunkCreator}
-					 status={this.props.status}
+			<Profile //profile={this.props.profile}
+					 //закоментил updateProfileStatusThunkCreator после рефакторинга на ProfileContainerWithHooks
+					 //updateProfileStatusThunkCreator={this.props.updateProfileStatusThunkCreator}
+					 //status={this.props.status}
 				//isAuth={this.props.isAuth}
 					 data={this.props.data}
 			/>

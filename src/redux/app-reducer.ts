@@ -67,21 +67,31 @@ export const setSuccessfulInitialization = () => {
 }
 
 
-
 //Thunk creator
+//then
+// export const initializeAppThunkCreator = () => {
+// 	return  (dispatch: Dispatch<ActionsTypes | any>) => {
+//
+// 		let resultPromise =  dispatch(getAuthMeThunkCreator())
+// 		console.log(`hello form initializeAppThunkCreator  ===>`, resultPromise )
+// 		Promise.all([resultPromise]).then(()=> dispatch(setSuccessfulInitialization()))
+// 	}
+// }
 
+////async/await
 export const initializeAppThunkCreator = () => {
-	// return async (dispatch: Dispatch<ActionsTypes | any>) => {
-	return  (dispatch: Dispatch<ActionsTypes | any>) => {
+	return async (dispatch: Dispatch<ActionsTypes | any>) => {
+		try {
 
-		let resultPromise =  dispatch(getAuthMeThunkCreator())
-		// debugger
-		console.log(`hello form initializeAppThunkCreator  ===>`, resultPromise )
-		// без await будет: hello form initializeAppThunkCreator  ===> Promise {<pending>}
-		// c await будет:   hello form initializeAppThunkCreator  ===> IT-Incubator
-		Promise.all([resultPromise]).then(()=> dispatch(setSuccessfulInitialization()))
-		// resultPromise.then(()=> {
-		// 	dispatch(setSuccessfulInitialization())
+				console.log(85)
+				await dispatch(getAuthMeThunkCreator())
+				console.log(87)
+				dispatch(setSuccessfulInitialization())
+				console.log(89)
+
+			//debugger
+		} catch (e) {
+			alert(e)
+		}
 	}
 }
-

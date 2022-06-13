@@ -17,9 +17,9 @@ import {AuthDataType} from "../../redux/auth-reducer";
 // }
 
 type ProfileType = {
-	profile: UsersProfileResponseType | null
-	status: string//ProfileStatusType // | null
-	updateProfileStatusThunkCreator: (status: string) => void
+	// profile: UsersProfileResponseType | null
+	// status: string//ProfileStatusType // | null
+	//updateProfileStatusThunkCreator: (status: string) => void
 	data: AuthDataType,
 }
 export const Profile = (props: ProfileType) => {
@@ -28,10 +28,12 @@ export const Profile = (props: ProfileType) => {
 		<div>
 			Main content
 
-			<ProfileInfo profile={props.profile}
-						 status={props.status}
+			<ProfileInfo
+				// profile={props.profile}
+				// 		 status={props.status}
 						 data={props.data}
-						 updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}/>
+						 // updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}
+			/>
 			<MyPostsContainer/>
 			<>
 				{/*//PostData={props.PostData}*/}

@@ -4,19 +4,18 @@ import {InputArea} from "../common/InputArea";
 import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
 
 const maxLength25 = maxLengthCreator(25) // необх вынести за пределы функц LoginForm
-												// иначе будет зацикливание функции LoginForm
+// иначе будет зацикливание функции LoginForm
 
-const emailValidation = (value:string)  =>
+const emailValidation = (value: string) =>
 	value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
 		'Invalid email address' : undefined
-
 
 
 export const LoginForm = (props: InjectedFormProps) => {
 
 	console.log(props.error) //undefined или Email or password is wrong from loginThunkCreator (177 строка)
 							 // Incorrect Email or Password from Network -> login ->  "messages":["Incorrect Email or Password"]
-							//  !!!! Incorrect anti-bot symbols from Network -> login ->  "messages":["Incorrect Email or Password"]
+	//  !!!! Incorrect anti-bot symbols from Network -> login ->  "messages":["Incorrect Email or Password"]
 
 	//debugger
 	//const {handleSubmit,form,clearSubmit,dirty,touch}  = props // можно сделать деструктуризацию
@@ -26,27 +25,32 @@ export const LoginForm = (props: InjectedFormProps) => {
 				{/*<input placeholder={"Login"}/> - БЫЛО input, ЗАМЕНИЛИ НА Field */}
 				{/*<Field placeholder={"Login"} name={'login'} component={'input'}/>*/}
 				{/*component={'input'} ЗАМЕНИЛИ НА component={InputArea}*/}
-				<label htmlFor={`email`}>Email</label><br />
+				<label htmlFor={`email`}>Email</label><br/>
 				<Field placeholder={"email"}
 					   name={'email'}
 					   type={'email'}
 					   component={InputArea}
 					   validate={[requiredField, maxLength25, emailValidation]}
 					   dirty={props.dirty}
+					   autoComplete={"username"}
+					   id={"email"}
 				/>
 			</div>
 			<div>
-				<label htmlFor={`password`}>Password</label><br />
+				<label htmlFor={`password`}>Password</label><br/>
 				<Field placeholder={"password"}
 					   name={'password'}
 					   component={InputArea}
 					   validate={[requiredField, maxLength25]}
 					   type={'password'}
 					   dirty={props.dirty}
+					   autoComplete={"current-password"}
+					   id={"current-password"}
+
 				/>
 			</div>
 			<span>
-				<Field type={"checkbox"} name={'rememberMe'} component={'input'} /> remember me
+				<Field type={"checkbox"} name={'rememberMe'} component={'input'}/> remember me
 			</span>
 
 			<div style={{color: "firebrick"}}>{props.error}</div>

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {AuthDataType} from "../../../redux/auth-reducer";
 import {UsersProfileResponseType} from "../ProfileContainer";
+import {updateProfileStatusThunkCreator} from "../../../redux/profile-reducer";
 
 type ProfileStatusProps = {
 	status: string //as ProfileStatusType // | null
-	updateProfileStatusThunkCreator: (status: string) => void
+	// updateProfileStatusThunkCreator: (status: string) => void
 	//isAuth: boolean
 	data: AuthDataType
 	profile: UsersProfileResponseType | null
@@ -57,7 +58,8 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	function onBlurHandleDeactivateEditMode() {
 		setEditMode(false)
 		console.log(`onBlurHandleDeactivateEditMode`)
-		props.updateProfileStatusThunkCreator(textForStatus) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
+		updateProfileStatusThunkCreator(textForStatus) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
+		// props.updateProfileStatusThunkCreator(textForStatus) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
 	}
 
 

@@ -48,11 +48,11 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 				// id: v1(), message: state.newPostText, likesCount: 0
 				id: v1(), message: action.newPostMessage, likesCount: 0
 			}
-			return {...state, posts: [...state.posts, newPost] }
+			return {...state, posts: [...state.posts, newPost]}
 		}
 
-		case "REMOVE-POST":{
-			return {...state, posts: state.posts.filter(el=> el.id !== action.postID)}
+		case "REMOVE-POST": {
+			return {...state, posts: state.posts.filter(el => el.id !== action.postID)}
 		}
 
 		case "SET-USER-PROFILE": {
@@ -79,7 +79,7 @@ export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
 // export const addPostAC = (
-export const addPost = (newPostMessage:string) => {
+export const addPost = (newPostMessage: string) => {
 	return {
 		type: "ADD-POST",
 		//newPostMessage: newPostMessage
@@ -88,7 +88,7 @@ export const addPost = (newPostMessage:string) => {
 }
 
 export const removePost = (postID: string) => {
-	return{
+	return {
 		type: "REMOVE-POST",
 		postID
 	} as const
@@ -104,7 +104,7 @@ export const setUserProfile = (profile: UsersProfileResponseType) => {
 }
 
 export const setUserStatus = (status: string//ProfileStatusType
- ) => {
+) => {
 	//debugger
 	return {
 		type: "SET-USER-STATUS",
@@ -113,41 +113,76 @@ export const setUserStatus = (status: string//ProfileStatusType
 }
 
 //Thunk creators:
+//then
+// export const getProfileThunkCreator = (userId: number) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		profileAPI.getProfile(userId)
+// 			// .then((response: AxiosResponse<UsersProfileResponseType>) => {
+// 			.then((data) => {
+// 				//console.log(data)//{aboutMe: 'я круто чувак 1001%', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'не ищу, а дурачусь', fullName: 'samurai dimych', …}
+// 				//this.props.setUserProfile(response.data)
+// 				dispatch(setUserProfile(data))
+// 			})
+// 	}
+// }
 
+//Thunk creators:
+//async/await
 export const getProfileThunkCreator = (userId: number) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		profileAPI.getProfile(userId)
-			// .then((response: AxiosResponse<UsersProfileResponseType>) => {
-			.then((data) => {
-				//console.log(data)//{aboutMe: 'я круто чувак 1001%', contacts: {…}, lookingForAJob: true, lookingForAJobDescription: 'не ищу, а дурачусь', fullName: 'samurai dimych', …}
-				//this.props.setUserProfile(response.data)
-				dispatch(setUserProfile(data))
-			})
+	debugger
+	return async (dispatch: Dispatch<ActionsTypes>) => {
+		let data = await profileAPI.getProfile(userId)
+		dispatch(setUserProfile(data))
+
 	}
 }
+//
+// export const getUserStatusThunkCreator = (userId: number) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		profileAPI.getProfileStatus(userId)
+// 			.then((data) => {
+// 				//debugger
+// 				//console.log(data) //статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
+// 				dispatch(setUserStatus(data))
+// 			})
+// 	}
+// }
 
+//Thunk creators:
+//async/await
 export const getUserStatusThunkCreator = (userId: number) => {
+	debugger
+	return async (dispatch: Dispatch<ActionsTypes>) => {
+		const data = await profileAPI.getProfileStatus(userId)
+		dispatch(setUserStatus(data))
 
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		profileAPI.getProfileStatus(userId)
-			.then((data)=> {
-				//debugger
-				//console.log(data) //статус того кого выбрал в Users: Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)
-				dispatch(setUserStatus(data))
-			})
 	}
 }
 
+//then
+// export const updateProfileStatusThunkCreator = (status: string) => {
+// 	return (dispatch: Dispatch<ActionsTypes>) => {
+// 		profileAPI.updateProfileStatus(status)
+// 			.then((data) => {
+// 				console.log(data)
+// 				if (data.resultCode === 0) {
+// 					console.log(data)
+// 					console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
+// 					dispatch(setUserStatus(status))
+// 				}
+// 			})
+// 	}
+// }
+
+//Thunk creators:
+//async/await
 export const updateProfileStatusThunkCreator = (status: string) => {
-	return (dispatch: Dispatch<ActionsTypes>) => {
-		profileAPI.updateProfileStatus(status)
-			.then((data)=>{
-				console.log(data)
-				if (data.resultCode === 0 ) {
-					console.log(data)
-					console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
-					dispatch(setUserStatus(status))
-				}
-			})
+	return async (dispatch: Dispatch<ActionsTypes>) => {
+		const data = await profileAPI.updateProfileStatus(status)
+		if (data.resultCode === 0) {
+			dispatch(setUserStatus(status))
+			//		console.log(data)
+			//		console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
+		}
 	}
 }
