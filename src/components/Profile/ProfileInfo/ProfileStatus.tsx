@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {AuthDataType} from "../../../redux/auth-reducer";
 import {UsersProfileResponseType} from "../ProfileContainer";
 import {updateProfileStatusThunkCreator} from "../../../redux/profile-reducer";
+import {useDispatch} from "react-redux";
 
 type ProfileStatusProps = {
 	status: string //as ProfileStatusType // | null
@@ -15,6 +16,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 
 	const [editMode, setEditMode] = useState<boolean>(false)
 	let [textForStatus, setTextForStatus] = useState<string>(props.status)
+	const dispatch = useDispatch()
 
 	useEffect(() => {  // ЗДЕСЬ ВАЖНО для переотрисовки, если обновились пропсы [props.status] !!!!
 		console.log("useEffect")
@@ -58,7 +60,7 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 	function onBlurHandleDeactivateEditMode() {
 		setEditMode(false)
 		console.log(`onBlurHandleDeactivateEditMode`)
-		updateProfileStatusThunkCreator(textForStatus) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
+		dispatch(updateProfileStatusThunkCreator(textForStatus)) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
 		// props.updateProfileStatusThunkCreator(textForStatus) // только здесь вызываем updateProfileStatusThunkCreator через пропсы
 	}
 
