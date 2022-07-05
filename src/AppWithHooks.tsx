@@ -30,6 +30,7 @@ export const AppWithHooks: React.FC = () => {
 	}, [dispatch])
 
 	console.log(`APP props.initialized --->`, initialized)
+	let date =  new Date().toLocaleDateString()
 
 	if (!initialized) {
 		console.log(`APP props.initialized inside IF --->`, initialized)
@@ -37,7 +38,7 @@ export const AppWithHooks: React.FC = () => {
 	} else
 		return (
 			<>
-				<div className="App">Hello, samurai! Let's go!</div>
+				<div className="App">Hello, samurai! Let's go!  {date}</div>
 				<div className={'app-wrapper'}>
 					<HeaderContainer/>
 					<Navbar/>

@@ -18,6 +18,7 @@ type ProfileInfoType = {
 const ProfileInfo = (props: ProfileInfoType) => {
 	const {profile, status} = useTypedSelector(state=>state.ProfilePage)
 	console.log(`profile from ProfileInfo =`, profile)
+	console.log(`status from ProfileInfo =`, status)
 
 	if (!profile) {
 		return <h1>PROFILE LOADING PROFILE....</h1>

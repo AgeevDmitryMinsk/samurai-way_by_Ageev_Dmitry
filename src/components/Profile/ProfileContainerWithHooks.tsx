@@ -29,7 +29,7 @@ const ProfileContainerWithHooks: React.FC = () => {
 			// userId = `22100`
 			if (data.id) {
 				userId = data.id
-				console.log(data.id)
+				console.log(32, data.id)
 			}
 
 		}

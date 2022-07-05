@@ -129,7 +129,7 @@ export const setUserStatus = (status: string//ProfileStatusType
 //Thunk creators:
 //async/await
 export const getProfileThunkCreator = (userId: number) => {
-	debugger
+	//debugger
 	return async (dispatch: Dispatch<ActionsTypes>) => {
 		let data = await profileAPI.getProfile(userId)
 		dispatch(setUserProfile(data))
@@ -151,7 +151,7 @@ export const getProfileThunkCreator = (userId: number) => {
 //Thunk creators:
 //async/await
 export const getUserStatusThunkCreator = (userId: number) => {
-	debugger
+	//debugger
 	return async (dispatch: Dispatch<ActionsTypes>) => {
 		const data = await profileAPI.getProfileStatus(userId)
 		dispatch(setUserStatus(data))
@@ -181,8 +181,8 @@ export const updateProfileStatusThunkCreator = (status: string) => {
 		const data = await profileAPI.updateProfileStatus(status)
 		if (data.resultCode === 0) {
 			dispatch(setUserStatus(status))
-			//		console.log(data)
-			//		console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
+					console.log(data)
+					console.log(status) //Делай то, что нравится — и в твоей жизни не будет ни одного рабочего дня!!! Ведь здорово)))!!!$
 		}
 	}
 }

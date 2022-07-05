@@ -37,9 +37,9 @@ export const ProfileStatus = (props: ProfileStatusProps) => {
 
 	function onClickHandleActivateEditMode() {
 		if (Number(props.data.id) === props.profile?.userId) {
-			//		console.log(`before`, editmode) // false
+					console.log(`before`, editMode) // false
 			setEditMode(true)
-			//		console.log(`after`, editmode) // и здесь false, т.к. useState асинхронный !
+					console.log(`after`, editMode) // и здесь false, т.к. useState асинхронный !
 		} else {
 			// alert(`нельзя редактировать не свой статус!`)
 			setTextForStatus(`нельзя редактировать не свой статус!`)
